@@ -98,6 +98,17 @@ addEventListener('resize',()=>requestAnimationFrame(onScroll));
 const stepsEl=$('#steps'); if(stepsEl)scrollers.push(()=>{const r=stepsEl.getBoundingClientRect();stepsEl.style.setProperty('--sp',clamp((innerHeight*.85-r.top)/(r.height+innerHeight*.35),0,1).toFixed(3));});
 /* reveal-on-scroll is pure CSS (animation-timeline: view()) so it never forces layout */
 
+
+/* reliable in-page scrolling: sections use content-visibility, so heights settle while scrolling.
+   Scroll, then re-check and correct until the target sits just under the floating header. */
+function goTo(el,focusSel){
+  if(!el)return;
+  const off=()=>el.getBoundingClientRect().top-(innerWidth<760?78:96);
+  scrollBy({top:off(),behavior:reduce?'auto':'smooth'});
+  let n=0;const fix=()=>{const d=off();if(Math.abs(d)>3&&n++<8){scrollBy({top:d,behavior:'auto'});setTimeout(fix,140);}else if(focusSel){const f=el.querySelector(focusSel);f&&f.focus({preventScroll:true});}};
+  setTimeout(fix,reduce?60:650);
+}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.getAttribute('href').length<2)return;const t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();goTo(t);history.replaceState(null,'',a.getAttribute('href'));});
 /* ---------------- quote form ---------------- */
 function selectType(t){const r=$$('input[name="type"]').find(i=>i.value===t);if(r)r.checked=true;try{sessionStorage.setItem('itop-type',t);}catch(_){}}
 document.addEventListener('click',e=>{const a=e.target.closest('[data-q]');if(a)selectType(a.dataset.q);});
@@ -189,7 +200,7 @@ if(sxColls&&design){
   sxBordEl.addEventListener('click',e=>{const b=e.target.closest('.sx-c');if(b)setBord([...sxBordEl.children].indexOf(b));});
   radioKeys(sxColls,'.sx-coll',setColl);radioKeys(sxSw,'.sx-c',setCol);radioKeys(sxBordEl,'.sx-c',setBord);
   $$('[data-sxv]').forEach(b=>b.addEventListener('click',()=>{$$('[data-sxv]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('.sx-stage').classList.toggle('m3d',b.dataset.sxv==='3d');sx3d.kick&&sx3d.kick();}));
-  $('#useDesign').addEventListener('click',e=>{design.used=true;saveDesign();renderDesignBox();if(qform){e.preventDefault();$('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
+  $('#useDesign').addEventListener('click',e=>{design.used=true;saveDesign();renderDesignBox();if(qform){e.preventDefault();e.stopPropagation();goTo($('#qcard'),'input,textarea');}});
   if(design.coll!==COLLS[0]||design.color!==COLLS[0].c[0]||design.border!==BORD[0])render();
 }
 
@@ -207,15 +218,15 @@ if(finder&&COLLS.length){
   finder.addEventListener('change',render); render();
   const apply=used=>{const r=pick();design.coll=r.c;design.color=r.col;if(used)design.used=true;saveDesign();renderDesignBox();
     const i=COLLS.indexOf(r.c);const cb=document.querySelectorAll('#sxColls .sx-coll')[i];if(cb){cb.click();const j=r.c.c.indexOf(r.col);const sw=document.querySelectorAll('#sxSw .sx-c')[j];sw&&sw.click();}return r;};
-  $('#fd3d').addEventListener('click',e=>{apply(false);if($('#studio')){e.preventDefault();$('#studio').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
-  $('#fdAdd').addEventListener('click',e=>{const r=apply(true);selectType(r.type);if($('#quote')){e.preventDefault();$('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
+  $('#fd3d').addEventListener('click',e=>{apply(false);if($('#studio')){e.preventDefault();e.stopPropagation();goTo($('#studio'));}});
+  $('#fdAdd').addEventListener('click',e=>{const r=apply(true);selectType(r.type);if($('#quote')){e.preventDefault();e.stopPropagation();goTo($('#qcard'),'input,textarea');}});
 }
 
 /* ---------------- hero background video: desktop only, after load, never for reduced motion / data saver ---------------- */
 const hv=document.querySelector('.hero-video'), hctl=document.getElementById('heroVctl');
 if(hv){
-  const ok=()=>!reduce&&innerWidth>=900&&!(navigator.connection&&navigator.connection.saveData);
-  const start=()=>{if(!ok()||hv.src)return;hv.src=hv.dataset.src;hv.addEventListener('playing',()=>{document.querySelector('.hero').classList.add('vplay');hctl.hidden=false;},{once:true});hv.play().catch(()=>{});};
+  const ok=()=>!reduce&&!(navigator.connection&&navigator.connection.saveData);
+  const start=()=>{if(!ok()||hv.src)return;hv.muted=true;hv.setAttribute('muted','');hv.src=innerWidth<900?hv.dataset.srcSm:hv.dataset.src;hv.addEventListener('playing',()=>{document.querySelector('.hero').classList.add('vplay');hctl.hidden=false;},{once:true});hv.play().catch(()=>{});};
   if(document.readyState==='complete')setTimeout(start,600);else addEventListener('load',()=>setTimeout(start,600));
   hctl.addEventListener('click',()=>{if(hv.paused){hv.play();hctl.setAttribute('aria-label','Pause background video');hctl.classList.remove('paused');}else{hv.pause();hctl.setAttribute('aria-label','Play background video');hctl.classList.add('paused');}});
   document.addEventListener('visibilitychange',()=>{if(!hv.src)return;if(document.hidden)hv.pause();else if(!hctl.classList.contains('paused'))hv.play().catch(()=>{});});
@@ -227,7 +238,7 @@ if(show){
   const DUR=6000; let i0=0, timer=null, paused=false;
   const go=(i,user)=>{i0=(i+HC.length)%HC.length;const c=HC[i0];
     slides.forEach((el,k)=>{el.classList.toggle('on',k===i0);el.setAttribute('aria-hidden',k!==i0);const im=el.querySelector('img');if(Math.abs(k-i0)<=1&&im.loading==='lazy')im.loading='eager';});
-    bars.forEach((el,k)=>{el.className=k<i0?'done':(k===i0?'on':'');});
+    bars.forEach((el,k)=>{el.className=k<i0?'past':(k===i0?'on':'');});
     if(!paused&&!reduce){const b=bars[i0];void b.offsetWidth;b.classList.add('run');}
     thumbs.forEach((el,k)=>el.setAttribute('aria-pressed',k===i0));
     cap.innerHTML=`<small>${esc(c.t)} · Recent iTOP job</small><b>${esc(c.title)}</b><span>${esc(c.sub)}</span><a class="btn btn-primary" href="/get-a-quote/" data-q="${esc(c.q)}">Get an estimate like this <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>`;

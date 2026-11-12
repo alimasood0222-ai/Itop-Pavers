@@ -449,7 +449,7 @@ def compare_table():
 
 def cta_band(text='Ready to plan your project?', sub=None):
     sub = sub or f'Free on-site consultation and a detailed written estimate. Licensed Florida contractor {BIZ["licence"]}.'
-    return f'''<section class="cta-band" aria-label="Get a free estimate"><div class="wrap"><div class="cta-in">
+    return f'''<section class="cta-band" aria-label="Get a free estimate"><div class="wrap"><div class="cta-in"><img class="cta-bg" src="{img('driveway-gated', False)}" alt="" loading="lazy" decoding="async">
       <div><h2 class="display">{e(text)}</h2><p>{e(sub)}</p></div>
       <div class="ctas"><a class="btn btn-primary" href="/get-a-quote/">Get a free estimate {ARROW}</a><a class="btn btn-ghost" href="tel:{BIZ['phone_e164']}">{ic('i-phone')}{BIZ['phone']}</a></div>
     </div></div></section>'''
@@ -562,7 +562,7 @@ def p_home():
     main = f'''<section class="hero" aria-labelledby="h1" style="padding:0">
     <div class="hero-bg" aria-hidden="true">
       <img class="hero-poster" src="/assets/hero-poster.webp" srcset="/assets/hero-poster-sm.webp 800w, /assets/hero-poster.webp 1600w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
-      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/hero-poster.webp" data-src="/assets/hero.mp4"></video>
+      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/hero-poster.webp" data-src="/assets/hero.mp4" data-src-sm="/assets/hero-sm.mp4"></video>
     </div>
     <button class="hero-vctl" type="button" id="heroVctl" aria-label="Pause background video" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
     <div class="wrap hero-grid">
