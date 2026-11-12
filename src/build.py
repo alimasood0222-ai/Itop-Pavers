@@ -468,7 +468,7 @@ def page_hero(crumbs, eb, h1, lede, aside='', cls='', bg=None):
 
 def about_teaser():
     return f'''<section class="about-t" aria-labelledby="about-h"><div class="wrap about-in">
-      <figure class="about-ph"><img src="/img/fabio-sm.webp" alt="{e(BIZ['manager'])}, manager of iTOP Pavers" loading="lazy" decoding="async" width="720" height="720"></figure>
+      <figure class="about-ph"><img src="/img/fabio-sm.webp" alt="{e(BIZ['manager'])}, manager of iTOP Pavers" loading="lazy" decoding="async" width="720" height="720"><figcaption><b>{e(BIZ['manager'].split()[0])}</b><span>Manager, iTOP Pavers</span><small>{ic('i-shield')}Licensed · {BIZ['licence']}</small></figcaption></figure>
       <div>{eyebrow('About iTOP Pavers')}<h2 class="display" id="about-h">A local crew led by a builder.</h2>
         <p class="lede">{e(ABOUT['intro'])}</p>
         <ul class="ticks"><li>Licensed Florida contractor {BIZ['licence']}</li><li>{BIZ['experience']} building outdoor spaces</li><li>Pools, pavers and screen enclosures from one team</li></ul>

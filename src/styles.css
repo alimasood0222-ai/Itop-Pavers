@@ -1214,3 +1214,22 @@ section{padding-block:clamp(72px,8.5vw,120px)}
   .hero-stats span{font-size:12.5px}
   .hero-vctl{left:auto;right:16px;bottom:auto;top:92px}
 }
+/* Safari collapsed the stacked 3D stage to 0px (aspect-ratio on a stretched grid item whose children are all absolute): give it a real height */
+@media (max-width:1060px){.sx-stage{aspect-ratio:auto!important;align-self:start;height:calc((100vw - 48px) * .72);max-height:640px;min-height:260px}}
+@media (max-width:560px){.sx-stage{height:calc((100vw - 36px) * .8)}}
+/* about photo: captioned portrait (desktop) / full-width profile card (phone) */
+.about-ph{background:#000}
+.about-ph::after{display:none}
+.about-ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:56px 24px 20px;background:linear-gradient(0deg,rgba(0,0,0,.92) 30%,rgba(0,0,0,0));color:#fff;display:grid;gap:2px}
+.about-ph figcaption b{font:700 20px/1.2 var(--f-display);letter-spacing:-.01em}
+.about-ph figcaption span{font-size:14px;color:#cfc6bb}
+.about-ph figcaption small{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12.5px;color:#a39b91}
+.about-ph figcaption svg{width:14px;height:14px;color:var(--orange)}
+@media (max-width:560px){
+  .about-ph{max-width:none;aspect-ratio:auto;display:grid;grid-template-columns:44% 1fr;align-items:center;border-radius:20px;box-shadow:0 30px 60px -40px rgba(40,25,10,.7)}
+  .about-ph img{aspect-ratio:1;height:auto;object-position:50% 20%}
+  .about-ph figcaption{position:static;background:none;padding:18px 18px 18px 6px}
+  .about-ph figcaption b{font-size:19px}
+  .about-ph figcaption span{font-size:13.5px}
+  .about-ph figcaption small{font-size:12px}
+}
