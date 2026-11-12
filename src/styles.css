@@ -1140,3 +1140,63 @@ section{padding-block:clamp(72px,8.5vw,120px)}
   .hero-bg{bottom:auto;height:min(640px,60svh)}
   .hero-bg::after{background:linear-gradient(180deg,rgba(13,12,11,.5) 0%,rgba(13,12,11,.6) 45%,rgba(13,12,11,.9) 80%,#0d0c0b 100%)!important}
 }
+
+/* ================= phone redesign: swipe rails + compact tiles ================= */
+@media (max-width:560px){
+  .sec-head .lede{font-size:15px;line-height:1.6}
+  h2.display{font-size:clamp(28px,8vw,34px)}
+  /* swipe rails */
+  .svc-grid,.svc-grid.rel{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:68%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-inline:calc(-1 * var(--gut));padding:4px var(--gut) 12px;scroll-padding-inline:var(--gut);scrollbar-width:none}
+  .svc-grid::-webkit-scrollbar,.sx-colls::-webkit-scrollbar,.towns::-webkit-scrollbar{display:none}
+  .svc{scroll-snap-align:start;min-height:0}
+  .svc p{font-size:13px}
+  .svc-group{margin-top:26px}
+  /* trust: 2x2 tiles */
+  .trust-in{grid-template-columns:1fr 1fr;gap:10px}
+  .tcard{flex-direction:column;gap:10px;padding:14px}
+  .tcard b{font-size:14px}.tcard span{font-size:12px}
+  .tic{width:38px;height:38px}
+  /* studio: collection chips rail */
+  .sx-colls{display:flex;gap:8px;overflow-x:auto;margin-inline:-18px;padding:2px 18px 8px;scroll-snap-type:x mandatory}
+  .sx-coll{flex:0 0 auto;grid-template-columns:36px auto;gap:10px;padding:7px 12px 7px 7px;scroll-snap-align:start}
+  .sx-coll img{width:36px;height:36px}
+  .sx-coll>span>span{display:none}
+  .sx-coll b{font-size:13.5px;white-space:nowrap}
+  .sx-panel{padding:18px}
+  /* build-up */
+  .layers small{display:none}
+  .layers li{padding:8px 12px}
+  .build-stage{height:min(380px,92vw)}
+  /* process: 2x2 */
+  .steps{grid-template-columns:1fr 1fr!important;gap:22px 14px}
+  .step{padding:0!important;border:0!important}
+  .step .tag{display:none}
+  .step h3{font-size:16px;margin:12px 0 4px}
+  .step p{font-size:13.5px}
+  .step .n{width:40px;height:40px}
+  /* about */
+  .about-in{gap:22px}
+  .about-ph{max-width:200px;border-radius:22px}
+  /* reviews + area */
+  .rev-photo{min-height:170px;flex:none;height:170px}
+  .towns{flex-wrap:nowrap;overflow-x:auto;margin-inline:-24px;padding:0 24px 6px}
+  .towns li{flex:none}
+  .duo{gap:14px}
+  /* quote */
+  .contact-list li:nth-child(3),.contact-list li:nth-child(4){display:none}
+  /* finder */
+  .fd-card{gap:18px;padding:18px}
+  .fd-q legend{font-size:17px}
+  .fd-o span{padding:10px 13px;font-size:13.5px}
+}
+/* phone: keep rails from blowing out their grid columns; shorter explorer stage */
+@media (max-width:760px){
+  .sx,.duo{grid-template-columns:minmax(0,1fr)!important}
+  .sx>*,.duo>*,.card{min-width:0}
+}
+@media (max-width:560px){
+  .sx-stage{aspect-ratio:5/4}
+  .sx-panel .sx-sw{flex-wrap:wrap}
+  .rev-card h2{font-size:clamp(24px,7vw,30px)}
+}
