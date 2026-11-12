@@ -169,7 +169,7 @@ scrollers.push(()=>{const r=stepsEl.getBoundingClientRect();stepsEl.style.setPro
 /* reveal */
 if(!reduce&&'IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
-  $$('.svc, .step, .card, .adv').forEach((el,i)=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('reveal','pre');el.style.transitionDelay=(i%5)*60+'ms';io.observe(el);}});
+  $$('.sec-head, .svc, .step, .card, .adv, .sx, .proj-grid, .proj-more, .filters, .qcard, .quote .wrap>div:first-child, .build-copy').forEach((el,i)=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('reveal','pre');el.style.transitionDelay=(i%5)*60+'ms';io.observe(el);}});
 }
 
 /* service card preselect */
@@ -236,7 +236,7 @@ document.addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')
     const head=o.office?`<use href="#mark" x="${x-12}" y="${y-hgt-14}" width="24" height="24" style="color:#EA680F"/>`:`<rect class="head" x="${x-4.5}" y="${y-hgt-4.5}" width="9" height="9" transform="rotate(45 ${x} ${y-hgt})" fill="#EA680F"/>`;
     const ring=o.office&&!reduce?`<ellipse cx="${x}" cy="${y}" rx="6" ry="2.6" fill="none" stroke="#EA680F" stroke-width="2"><animate attributeName="rx" values="6;30" dur="2.2s" repeatCount="indefinite"/><animate attributeName="ry" values="2.6;12" dur="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="2.2s" repeatCount="indefinite"/></ellipse>`:'';
     return `<g class="town${o.office?' office':''}" data-town="${esc(o.name)}">${ring}<ellipse cx="${x}" cy="${y}" rx="6" ry="2.6" fill="rgba(0,0,0,.55)"/><line x1="${x}" y1="${y}" x2="${x}" y2="${y-hgt}" stroke="${o.office?'#EA680F':'#e8e3dc'}" stroke-width="${o.office?2.5:1.5}"/>${head}${lab}</g>`;}).join('');
-  $('#map').innerHTML=`<svg viewBox="0 0 ${W} ${H+T+10}" role="img" aria-label="Schematic map of the iTOP Pavers service area in Northeast Florida, from Fernandina Beach to St. Augustine, with the office in Jacksonville.">
+  $('#map').innerHTML=`<svg viewBox="0 0 ${W} ${H+T+10}" role="img" aria-label="Map of the iTOP Pavers service area in Northeast Florida, from Fernandina Beach to St. Augustine, with the office in Jacksonville.">
     <defs><linearGradient id="og" x1="0" x2="1"><stop offset="0" stop-color="#16232a"/><stop offset="1" stop-color="#0f171b"/></linearGradient>
     <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1a18"/><stop offset="1" stop-color="#262320"/></linearGradient></defs>
     <polygon points="${sw[0]},${sw[1]} ${se[0]},${se[1]} ${se[0]},${se[1]+T} ${sw[0]},${sw[1]+T}" fill="#0a0a0a"/>
@@ -331,9 +331,15 @@ qform.addEventListener('submit',e=>{
   e.preventDefault();
   if(!validate(qStep))return;
   if(qStep<3){showStep(qStep+1,true);return;}
-  const name=$('#f-name').value.trim().split(' ')[0];
+  const full=$('#f-name').value.trim(), name=full.split(' ')[0];
   const type=$('input[name="type"]:checked').value;
-  $('#qcard').innerHTML=`<div class="done" aria-live="polite"><div class="eyebrow">Request ready</div><h3>Thanks, ${esc(name)}.</h3><p>${esc(type)}${design.used?' · '+esc(designText()):''}</p><p style="margin-top:10px">Concept preview: nothing was sent. On the live site this request goes straight into GoHighLevel with your 3D design attached, and the office calls you within one business day.</p></div>`;
+  const val=n=>{const r=$(`input[name="${n}"]:checked`);return r?r.value:'Not given';};
+  /* Until the form is connected to the CRM, the request is sent by the visitor's own email app so no lead is lost. */
+  const body=[`Project: ${type}`,`Size: ${val('size')}`,`Start: ${val('time')}`,design.used?`Pavers: ${designText()}`:'',`Notes: ${$('#f-msg').value.trim()||'None'}`,'',`Name: ${full}`,`Phone: ${$('#f-phone').value.trim()}`,`Email: ${$('#f-email').value.trim()}`,`ZIP / postal code: ${$('#f-zip').value.trim()}`].filter(Boolean).join('\n');
+  const mail=`mailto:info@itoppavers.com?subject=${encodeURIComponent('Free estimate request: '+type)}&body=${encodeURIComponent(body)}`;
+  $('#qcard').innerHTML=`<div class="done" aria-live="polite"><div class="eyebrow">Almost done</div><h3>Thanks, ${esc(name)}. One last step.</h3><p>Send your request to our office and we’ll call you within one business day to book your free on-site visit.</p>
+    <div class="done-sum"><b>${esc(type)}</b>${design.used?`<span>${esc(designText())}</span>`:''}</div>
+    <div class="ctas"><a class="btn btn-primary" href="${mail}">Send my request <svg><use href="#i-arrow"/></svg></a><a class="btn btn-ghost" href="tel:+19045259191"><svg><use href="#i-phone"/></svg>Call (904) 525-9191</a></div></div>`;
 });
 qBack.addEventListener('click',()=>showStep(qStep-1,true));
 

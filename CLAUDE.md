@@ -13,13 +13,13 @@ Context for Claude Code. Read README.md for structure and the build command.
 - **Colours:** orange `#EA680F`, black `#131313`, white. Dark theme throughout. Primary buttons use **black text on orange** (white on orange fails contrast for small text).
 - **Fonts:** **Poppins** everywhere, to match the client's current site itoppavers.com. Headings 700, sub-headings 600, body 400 at 16 px. Already tried and rejected: Archivo Expanded, Unbounded, Inter Tight.
 - **Look:** sleek and professional, not childish. The 3D studio uses an architectural-render look: muted realistic grass, ornamental grasses, slatted fence, soft warm light and sprite flames. Avoid saturated cartoon colours, cone shapes and ball shrubs.
-- **Hero (changed 2026-11-12):** the 3D backyard hero was dropped as toy-like. The hero is now a real iTOP job photo with a "Start your project" picker that shows a matching real job and pre-selects the quote form. Keep the headline to two lines on desktop so the CTAs stay above the fold.
+- **Hero (changed 2026-11-12):** no 3D backyard (dropped as toy-like). Text on the left; on the right a large rounded photo showcase of real iTOP jobs (crossfade, thumbnails, licence badge in 3D depth). Keep the headline to two lines on desktop so the CTAs stay above the fold. Avoid "AI-looking" touches: glowing pill labels, grid backdrops, button glows.
 - **Paver styles (changed 2026-11-12):** the 3D before/after studio was replaced by a selector of real Tremron collections and colour blends (product photos from the old site, credited "Photo: Tremron"). The exploded 3D build-up section stays.
 - **Photos:** only real iTOP job photos (from the old site's uploads and Instagram feed) are shown as iTOP work, in `assets/photos/`. Never use the old site's stock/AI images or present Tremron's photos as iTOP jobs.
 
 ## Content rules
 - Don't invent reviews, ratings, locations, prices, financing or warranty claims. The known facts:
-  - 32 Google reviews
+  - Google reviews exist, but never show the review count anywhere (user request 2026-11-12); link to the Google reviews instead
   - licence CBC 1294954
   - 10+ years
   - phone (904) 525-9191

@@ -461,7 +461,10 @@ legend{font-family:var(--f-display);font-size:20px;font-weight:700;letter-spacin
 .qnav small{font-size:12px;color:var(--muted);flex-basis:100%}
 .done{padding:clamp(24px,4vw,40px)}
 .done h3{font-family:var(--f-display);font-size:25px;letter-spacing:-.02em;margin:14px 0 8px}
-.done p{color:var(--muted);margin:0}
+.done p{color:var(--muted);margin:0;max-width:52ch}
+.done-sum{margin-top:18px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);display:flex;flex-direction:column;gap:3px}
+.done-sum span{font-size:14px;color:var(--muted)}
+.done .ctas{margin-top:20px}
 
 /* footer */
 footer{background:#0a0a0a;border-top:1px solid var(--line);padding-block:56px 120px;font-size:14px;color:var(--muted)}
@@ -644,6 +647,35 @@ footer{background:#0a0a09}
 .process .eyebrow{background:none;border:0;color:#7d7268}
 .hero-bg::after{display:none}
 .hero-bg{background:radial-gradient(60% 70% at 80% 40%,rgba(234,104,15,.12),transparent 68%),#0d0c0b}
+
+/* ---------- refinement pass: flatter, quieter, sharper type ---------- */
+.display{font-weight:700;letter-spacing:-.035em}
+h2.display{font-size:clamp(34px,4.4vw,62px);line-height:1.02}
+.hero h1{font-weight:700;letter-spacing:-.04em;line-height:1.02}
+.lede{color:#b3aca3}
+.btn-primary,.btn-primary:hover{box-shadow:none}
+.btn-primary:hover{transform:translateY(-1px)}
+.bar .wrap{box-shadow:0 24px 60px -28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.06)}
+.show-lic{animation:none}
+.callbox small{display:none}
+.callbox b{margin-top:0;font-weight:600}
+.proof{gap:0;flex-wrap:nowrap;font-size:13.5px}
+.proof li::before{display:none}
+.proof li{padding:0 18px;border-left:1px solid rgba(255,255,255,.14);white-space:nowrap}
+.proof li:first-child{padding-left:0;border-left:0}
+@media (max-width:560px){.proof{flex-wrap:wrap;gap:8px 0}.proof li:nth-child(3){padding-left:0;border-left:0}}
+/* stats bar: dark glass instead of an orange slab */
+.strip{color:var(--white)}
+.strip .wrap::before{background:rgba(24,22,20,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--stroke);box-shadow:0 30px 70px -36px rgba(0,0,0,.9)}
+.strip .wrap>div{border-left-color:rgba(255,255,255,.1)}
+.strip b{color:var(--orange-ink);font-weight:600;font-size:18px}
+.strip span{color:#b3aca3;font-weight:500}
+/* scroll reveal: fade up */
+.reveal{transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .9s ease}
+.reveal.pre{opacity:0;transform:translateY(32px)}
+@media (prefers-reduced-motion:reduce){.reveal.pre{opacity:1;transform:none}}
+.quote::before{display:none}
+.quote{background:radial-gradient(50% 60% at 85% 30%,rgba(234,104,15,.08),transparent 70%),#0d0c0b}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -710,7 +742,6 @@ footer{background:#0a0a09}
               <button type="button" id="showNext" aria-label="Next project"><svg><use href="#i-right"/></svg></button>
             </div>
           </div>
-          <a class="show-badge" href="#reviews"><span class="sb-ic"><svg><use href="#i-star"/></svg></span><span><b>32</b> Google reviews<small>From local homeowners</small></span></a>
           <div class="show-lic"><svg><use href="#i-shield"/></svg><span>Licensed<br><b>CBC 1294954</b></span></div>
         </div>
         <div class="show-thumbs" id="showThumbs" role="group" aria-label="Choose a project photo"></div>
@@ -868,7 +899,7 @@ footer{background:#0a0a09}
       <div class="card rev-card">
         <div class="rev-in">
           <div class="eyebrow">Reviews</div>
-          <div class="score"><b>32</b><span>Google reviews<br>from local homeowners</span></div>
+          <h2 class="display" style="font-size:clamp(26px,3vw,40px)">Hear it from our homeowners.</h2>
           <p class="lede">Read what Jacksonville and St. Johns County homeowners say about working with our crew, in their own words on Google.</p>
           <div class="ctas">
             <a class="btn btn-primary" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville+reviews" target="_blank" rel="noopener">Read our Google reviews <svg><use href="#i-arrow"/></svg></a>
@@ -894,7 +925,7 @@ footer{background:#0a0a09}
       <div>
         <div class="eyebrow">Free estimate</div>
         <h2 class="display">Let’s plan your outdoor space.</h2>
-        <p class="lede">Three quick steps. We call you within one business day to book a free on-site visit, and we bring your 3D design.</p>
+        <p class="lede">Three quick steps. We call you within one business day to book a free on-site visit, and we bring real paver samples.</p>
         <ul class="contact-list">
           <li><svg><use href="#i-phone"/></svg><span class="sel">(904) 525-9191</span></li>
           <li><svg><use href="#i-mail"/></svg><span class="sel">info@itoppavers.com</span></li>
