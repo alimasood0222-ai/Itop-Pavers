@@ -335,3 +335,15 @@ ABOUT = {
     ],
     # TODO(client): confirm the story is current, the spelling of the surname, and permission to show Fabio's photo
 }
+
+# 3D backyard hero: the four features you can fly to (positions live in app.js)
+HERO_SPOTS = [
+    dict(id='patio', name='Paver patio', type='Patio',
+         text='Herringbone pavers on a compacted base, finished with a soldier-course border and set flush with the sliding doors.'),
+    dict(id='pool', name='Pool deck', type='Pool deck',
+         text='Light, slip-resistant pavers and bullnose coping around a fiberglass pool. One crew builds the pool and the deck.'),
+    dict(id='kitchen', name='Outdoor kitchen & pergola', type='Outdoor kitchen',
+         text='Stone-clad counters, a built-in grill and a pergola that shades dinner, planned around how you cook and host.'),
+    dict(id='fire', name='Fire pit & seat wall', type='Fire pit or retaining wall',
+         text='A built-in fire pit wrapped by a curved seat wall in matching block. The spot everyone ends up at.'),
+]

@@ -559,35 +559,35 @@ def p_home():
     a, full, tg, q, t, s = HERO_SLIDES[0]
     cap = f'<small>{e(tg)} · Recent iTOP job</small><b>{e(t)}</b><span>{e(s)}</span><a class="btn btn-primary" href="/get-a-quote/" data-q="{e(q)}">Get an estimate like this {ARROW}</a>'
     thumbs = ''.join(f'<button type="button" aria-label="Show {e(t)}" aria-pressed="{str(i == 0).lower()}"><img src="{img(a)}" alt="" loading="lazy" decoding="async"><span>{e(tg)}</span></button>' for i, (a, full, tg, q, t, s) in enumerate(HERO_SLIDES))
-    main = f'''<section class="hero" aria-labelledby="h1" style="padding:0">
-    <div class="hero-bg" aria-hidden="true">
-      <img class="hero-poster" src="/assets/hero-poster.webp" srcset="/assets/hero-poster-sm.webp 800w, /assets/hero-poster.webp 1600w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
-      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/hero-poster.webp" data-src="/assets/hero.mp4" data-src-sm="/assets/hero-sm.mp4"></video>
+    spots = ''.join(f'<li><button type="button" data-spot="{s["id"]}" data-type="{e(s["type"])}" data-text="{e(s["text"])}"><span class="n">{i + 1}</span>{e(s["name"])}</button></li>' for i, s in enumerate(HERO_SPOTS))
+    main = f'''<section class="hero3d" aria-labelledby="h1">
+    <div class="h3d-stage" id="heroStage">
+      <picture class="h3d-poster" aria-hidden="true"><source media="(max-width:980px)" srcset="/assets/hero3d-poster-sm.webp"><img src="/assets/hero3d-poster.webp" alt="" fetchpriority="high" decoding="async"></picture>
+      <canvas id="heroCanvas" data-3d data-hero3d aria-label="Interactive 3D backyard by iTOP Pavers: paver patio, pool deck, outdoor kitchen with pergola, and fire pit. Drag to look around."></canvas>
+      <div class="pins" id="heroPins"></div>
+      <button class="exit-view" id="exitView" type="button" hidden>{ic('i-right')}Back to whole yard<kbd>Esc</kbd></button>
     </div>
-    <button class="hero-vctl" type="button" id="heroVctl" aria-label="Pause background video" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
+    <div class="h3d-shade" aria-hidden="true"></div>
+    <div class="wrap h3d-grid">
+      <div class="h3d-copy">
         {eyebrow('Paver contractor · Northeast Florida')}
-        <h1 id="h1" class="display"><span class="l1">Outdoor spaces,</span> <em>built to last.</em></h1>
-        <p class="lede">iTOP Pavers builds paver driveways, patios and pool decks<span class="lede-more">, plus complete outdoor living,</span> across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County.<span class="lede-more"> Planned with you and built by our own crew.</span></p>
-        <div class="ctas"><a class="btn btn-primary" href="/get-a-quote/">Get a free estimate {ARROW}</a><a class="btn btn-ghost" href="/styles/">Design yours in 3D {ARROW}</a></div>
-      </div>
-      <div class="show" id="show" aria-roledescription="carousel" aria-label="Recent iTOP Pavers projects">
-        <div class="show-3d" id="show3d">
-          <div class="show-stage" id="showStage">
-            <div class="show-slides" id="showSlides">{slides}</div>
-            <div class="show-bars" id="showBars" aria-hidden="true">{bars}</div>
-            <div class="show-cap" id="showCap">{cap}</div>
-            <div class="show-nav"><button type="button" id="showPrev" aria-label="Previous project">{ic('i-right')}</button><button type="button" id="showNext" aria-label="Next project">{ic('i-right')}</button></div>
-          </div>
-          <div class="show-lic">{ic('i-shield')}<span>Licensed<br><b>{BIZ['licence']}</b></span></div>
-        </div>
-        <div class="show-thumbs" id="showThumbs" role="group" aria-label="Choose a project photo">{thumbs}</div>
-        <p class="sr" id="showLive" aria-live="polite"></p>
+        <h1 id="h1" class="display">Crafting unique <em>outdoor</em> spaces.</h1>
+        <p class="lede">Paver patios, driveways, pool decks and complete outdoor living across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County. Planned with you and built by our own crew.</p>
+        <div class="ctas"><a class="btn btn-primary" href="/get-a-quote/">Get a free estimate {ARROW}</a><a class="btn btn-ghost" href="#studio">Design yours in 3D {ic('i-down')}</a></div>
+        <ul class="h3d-proof"><li>Licensed <b>{BIZ['licence']}</b></li><li><b>{BIZ['experience']}</b> building outdoor spaces</li><li>Free on-site estimates</li></ul>
       </div>
     </div>
-    {hero_stats()}
-    {PAVER_EDGE}
+    <aside class="h3d-explore" id="explore" aria-label="Explore the 3D backyard">
+      <div class="ex-head"><p class="ex-title">Explore the yard</p>
+        <div class="seg" role="group" aria-label="Time of day"><button type="button" data-tod="1" aria-pressed="true">{ic('i-moon')}Dusk</button><button type="button" data-tod="0" aria-pressed="false">{ic('i-sun')}Day</button></div></div>
+      <ul class="ex-list" id="exList">{spots}</ul>
+      <div class="ex-detail" id="exDetail" aria-live="polite">
+        <div class="ex-nav"><button class="ex-back" type="button" id="exBack">{ic('i-right')}Whole yard</button><button class="ex-next" type="button" id="exNext">Next {ic('i-right')}</button></div>
+        <p class="ex-h" id="exTitle"></p><p id="exText"></p>
+        <a class="btn btn-primary" href="#quote" id="exCta">Price this feature {ARROW}</a>
+      </div>
+      <div class="ex-foot"><span>{ic('i-drag')}Drag to look around</span><a href="#studio">Choose your pavers {ic('i-down')}</a></div>
+    </aside>
   </section>
   {services_section()}
   {styles_explorer()}
