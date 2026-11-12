@@ -637,6 +637,13 @@ footer{background:#0a0a09}
   .mbar{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding-bottom:0;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:rgba(18,17,16,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 40px -14px rgba(0,0,0,.9)}
   .mbar a{height:54px}
 }
+
+/* editorial section labels (no pill, no glow) and a cleaner hero backdrop */
+.eyebrow{display:flex;padding:0;border:0;background:none;border-radius:0;gap:14px;font-size:12px;font-weight:600;letter-spacing:.16em;color:#a39b91}
+.eyebrow::before{width:32px;height:1px;border-radius:0;box-shadow:none;background:var(--orange)}
+.process .eyebrow{background:none;border:0;color:#7d7268}
+.hero-bg::after{display:none}
+.hero-bg{background:radial-gradient(60% 70% at 80% 40%,rgba(234,104,15,.12),transparent 68%),#0d0c0b}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
