@@ -210,6 +210,16 @@ if(finder&&COLLS.length){
   $('#fd3d').addEventListener('click',e=>{apply(false);if($('#studio')){e.preventDefault();$('#studio').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
   $('#fdAdd').addEventListener('click',e=>{const r=apply(true);selectType(r.type);if($('#quote')){e.preventDefault();$('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
 }
+
+/* ---------------- hero background video: desktop only, after load, never for reduced motion / data saver ---------------- */
+const hv=document.querySelector('.hero-video'), hctl=document.getElementById('heroVctl');
+if(hv){
+  const ok=()=>!reduce&&innerWidth>=900&&!(navigator.connection&&navigator.connection.saveData);
+  const start=()=>{if(!ok()||hv.src)return;hv.src=hv.dataset.src;hv.addEventListener('playing',()=>{document.querySelector('.hero').classList.add('vplay');hctl.hidden=false;},{once:true});hv.play().catch(()=>{});};
+  if(document.readyState==='complete')setTimeout(start,600);else addEventListener('load',()=>setTimeout(start,600));
+  hctl.addEventListener('click',()=>{if(hv.paused){hv.play();hctl.setAttribute('aria-label','Pause background video');hctl.classList.remove('paused');}else{hv.pause();hctl.setAttribute('aria-label','Play background video');hctl.classList.add('paused');}});
+  document.addEventListener('visibilitychange',()=>{if(!hv.src)return;if(document.hidden)hv.pause();else if(!hctl.classList.contains('paused'))hv.play().catch(()=>{});});
+}
 /* ---------------- hero showcase ---------------- */
 const show=$('#show');
 if(show){

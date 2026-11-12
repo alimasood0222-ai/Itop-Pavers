@@ -551,7 +551,7 @@ def js_data(proj=True, styles=False, hero=False):
 # ------------------------------------------------------------------ pages
 def p_home():
     def slide(i, a, full, t, s):
-        pr = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
+        pr = '' if i == 0 else 'loading="lazy"'
         srcset = f' srcset="{img(a)} 720w, {img(a, False)} 1600w" sizes="(max-width:1100px) 92vw, 56vw"' if full else ''
         return f'<figure class="show-slide{" on" if i == 0 else ""}" aria-hidden="{str(i != 0).lower()}"><img src="{img(a, not full)}"{srcset} alt="{e(t)}: {e(s)}, by iTOP Pavers" {pr} decoding="async" draggable="false"></figure>'
     slides = ''.join(slide(i, a, full, t, s) for i, (a, full, tg, q, t, s) in enumerate(HERO_SLIDES))
@@ -560,7 +560,11 @@ def p_home():
     cap = f'<small>{e(tg)} · Recent iTOP job</small><b>{e(t)}</b><span>{e(s)}</span><a class="btn btn-primary" href="/get-a-quote/" data-q="{e(q)}">Get an estimate like this {ARROW}</a>'
     thumbs = ''.join(f'<button type="button" aria-label="Show {e(t)}" aria-pressed="{str(i == 0).lower()}"><img src="{img(a)}" alt="" loading="lazy" decoding="async"><span>{e(tg)}</span></button>' for i, (a, full, tg, q, t, s) in enumerate(HERO_SLIDES))
     main = f'''<section class="hero" aria-labelledby="h1" style="padding:0">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-bg" aria-hidden="true">
+      <img class="hero-poster" src="/assets/hero-poster.webp" srcset="/assets/hero-poster-sm.webp 800w, /assets/hero-poster.webp 1600w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
+      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/hero-poster.webp" data-src="/assets/hero.mp4"></video>
+    </div>
+    <button class="hero-vctl" type="button" id="heroVctl" aria-label="Pause background video" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
     <div class="wrap hero-grid">
       <div class="hero-copy">
         {eyebrow('Paver contractor · Northeast Florida')}
@@ -855,6 +859,7 @@ def copy_assets():
     shutil.copy2(R / 'assets' / 'vendor' / 'three.min.js', D / 'assets' / 'vendor' / 'three.min.js')
     for f in (R / 'assets' / 'brand').glob('*'): shutil.copy2(f, (D / f.name) if f.name in BRAND_ROOT else (D / 'assets' / f.name))
     for f in (R / 'assets' / 'photos').glob('*.webp'): shutil.copy2(f, D / 'img' / f.name)
+    for f in (R / 'assets' / 'video').glob('*'): shutil.copy2(f, D / 'assets' / f.name)
     for f in (R / 'assets' / 'pavers').glob('*.webp'): shutil.copy2(f, D / 'img' / 'pavers' / f.name)
 
 def main():
