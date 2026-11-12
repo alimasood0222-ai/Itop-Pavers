@@ -11,13 +11,14 @@ Context for Claude Code. Read README.md for structure and the build command.
 - SEO docs: `docs/seo/` (plan, redirects, schema, keyword map, off-site checklist, client questions).
 
 ## Decisions already made with the client (don't revert without asking)
-- **Name and logo:** "iTOP Pavers", using the client's logo, vectorised from `assets/logo/itop-pavers-logo-original.png`. On dark backgrounds: orange mark, white wordmark.
+- **Name and logo:** "iTOP Pavers". The logo is re-traced from the official file `assets/logo/source/itoppavers-logo-dark-bg.png` (old site) with `assets/logo/trace_logo_v2.py`; the logo artwork uses its exact orange **#FB5D00** (site accents stay #EA680F). On dark backgrounds: orange mark, white wordmark.
 - **Colours:** orange `#EA680F`, black `#131313`, white, plus a warm stone `#f4efe7` for light sections (added 2026-11-12 to alternate light/dark, at the user's request, using itop-pools.vercel.app as the quality bar). Primary buttons use **black text on orange** (white on orange fails contrast for small text).
 - **Fonts:** **Poppins** everywhere, to match the client's current site itoppavers.com. Headings 700, sub-headings 600, body 400 at 16 px. Already tried and rejected: Archivo Expanded, Unbounded, Inter Tight.
 - **Look:** sleek and professional, not childish. The 3D studio uses an architectural-render look: muted realistic grass, ornamental grasses, slatted fence, soft warm light and sprite flames. Avoid saturated cartoon colours, cone shapes and ball shrubs.
 - **Hero (changed 2026-11-12):** no 3D backyard (dropped as toy-like). Text on the left; on the right a large rounded photo showcase of real iTOP jobs (crossfade, thumbnails, licence badge in 3D depth). Keep the headline to two lines on desktop so the CTAs stay above the fold. Avoid "AI-looking" touches: glowing pill labels, grid backdrops, button glows.
 - **Paver styles (changed 2026-11-12):** the 3D before/after studio was replaced by a selector of real Tremron collections and colour blends (product photos from the old site, credited "Photo: Tremron"). The exploded 3D build-up section stays.
-- **Photos:** only real iTOP job photos (from the old site's uploads and Instagram feed) are shown as iTOP work, in `assets/photos/`. Never use the old site's stock/AI images or present Tremron's photos as iTOP jobs.
+- **Design standard:** the user's pools site https://itop-pools.vercel.app/ is the quality bar (not to be copied): calm mid-size headings, sentence-case labels, 10px-radius buttons, crisp white/near-white sections alternating with dark, hairline cards, a useful tool in each section (paver finder, 3D styles, timeline, gallery strip, +FAQ, photo CTA).
+- **Photos:** only real iTOP job photos (from the old site's uploads and Instagram feed) are shown as iTOP work, in `assets/photos/`. Never use the old site's stock/AI images or present Tremron's photos as iTOP jobs. Services without real photos (fiberglass pools, outdoor kitchens, pergolas) use old-site media captioned "Example design" until the client sends real ones.
 
 ## Content rules
 - Don't invent reviews, ratings, locations, prices, financing or warranty claims. The known facts:

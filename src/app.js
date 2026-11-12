@@ -193,6 +193,23 @@ if(sxColls&&design){
   if(design.coll!==COLLS[0]||design.color!==COLLS[0].c[0]||design.border!==BORD[0])render();
 }
 
+
+/* ---------------- paver finder (3 questions -> collection, colour, layout) ---------------- */
+const finder=$('#finderForm');
+if(finder&&COLLS.length){
+  const val=k=>finder.querySelector(`input[name="fd-${k}"]:checked`);
+  const pick=()=>{const sp=val('space'),lk=val('look'),tn=val('tone');const c=COLLS.find(x=>x.id===lk.dataset.coll)||COLLS[0];
+    const col=tn.dataset.tones.split(',').map(t=>c.c.find(x=>x[0]===t)).find(Boolean)||c.c[0];
+    const lay=(c.id==='brick'||c.id==='park-plaza')?sp.dataset.pat:'Multi-size layout, planned with you';
+    return {c,col,lay,space:sp.nextElementSibling.textContent,type:sp.dataset.type};};
+  const render=()=>{const r=pick();const im=$('#fdImg');im.src=texSrc(r.c.id,r.col[0]);im.alt=`${r.c.name} pavers in ${r.col[1]}`;
+    $('#fdName').textContent=`${r.c.name} · ${r.col[1]}`;$('#fdDesc').textContent=r.c.d;$('#fdSpace').textContent=r.space;$('#fdColl').textContent=r.c.name;$('#fdCol').textContent=r.col[1];$('#fdLay').textContent=r.lay;};
+  finder.addEventListener('change',render); render();
+  const apply=used=>{const r=pick();design.coll=r.c;design.color=r.col;if(used)design.used=true;saveDesign();renderDesignBox();
+    const i=COLLS.indexOf(r.c);const cb=document.querySelectorAll('#sxColls .sx-coll')[i];if(cb){cb.click();const j=r.c.c.indexOf(r.col);const sw=document.querySelectorAll('#sxSw .sx-c')[j];sw&&sw.click();}return r;};
+  $('#fd3d').addEventListener('click',e=>{apply(false);if($('#studio')){e.preventDefault();$('#studio').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
+  $('#fdAdd').addEventListener('click',e=>{const r=apply(true);selectType(r.type);if($('#quote')){e.preventDefault();$('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});}});
+}
 /* ---------------- hero showcase ---------------- */
 const show=$('#show');
 if(show){

@@ -22,7 +22,10 @@ Q = '"'
 
 # ------------------------------------------------------------------ assets & helpers
 vb, o_p, d_p = (read(f'assets/logo/{n}.txt').strip() for n in ('vb', 'o', 'd'))
-LOGO_SYMBOL = f'<symbol id="logo" viewBox="{vb}"><path fill="#EA680F" fill-rule="evenodd" d="{o_p}"/><path fill="currentColor" fill-rule="evenodd" d="{d_p}"/></symbol>'
+m_p, mvb = (read(f'assets/logo/{n}.txt').strip() for n in ('m', 'mvb'))
+LOGO_ORANGE = '#FB5D00'   # exact colour of the official logo artwork (old site ITOPPAVERS-LOGO files)
+LOGO_SYMBOL = (f'<symbol id="logo" viewBox="{vb}"><path fill="{LOGO_ORANGE}" fill-rule="evenodd" d="{o_p}"/><path fill="currentColor" fill-rule="evenodd" d="{d_p}"/></symbol>'
+               f'<symbol id="mark" viewBox="{mvb}"><path fill="currentColor" fill-rule="evenodd" d="{m_p}"/></symbol>')
 SPRITE = read('src/sprite.svg').replace('{{LOGO_SYMBOL}}', LOGO_SYMBOL)
 CSS = read('src/styles.css')
 APP = read('src/app.js')
@@ -140,7 +143,7 @@ def header(active=''):
   </div>
   <div class="mega" id="mm-living" role="region" aria-label="Outdoor living services">
     <div class="wrap mega-in">
-      <div><p class="mega-h">Outdoor living</p><div class="mega-grid">{''.join(ml_icon(s) for s in LIVING)}</div></div>
+      <div><p class="mega-h">Outdoor living</p><div class="mega-grid">{''.join(ml_photo(s) for s in LIVING)}</div></div>
       <a class="mega-feature photo" href="/get-a-quote/"><img src="{img('screen-enclosure')}" alt="" loading="lazy" decoding="async"><span class="tag2">One team, one contact</span><b>Pool, deck and kitchen, planned together.</b><p>We plan the whole backyard with you and handle the permits.</p><span class="big">{BIZ['phone']}</span><span class="fl">Book a free visit {ARROW}</span></a>
     </div>
     <div class="mega-foot"><div class="wrap"><span>HOA paperwork done for you</span><span>Built for Florida weather</span><span>{BIZ['experience']} experience</span><a href="/services/">All services {ARROW}</a></div></div>
@@ -233,7 +236,8 @@ def trust_bar():
         f'<div class="tcard"><span class="tic">{ic(i)}</span><div><b>{e(t)}</b><span>{e(d)}</span></div></div>' for i, t, d in TRUST) + '</div></section>'
 
 def svc_card(s, h='h3'):
-    vis = (f'<span class="svc-ph"><img src="{img(s["img"])}" alt="{e(s["name"])} by iTOP Pavers" loading="lazy" decoding="async"></span>' if s['img'] else ic(s['icon'], 'ic'))
+    alt = f'{s["name"]}: example design' if s.get('img_note') else f'{s["name"]} by iTOP Pavers'
+    vis = (f'<span class="svc-ph"><img src="{img(s["img"])}" alt="{e(alt)}" loading="lazy" decoding="async"></span>' if s['img'] else ic(s['icon'], 'ic'))
     return f'<a class="svc" href="{svc_url(s)}">{ic("i-arrow", "go")}{vis}<{h}>{e(s["nav"])}</{h}><p>{e(s["card"])}</p></a>'
 
 def services_section(h2='Built by the space you want to use.', lede='From the driveway that greets you to the pool deck you live on all summer. One local crew, one point of contact, one standard of finish.'):
@@ -263,7 +267,6 @@ def process_section(light=True):
   <div class="wrap">
     {sec_head('Our process', 'Four steps. No surprises.', 'You get a clear plan and a written estimate before work begins. We take care of HOA, engineering and permit approvals and keep you updated until the job is done.', 'proc-h')}
     <ol class="steps" id="steps">{steps}</ol>
-    <div class="adv"><h3>The iTOP<br><span>advantage</span></h3><ul>{adv}</ul></div>
   </div>
 </section>'''
 
@@ -325,6 +328,7 @@ def quote_form(h='h2'):
     types = ''.join(f'<label class="opt"><input type="radio" name="type" value="{e(t)}"><span>{e(t)}</span></label>' for t in QUOTE_TYPES)
     radios = lambda name, vals: ''.join(f'<label class="opt"><input type="radio" name="{name}" value="{e(v)}"><span>{e(v)}</span></label>' for v in vals)
     return f'''<section class="quote" id="quote" aria-labelledby="quote-h">
+    <div class="quote-bg" aria-hidden="true"><img src="{img('patio-circle', False)}" alt="" loading="lazy" decoding="async"></div>
     <div class="wrap">
       <div>
         {eyebrow('Free estimate')}
@@ -471,6 +475,72 @@ def about_teaser():
         <div class="ctas"><a class="btn btn-ghost" href="/about/">About iTOP Pavers {ARROW}</a></div></div>
     </div></section>'''
 
+# ------------------------------------------------------------------ pools-standard sections
+FINDER = {
+    'space': [('driveway', 'Driveway', 'Driveway', 'h45'), ('patio', 'Patio', 'Patio', 'h90'), ('pool', 'Pool deck', 'Pool deck', 'h90'), ('walkway', 'Walkway', 'Walkway', 'bond')],
+    'look': [('classic', 'Classic, tumbled', 'olde-towne'), ('large', 'Large & relaxed', 'mega-olde-towne'), ('modern', 'Smooth & modern', 'park-plaza'), ('stone', 'Natural stone', 'stonehurst'), ('brick', 'Classic brick', 'brick')],
+    'tone': [('warm', 'Warm', ['autumn-blend', 'sand-dune', 'tan', 'heritage', 'santa-fe']), ('neutral', 'Neutral', ['sierra', 'sandstone', 'taupe', 'natural', 'white']), ('cool', 'Cool grey', ['glacier', 'granite', 'charcoal', 'lions-bridge'])],
+}
+PAT_NAME = {k: n for k, n, _, _ in PATTERNS}
+def finder_pick(space, look, tone):
+    sp = next(x for x in FINDER['space'] if x[0] == space); lk = next(x for x in FINDER['look'] if x[0] == look); tn = next(x for x in FINDER['tone'] if x[0] == tone)
+    c = next(x for x in COLLS if x['id'] == lk[2]); col = next((x for t in tn[2] for x in c['c'] if x[0] == t), c['c'][0])
+    layout = PAT_NAME[sp[3]] if c['id'] in ('brick', 'park-plaza') else 'Multi-size layout, planned with you'
+    return c, col, layout, sp
+def finder_section():
+    q = lambda key, title, n, opts: (f'<fieldset class="fd-q" data-k="{key}"><legend><span class="fd-n">0{n} / 03</span>{title}</legend><div class="fd-opts">'
+        + ''.join(f'<label class="fd-o"><input type="radio" name="fd-{key}" value="{o[0]}"{attr(key, o)}{" checked" if i == 0 else ""}><span>{e(o[1])}</span></label>' for i, o in enumerate(opts)) + '</div></fieldset>')
+    def attr(key, o):
+        if key == 'space': return f' data-type="{e(o[2])}" data-pat="{e(PAT_NAME[o[3]])}"'
+        if key == 'look': return f' data-coll="{o[2]}"'
+        return f' data-tones="{",".join(o[2])}"'
+    c, col, layout, sp = finder_pick('driveway', 'classic', 'warm')
+    return f"""<section class="finder light" id="finder" aria-labelledby="fd-h">
+  <div class="wrap">
+    {sec_head('Paver finder', 'Find your paver in three questions.', 'Answer three quick questions and we’ll suggest a Tremron collection, colour blend and layout to start from. Then see it in 3D or add it to your estimate.', 'fd-h')}
+    <div class="fd">
+      <form class="fd-card" id="finderForm" onsubmit="return false">
+        {q('space', 'Where are the pavers going?', 1, FINDER['space'])}
+        {q('look', 'Which look do you like?', 2, FINDER['look'])}
+        {q('tone', 'Warm, neutral or cool?', 3, FINDER['tone'])}
+      </form>
+      <div class="fd-res" id="finderRes" aria-live="polite">
+        <img id="fdImg" src="{tex(c['id'], col[0])}" alt="{e(c['name'])} pavers in {e(col[1])}" loading="lazy" decoding="async">
+        <div class="fd-res-in">
+          <p class="fd-tag">A good place to start</p>
+          <p class="fd-name" id="fdName">{e(c['name'])} · {e(col[1])}</p>
+          <p class="fd-d" id="fdDesc">{e(c['d'])}</p>
+          <dl class="fd-spec"><div><dt>Space</dt><dd id="fdSpace">{e(sp[1])}</dd></div><div><dt>Collection</dt><dd id="fdColl">{e(c['name'])}</dd></div><div><dt>Colour</dt><dd id="fdCol">{e(col[1])}</dd></div><div><dt>Layout</dt><dd id="fdLay">{e(layout)}</dd></div></dl>
+          <div class="ctas"><a class="btn btn-primary" href="#studio" id="fd3d">See it in 3D {ARROW}</a><a class="btn btn-ghost" href="/get-a-quote/" id="fdAdd">Add to my estimate</a></div>
+          <p class="fd-note">Suggestions only. We confirm the right paver and pattern with real samples at your free visit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+def why_section():
+    stats = [('10+', 'years', 'Building outdoor spaces in Northeast Florida', 'dark'), ('10', 'services', 'Pavers, pools, kitchens and enclosures from one team', ''),
+             (str(len(TOWN_NAMES)), 'towns', 'Served from our Jacksonville office', ''), ('6', 'layers', 'Under every patio, driveway and pool deck', 'dark')]
+    cards = ''.join(f'<div class="bento {cls}"><p class="big">{n}<span>{u}</span></p><p>{e(d)}</p></div>' for n, u, d, cls in stats)
+    rows = [('Free on-site consultation', 'Measured, with a detailed written estimate'), ('HOA, engineering & permits', 'We take care of the approvals'),
+            ('One team for the whole backyard', 'Pavers, pools, kitchens, pergolas & enclosures'), ('Licensed Florida contractor', BIZ['licence']),
+            ('Tremron paver collections', '5 collections, many colour blends'), ('Office hours', 'Mon–Fri 8–6 · Sat 9–1')]
+    tbl = ''.join(f'<tr><th scope="row">{e(a)}</th><td><span class="ok" aria-hidden="true">✓</span>{e(b)}</td></tr>' for a, b in rows)
+    return f"""<section class="why-sec" aria-labelledby="why-h">
+  <div class="wrap">
+    {sec_head('Why iTOP Pavers', 'Why homeowners choose iTOP Pavers.', 'A licensed local contractor with its own Jacksonville office, a clear process and one team from the first visit to the final inspection.', 'why-h')}
+    <div class="why-grid">
+      <div class="bentos">{cards}</div>
+      <div class="why-tbl"><table><caption class="sr">What you get with iTOP Pavers</caption><thead><tr><th scope="col">What you get</th><th scope="col">With iTOP Pavers</th></tr></thead><tbody>{tbl}</tbody></table></div>
+    </div>
+  </div>
+</section>"""
+
+def hero_stats():
+    items = [('10+ years', 'Building outdoor spaces'), ('Free estimate', 'On-site, measured, in writing'), ('Licensed', f'Florida {BIZ["licence"]}'), ('One team', 'Pavers, pools & enclosures')]
+    return '<div class="wrap hero-stats" role="list">' + ''.join(f'<div role="listitem"><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in items) + '</div>'
+
 def js_data(proj=True, styles=False, hero=False):
     d = {}
     if proj: d['proj'] = PROJ
@@ -497,7 +567,6 @@ def p_home():
         <h1 id="h1" class="display"><span class="l1">Outdoor spaces,</span> <em>built to last.</em></h1>
         <p class="lede">iTOP Pavers builds paver driveways, patios, pool decks and complete outdoor living across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County. Planned with you and built by our own crew.</p>
         <div class="ctas"><a class="btn btn-primary" href="/get-a-quote/">Get a free estimate {ARROW}</a><a class="btn btn-ghost" href="/styles/">Design yours in 3D {ARROW}</a></div>
-        <ul class="proof"><li><b>10+</b>&nbsp;years experience</li><li>Free on-site estimates</li><li>Permits &amp; HOA handled</li></ul>
       </div>
       <div class="show" id="show" aria-roledescription="carousel" aria-label="Recent iTOP Pavers projects">
         <div class="show-3d" id="show3d">
@@ -513,25 +582,24 @@ def p_home():
         <p class="sr" id="showLive" aria-live="polite"></p>
       </div>
     </div>
+    {hero_stats()}
     {PAVER_EDGE}
   </section>
   {trust_bar()}
   {services_section()}
   {styles_explorer()}
+  {finder_section()}
   {build_section()}
   <section id="projects" class="light" aria-labelledby="proj-h">
     <div class="wrap">
       {sec_head('Recent work', 'Real yards. Real Northeast Florida.', 'Driveways, pool decks, patios and entries built by our own crew. Tap any photo to see it larger.', 'proj-h')}
-      {projects_block(PROJ[:6], filters=False)}
+      <div class="strip-wrap">{projects_block(PROJ[:8], filters=False)}</div>
       <div class="proj-more"><p>Planning something similar? We’ll visit, measure and give you a detailed estimate, free.</p><a class="btn btn-primary" href="/projects/">See all projects {ARROW}</a></div>
     </div>
   </section>
-  {process_section()}
+  {why_section()}
   {about_teaser()}
-  <section id="faq" aria-labelledby="faq-h"><div class="wrap faq-wrap">
-    <div class="faq-side">{eyebrow('FAQ')}<h2 class="display" id="faq-h">Questions homeowners ask us.</h2><p class="lede">Straight answers about pavers, permits, timing and what the free estimate includes.</p><p class="more-link"><a href="/faq/">All questions and answers {ARROW}</a></p></div>
-    {faq_list(HOME_FAQ)}
-  </div></section>
+  {process_section()}
   <section id="reviews" class="light" aria-labelledby="rev-h">
     <div class="wrap duo">
       <div class="card rev-card">
@@ -543,6 +611,10 @@ def p_home():
       {area_card()}
     </div>
   </section>
+  <section id="faq" aria-labelledby="faq-h"><div class="wrap faq-wrap">
+    <div class="faq-side">{eyebrow('FAQ')}<h2 class="display" id="faq-h">Questions homeowners ask us.</h2><p class="lede">Straight answers about pavers, permits, timing and what the free estimate includes.</p><div class="ctas"><a class="btn btn-primary" href="tel:{BIZ['phone_e164']}">{ic('i-phone')}Call {BIZ['phone']}</a><a class="btn btn-ghost" href="/faq/">All questions {ARROW}</a></div></div>
+    {faq_list(HOME_FAQ)}
+  </div></section>
   {quote_form()}'''
     page('/', 'Paver Contractor in Jacksonville, FL | iTOP Pavers',
          'iTOP Pavers builds paver patios, driveways, pool decks and outdoor living across Jacksonville, St. Augustine and St. Johns County. Licensed CBC 1294954.',
@@ -561,8 +633,10 @@ def p_services():
 def p_service(s):
     crumbs = [('Home', '/'), ('Services', '/services/'), (s['name'], svc_url(s))]
     photos = [p for p in PROJ if p['svc'] == s['slug']] or [p for p in PROJ if s['img'] and p['img'] == s['img']]
-    big = any(p['img'] == s['img'] and p.get('full') for p in PROJ)
-    aside = (f'<figure class="phero-ph"><img src="{img(s["img"], not big)}" alt="{e(s["name"])} by iTOP Pavers" fetchpriority="high" decoding="async"><figcaption>Recent iTOP job</figcaption></figure>'
+    big = bool(s['img']) and (R / 'assets' / 'photos' / f"{s['img']}.webp").exists()
+    note = s.get('img_note', 'Recent iTOP job')
+    alt = f'{s["name"]}: example design' if s.get('img_note') else f'{s["name"]} by iTOP Pavers'
+    aside = (f'<figure class="phero-ph"><img src="{img(s["img"], not big)}" alt="{e(alt)}" fetchpriority="high" decoding="async"><figcaption>{e(note)}</figcaption></figure>'
              if s['img'] else f'<div class="phero-ic">{ic(s["icon"])}<p>{e(s["card"])}</p></div>')
     why = ''.join(f'<li><b>{e(t)}</b><span>{e(d)}</span></li>' for t, d in s['why'])
     inc = ''.join(f'<li>{e(x)}</li>' for x in s['included'])
@@ -586,7 +660,7 @@ def p_service(s):
         <ul class="why">{why}</ul>
       </div>
       <aside class="svc-aside" aria-label="Free estimate">
-        <p class="eyebrow">Free estimate</p><p class="aside-h">Plan your {e(s['nav'].lower())} with us.</p>
+        <p class="eyebrow">Free estimate</p><p class="aside-h">Plan your project with us.</p>
         <p>We visit, measure and give you a detailed written estimate, with no obligation.</p>
         <a class="btn btn-primary" href="/get-a-quote/" data-q="{e(s['type'])}">Get a free estimate {ARROW}</a>
         <a class="aside-call" href="tel:{BIZ['phone_e164']}">{ic('i-phone')}{BIZ['phone']}</a>
@@ -600,7 +674,7 @@ def p_service(s):
       {faq_list(s['faqs'])}
     </div></section>
     <section class="sec-tight" aria-labelledby="rel-h"><div class="wrap">{sec_head('Related services', 'Often built together.', 'Many of our projects combine several of these, planned and built by one team.', 'rel-h')}<div class="svc-grid rel">{''.join(svc_card(x) for x in related)}</div></div></section>
-    {cta_band('Plan your ' + s['nav'].lower() + ' with iTOP Pavers.')}'''
+    {cta_band('Ready to plan your ' + s['name'].lower() + ' project?')}'''
     page(svc_url(s), s['title'], s['desc'], main, [service_node(s), faq_node(s['faqs'], svc_url(s)), crumbs_node(crumbs)], active=s['group'], data=js_data(True), prio='0.9')
 
 def p_styles():

@@ -145,7 +145,7 @@ SERVICES = [
     ],
   },
   {
-    'slug': 'fiberglass-pools', 'name': 'Fiberglass Pools', 'nav': 'Fiberglass pools', 'group': 'Outdoor Living', 'type': 'Fiberglass pool', 'img': None, 'icon': 's-pool',
+    'slug': 'fiberglass-pools', 'name': 'Fiberglass Pools', 'nav': 'Fiberglass pools', 'group': 'Outdoor Living', 'type': 'Fiberglass pool', 'img': 'fiberglass-pool-example', 'img_note': 'Example design', 'icon': 's-pool',
     'card': 'Resort-style pools installed with matching decks.',
     'title': 'Fiberglass Pool Installation in Jacksonville | iTOP Pavers',
     'desc': 'Fiberglass pool installation with matching paver decks in Jacksonville and Northeast Florida. Durable, low-maintenance, permits handled. Call (904) 525-9191.',
@@ -161,7 +161,7 @@ SERVICES = [
     ],
   },
   {
-    'slug': 'outdoor-kitchens', 'name': 'Outdoor Kitchens', 'nav': 'Outdoor kitchens', 'group': 'Outdoor Living', 'type': 'Outdoor kitchen', 'img': None, 'icon': 's-kitchen',
+    'slug': 'outdoor-kitchens', 'name': 'Outdoor Kitchens', 'nav': 'Outdoor kitchens', 'group': 'Outdoor Living', 'type': 'Outdoor kitchen', 'img': 'outdoor-kitchen-example', 'img_note': 'Example design', 'icon': 's-kitchen',
     'card': 'Grills, counters and storage built for Florida weather.',
     'title': 'Outdoor Kitchen Builder in Jacksonville, FL | iTOP Pavers',
     'desc': 'Custom outdoor kitchens in Jacksonville and St. Johns County: counters, grill stations and storage on a paver patio, built for Florida weather. Free estimate.',
@@ -177,7 +177,7 @@ SERVICES = [
     ],
   },
   {
-    'slug': 'pergolas-gazebos', 'name': 'Pergolas & Gazebos', 'nav': 'Pergolas & gazebos', 'group': 'Outdoor Living', 'type': 'Pergola or gazebo', 'img': None, 'icon': 's-pergola',
+    'slug': 'pergolas-gazebos', 'name': 'Pergolas & Gazebos', 'nav': 'Pergolas & gazebos', 'group': 'Outdoor Living', 'type': 'Pergola or gazebo', 'img': 'pergola-example', 'img_note': 'Example design', 'icon': 's-pergola',
     'card': 'Shade structures sized to your patio.',
     'title': 'Pergolas & Gazebos in Jacksonville, FL | iTOP Pavers',
     'desc': 'Custom pergolas and gazebos in Jacksonville and St. Johns County. Shade and style for your patio or pool deck, with permits handled. Free estimate today.',
@@ -298,6 +298,8 @@ COLLS = [
 ]
 BORD = [{'id': 'charcoal', 'name': 'Charcoal', 'tex': ['brick', 'charcoal']}, {'id': 'match', 'name': 'Matching', 'tex': None}, {'id': 'tan', 'name': 'Tan', 'tex': ['brick', 'tan']}]
 
+# 'Example design' photos come from the old site's media library; origin unconfirmed, so they are never labelled as iTOP jobs
+# and are not in PROJ. TODO(client): replace with real iTOP photos of kitchens, pergolas and pools.
 # ---------------------------------------------------------------- projects (real iTOP jobs)
 PROJ = [  # f = filter group, svc = service slug it belongs to
     {'t': 'Driveway', 'svc': 'driveways', 'img': 'driveway-gated', 'full': 1, 'big': 1, 'title': 'Gated entry driveway', 'sub': 'Tumbled pavers with a charcoal soldier course'},
