@@ -1,0 +1,799 @@
+<title>iTOP Pavers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* iTOP Pavers concept v3. Dark brand canvas. Three live 3D scenes: hero backyard, design studio (before/after), exploded build-up. */
+:root{
+  --black:#131313; --ink:#0b0b0b; --panel:#1a1918; --panel2:#141312; --line:#2c2a28;
+  --orange:#EA680F; --orange-ink:#ff8a3d; --white:#FFFFFF; --muted:#a9a49e;
+  --stone:#ebe5dc; --stone-ink:#2a2724;
+  --f-display:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;   /* stand-in for Universo */
+  --f-body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif; /* stand-in for Forma */
+  --gut:max(20px, env(safe-area-inset-left,0px)); --gutR:max(20px, env(safe-area-inset-right,0px));
+  --cut:14px; --hdr:68px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--black);color:var(--white);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--black)}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1320px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutR)}
+.display{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-wrap:balance}
+.eyebrow{font-family:var(--f-display);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:8px;background:var(--orange);clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+h2.display{font-size:clamp(30px,4.1vw,54px);margin:14px 0 18px}
+.lede{color:var(--muted);max-width:60ch;margin:0}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{--h:52px;display:inline-flex;align-items:center;gap:12px;height:var(--h);padding:0 26px;font:700 15px/1 var(--f-body);letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer;white-space:nowrap;clip-path:polygon(0 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%);transition:transform .2s ease,background .2s,box-shadow .2s}
+.btn-primary{background:var(--orange);color:var(--black)}
+.btn-primary:hover{background:#ff7a1f;transform:translateY(-2px)}
+.btn-ghost{background:rgba(19,19,19,.4);color:var(--white);box-shadow:inset 0 0 0 2px #4a4642}
+.btn-ghost:hover{box-shadow:inset 0 0 0 2px var(--white)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------------- header ---------------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+.util{background:#0a0a0a;border-bottom:1px solid #1f1d1b;height:40px;overflow:hidden;transition:height .3s ease,border-color .3s;font-size:12.5px;color:var(--muted)}
+.util .wrap{height:40px;display:flex;align-items:center;gap:20px}
+.util a,.util .u{display:inline-flex;align-items:center;gap:8px;text-decoration:none;white-space:nowrap}
+.util a:hover{color:var(--white)}
+.util svg{width:14px;height:14px;color:var(--orange);flex:none}
+.util .sep{width:1px;height:14px;background:#2e2b28;flex:none}
+.util .r{margin-left:auto;display:flex;gap:20px;align-items:center}
+.top.scrolled .util{height:0;border-bottom-color:transparent}
+.bar{position:relative;background:rgba(19,19,19,.86);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--line);transition:background .3s}
+.top.scrolled .bar,.top.mega-open .bar{background:rgba(14,14,14,.97)}
+.bar .wrap{display:flex;align-items:center;gap:20px;height:84px;transition:height .3s ease}
+.top.scrolled .bar .wrap{height:68px}
+.brand{display:flex;align-items:center;text-decoration:none;flex:none;color:var(--white)}
+.logo{display:block;width:142px;height:53px;transition:width .3s,height .3s}
+.top.scrolled .logo{width:113px;height:42px}
+.mainnav{margin-left:auto;height:100%}
+.menu{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0;height:100%}
+.menu>li{height:100%;display:flex;align-items:center}
+.nl{position:relative;display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 13px;font:500 15px/1 var(--f-body);color:#d6d0c8;text-decoration:none;background:none;border:0;cursor:pointer;letter-spacing:.01em;white-space:nowrap}
+.nl:hover,.nl[aria-expanded="true"],.nl[data-active="1"]{color:var(--white)}
+.nl::after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nl:hover::after,.nl[aria-expanded="true"]::after,.nl[data-active="1"]::after{transform:scaleX(1)}
+.nl .chev{width:12px;height:12px;color:var(--orange);transition:transform .25s}
+.nl[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.nl .badge3d{font:700 10px/1 var(--f-display);letter-spacing:.06em;background:var(--orange);color:var(--black);padding:4px 5px 3px;clip-path:polygon(0 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+.bar-r{display:flex;align-items:center;gap:18px;margin-left:10px}
+.callbox{display:flex;align-items:center;gap:12px;text-decoration:none;padding-left:20px;border-left:1px solid var(--line)}
+.callbox .ci{width:42px;height:42px;display:grid;place-items:center;border:1.5px solid #3a3631;color:var(--orange);clip-path:polygon(0 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%);transition:background .2s,color .2s,border-color .2s}
+.callbox:hover .ci{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.callbox .ci svg{width:18px;height:18px}
+.callbox small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.callbox b{display:block;font-size:16px;font-variant-numeric:tabular-nums;letter-spacing:.01em;margin-top:3px;white-space:nowrap}
+.bar .btn{--h:48px;padding:0 22px;font-size:14.5px}
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--orange);transform:scaleX(var(--p,0));transform-origin:left;pointer-events:none}
+.burger{display:none;flex:none;width:46px;height:46px;background:#1e1c1a;border:1px solid #34302c;cursor:pointer;position:relative;color:var(--white);padding:0}
+.burger span{position:absolute;left:12px;right:12px;height:2px;background:currentColor;transition:transform .3s,opacity .2s,top .3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px;right:19px;background:var(--orange)}.burger span:nth-child(3){top:27px}
+.burger[aria-expanded="true"] span:nth-child(1){top:21px;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+.mega{position:absolute;left:0;right:0;top:100%;background:#121110;border-bottom:1px solid var(--line);box-shadow:0 40px 70px -24px rgba(0,0,0,.75);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s}
+.mega.open{opacity:1;visibility:visible;transform:none;transition:opacity .22s ease,transform .22s ease,visibility 0s}
+.mega-in{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;padding-block:30px}
+.mega-h{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;gap:14px;align-items:center}
+.mega-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.mega-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+.ml{display:grid;grid-template-columns:58px 1fr 16px;gap:16px;align-items:center;padding:12px;text-decoration:none;border:1px solid transparent;transition:background .2s,border-color .2s}
+.ml:hover,.ml:focus-visible{background:#1b1a19;border-color:var(--line)}
+.ml canvas,.ml .mi{width:58px;height:58px;display:block}
+.ml .mi{display:grid;place-items:center;background:#1c1a18;border:1px solid #2e2b28;color:var(--orange)}
+.ml .mi svg{width:32px;height:32px}
+.ml b{display:block;font-family:var(--f-display);font-size:15px;font-weight:600;color:var(--white)}
+.ml small{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.35}
+.ml .ar{width:16px;height:16px;color:var(--orange);opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s}
+.ml:hover .ar,.ml:focus-visible .ar{opacity:1;transform:none}
+.mega-feature{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:26px;min-height:250px;text-decoration:none;color:var(--black);background:var(--orange);overflow:hidden;clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%)}
+.mega-feature::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(19,19,19,.13) 22px 24px),repeating-linear-gradient(-45deg,transparent 0 22px,rgba(19,19,19,.13) 22px 24px);transition:transform .6s ease}
+.mega-feature:hover::before{transform:scale(1.08)}
+.mega-feature>*{position:relative}
+.mega-feature .tag2{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.mega-feature b{font-family:var(--f-display);font-weight:700;font-size:23px;line-height:1.15;letter-spacing:-.02em}
+.mega-feature p{margin:0;font-size:14px;font-weight:500;max-width:30ch}
+.mega-feature .fl{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;margin-top:6px}
+.mega-feature .fl svg{width:16px;height:16px}
+.mega-feature.dark{background:#1b1a19;color:var(--white);box-shadow:inset 0 0 0 1px var(--line)}
+.mega-feature.dark::before{background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(234,104,15,.08) 22px 24px),repeating-linear-gradient(-45deg,transparent 0 22px,rgba(234,104,15,.08) 22px 24px)}
+.mega-feature.dark .tag2,.mega-feature.dark .fl{color:var(--orange-ink)}
+.mega-feature.dark p{color:var(--muted)}
+.mega-feature .big{font-family:var(--f-display);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums;color:var(--white)}
+.mega-foot{border-top:1px solid var(--line);background:#0e0d0c}
+.mega-foot .wrap{display:flex;align-items:center;gap:26px;height:52px;font-size:13px;color:var(--muted)}
+.mega-foot span{display:inline-flex;gap:9px;align-items:center;white-space:nowrap}
+.mega-foot span::before{content:"";width:6px;height:6px;background:var(--orange);transform:rotate(45deg)}
+.mega-foot a{margin-left:auto;color:var(--white);font-weight:700;text-decoration:none;display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
+.mega-foot a svg{width:14px;height:14px;color:var(--orange)}
+.mega-foot a:hover{color:var(--orange-ink)}
+.scrim{position:fixed;inset:0;z-index:45;background:rgba(5,5,5,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.scrim.on{opacity:1;visibility:visible;transition:opacity .25s}
+
+.mnav{position:fixed;left:0;right:0;top:var(--hb,68px);bottom:0;z-index:56;background:var(--black);overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+.mnav.open{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .25s}
+.mnav-in{padding:8px var(--gutR) calc(28px + env(safe-area-inset-bottom,0px)) var(--gut);display:flex;flex-direction:column;min-height:100%}
+.macc,.mlink{border-bottom:1px solid var(--line)}
+.macc summary,.mlink{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1.2;color:var(--white);text-decoration:none;cursor:pointer;list-style:none}
+.macc summary::-webkit-details-marker{display:none}
+.macc summary svg{width:16px;height:16px;color:var(--orange);transition:transform .25s}
+.macc[open] summary svg{transform:rotate(180deg)}
+.mlink svg{width:18px;height:18px;color:#6a635b}
+.mlink .badge3d{margin-right:auto;font:700 11px/1 var(--f-display);background:var(--orange);color:var(--black);padding:5px 6px 4px}
+.macc ul{list-style:none;margin:-4px 0 18px;padding:0;display:grid}
+.macc li a{display:flex;align-items:center;gap:14px;padding:11px 0;text-decoration:none;font-weight:600;font-size:16.5px;color:#d6d0c8}
+.macc li a::before{content:"";width:9px;height:9px;background:var(--orange);clip-path:polygon(0 0,100% 0,60% 100%,0 100%)}
+.mnav-foot{margin-top:auto;padding-top:28px;display:grid;gap:12px}
+.mphone{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);text-decoration:none}
+.mphone .ci{width:42px;height:42px;display:grid;place-items:center;background:var(--orange);color:var(--black)}
+.mphone .ci svg{width:18px;height:18px}
+.mphone small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.mphone b{display:block;font-size:19px;font-variant-numeric:tabular-nums;margin-top:3px}
+.mnav-foot .btn{justify-content:center;width:100%;--h:56px}
+.mnav-foot p{margin:4px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+html.lock{overflow:hidden}
+
+@media (max-width:1200px){.mega{display:none}.mainnav{display:none}.bar-r{margin-left:auto}.burger{display:block}}
+@media (max-width:1240px){.util .hide-md{display:none}}
+@media (max-width:980px){.util{display:none}}
+@media (max-width:760px){.callbox{display:none}.bar .wrap{height:68px;gap:14px}.top.scrolled .bar .wrap{height:60px}.logo,.top.scrolled .logo{width:105px;height:39px}.bar .btn{--h:44px;padding:0 16px;font-size:13.5px}}
+@media (max-width:440px){.bar-r{display:none}.burger{margin-left:auto}}
+@media (min-width:1201px){.mnav{display:none}}
+
+.concept{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:16px;z-index:40;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;background:rgba(27,26,25,.94);border:1px solid #34302c;font-size:12px;color:var(--muted);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .3s}
+.concept b{color:var(--orange-ink);letter-spacing:.12em;text-transform:uppercase;font-size:10.5px}
+.concept button{background:none;border:0;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:4px 6px}
+.concept button:hover{color:var(--white)}
+.top:not(.scrolled) ~ .concept{opacity:0;pointer-events:none}
+@media (max-width:760px){.concept{display:none}}
+
+/* ---------------- hero: 3D backyard ---------------- */
+.hero{position:relative;background:#0b0b0b;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-stage{position:absolute;inset:0}
+.hero-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.hero-stage canvas:active{cursor:grabbing}
+.hero-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(11,11,11,.93) 0%,rgba(11,11,11,.78) 28%,rgba(11,11,11,.0) 56%),linear-gradient(0deg,rgba(11,11,11,.55) 0%,transparent 26%)}
+.hero-grid{position:relative;z-index:3;min-height:min(840px,calc(100vh - 124px));display:flex;align-items:center;padding-block:80px 120px;pointer-events:none}
+.hero-copy{pointer-events:auto;max-width:590px}
+.hero h1{font-size:clamp(38px,4.9vw,70px);line-height:1.05;margin:22px 0 22px}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .lede{font-size:18px;color:#d4cec6}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.proof{display:flex;flex-wrap:wrap;gap:10px 22px;margin:32px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+.proof li{display:flex;align-items:center;gap:8px}
+.proof b{color:var(--white);font-variant-numeric:tabular-nums}
+.proof li::before{content:"";width:7px;height:7px;background:var(--orange);transform:rotate(45deg)}
+.pins{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.pin{position:absolute;left:0;top:0;pointer-events:auto;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:var(--orange);color:var(--black);border:2px solid #fff;font:700 13px/1 var(--f-display);display:grid;place-items:center;cursor:pointer;padding:0;transition:opacity .3s,background .2s;will-change:transform}
+.pin::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(234,104,15,.7);animation:ring 2.2s ease-out infinite}
+@keyframes ring{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pin::before{animation:none;opacity:.5}}
+.pin .pl{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap;background:rgba(15,15,15,.92);color:#fff;font:700 13px/1 var(--f-body);padding:9px 12px;opacity:0;transition:opacity .2s;pointer-events:none;border-left:3px solid var(--orange)}
+.pin:hover .pl,.pin:focus-visible .pl,.pin.on .pl{opacity:1}
+.pin.on{background:#fff}
+.pin.off{opacity:0;pointer-events:none}
+.explore{position:absolute;z-index:4;right:var(--gutR);bottom:24px;width:390px;background:rgba(17,16,15,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #34302c;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,0 100%)}
+@media (min-width:1360px){.explore{right:calc((100vw - 1320px)/2 + 20px)}}
+.ex-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:1px solid #2c2a28}
+.ex-head h3{margin:0;font-family:var(--f-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.seg{display:inline-flex;background:#0d0d0c;border:1px solid #34302c;padding:3px;gap:2px}
+.seg button{border:0;background:none;color:#bdb6ad;font:700 12px/1 var(--f-body);padding:8px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.seg button svg{width:13px;height:13px}
+.seg button[aria-pressed="true"]{background:var(--orange);color:var(--black)}
+.ex-list{list-style:none;margin:0;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.ex-list button{width:100%;height:100%;display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:center;text-align:left;background:rgba(255,255,255,.03);border:1px solid #2c2a28;color:var(--white);padding:9px 10px;cursor:pointer;font:600 13.5px/1.2 var(--f-body)}
+.ex-list button:hover,.ex-list button:focus-visible{background:#1f1d1b}
+.ex-list .n{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#262321;color:var(--orange-ink);font:700 12px/1 var(--f-display)}
+.ex-list svg{display:none}
+.ex-detail{padding:16px 18px 18px;display:none}
+.explore.detail .ex-list{display:none}.explore.detail .ex-detail{display:block}
+.ex-nav{display:flex;justify-content:space-between;gap:8px}
+.ex-back,.ex-next{background:#1f1d1b;border:1px solid #3a3631;color:#e8e3dc;font:700 13px/1 var(--f-body);padding:9px 12px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;white-space:nowrap;max-width:60%;overflow:hidden;text-overflow:ellipsis}
+.ex-back:hover,.ex-next:hover{border-color:var(--orange);color:#fff}
+.ex-back svg,.ex-next svg{width:14px;height:14px;flex:none;color:var(--orange)}.ex-back svg{transform:rotate(180deg)}
+.exit-view{position:absolute;z-index:5;top:22px;right:var(--gutR);display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 16px 0 14px;background:rgba(17,16,15,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #4a443d;color:#fff;font:700 14.5px/1 var(--f-body);cursor:pointer;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);animation:fade .3s ease}
+.exit-view[hidden]{display:none}
+.exit-view:hover{border-color:var(--orange)}
+.exit-view svg{width:16px;height:16px;color:var(--orange);transform:rotate(180deg)}
+.exit-view kbd{font:700 11px/1 var(--f-body);color:var(--muted);border:1px solid #4a443d;padding:4px 6px;margin-left:4px}
+@media (min-width:1360px){.exit-view{right:calc((100vw - 1320px)/2 + 20px)}}
+@media (max-width:980px){.exit-view{top:12px}.exit-view kbd{display:none}}
+.ex-detail h4{margin:12px 0 6px;font-family:var(--f-display);font-size:20px;line-height:1.2;letter-spacing:-.01em}
+.ex-detail p{margin:0 0 14px;font-size:14px;color:#c9c3bb}
+.ex-detail .btn{--h:44px;font-size:14px;padding:0 18px}
+.ex-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 18px;border-top:1px solid #2c2a28;font-size:12.5px;color:var(--muted)}
+.ex-foot a{color:var(--orange-ink);font-weight:700;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.ex-foot svg{width:14px;height:14px}
+.hero-fallback{display:none}
+.no3d .hero-fallback{display:block;position:absolute;inset:0;background:radial-gradient(80% 70% at 75% 50%,#3a2414,#0b0b0b)}
+@media (max-width:980px){
+  .hero{display:flex;flex-direction:column}.hero-grid{order:1}.hero-stage{order:2}.explore{order:3}
+  .hero-grid{min-height:0;padding-block:44px 28px}
+  .hero-shade{display:none}
+  .hero-stage{position:relative;inset:auto;height:min(520px,92vw)}
+  .explore{position:relative;right:auto;bottom:auto;width:auto;margin:0 var(--gutR) 28px var(--gut);clip-path:none}
+}
+
+/* trust strip */
+.strip{background:var(--orange);color:var(--black)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:22px}
+.strip .wrap>div{display:flex;flex-direction:column;padding:4px 20px;border-left:2px solid rgba(19,19,19,.25)}
+.strip .wrap>div:first-child{border-left:0;padding-left:0}
+.strip b{font-family:var(--f-display);font-size:20px;letter-spacing:-.01em;font-weight:700;line-height:1.1}
+.strip span{font-size:13px;font-weight:600}
+@media (max-width:760px){.strip .wrap{grid-template-columns:1fr 1fr;row-gap:16px}.strip .wrap>div:nth-child(3){border-left:0;padding-left:0}}
+
+section{padding-block:clamp(72px,10vw,128px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:40px;align-items:end;margin-bottom:48px}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr;gap:8px}}
+
+/* ---------------- design studio ---------------- */
+.studio{background:linear-gradient(180deg,#131313 0%,#0e0d0c 100%)}
+.studio-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+@media (max-width:1060px){.studio-grid{grid-template-columns:minmax(0,1fr)}}
+.stage-card{position:sticky;top:96px;height:min(680px,calc(100vh - 130px));min-height:460px;background:#0a0a0a;border:1px solid var(--line);overflow:hidden;clip-path:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,0 100%)}
+@media (max-width:1060px){.stage-card{position:relative;top:0;height:auto;min-height:0;aspect-ratio:4/3}}
+@media (max-width:560px){.stage-card{aspect-ratio:4/4.4}}
+.stage-card canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.stage-card::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 95% at 55% 45%,transparent 55%,rgba(0,0,0,.5))}
+.stage-card canvas:active{cursor:grabbing}
+.split{position:absolute;top:0;bottom:0;left:50%;width:0;pointer-events:none;z-index:2}
+.split::before{content:"";position:absolute;top:0;bottom:0;left:-1px;width:2px;background:#fff;box-shadow:0 0 18px rgba(0,0,0,.5)}
+.knob{pointer-events:auto;position:absolute;top:50%;left:0;width:52px;height:52px;margin:-26px 0 0 -26px;background:var(--orange);color:var(--black);border:3px solid #fff;border-radius:50%;cursor:ew-resize;display:grid;place-items:center;touch-action:none;padding:0;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.knob svg{width:22px;height:22px}
+.split.hide{display:none}
+.stag{position:absolute;top:16px;z-index:2;font:700 11px/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;padding:9px 12px;background:rgba(10,10,10,.8);border:1px solid #3a3631;transition:opacity .2s;pointer-events:none}
+.stag.l{left:16px;color:#d6d0c8}.stag.r{right:46px;color:var(--orange-ink)}
+.stag.hide{opacity:0}
+.stage-hint{position:absolute;left:16px;bottom:14px;z-index:2;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;pointer-events:none;background:rgba(10,10,10,.6);padding:6px 10px}
+.stage-hint svg{width:15px;height:15px}
+.studio-panel{background:var(--panel);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column}
+.sp-lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:18px 0 9px;font-weight:600;display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:space-between}
+.sp-lbl:first-child{margin-top:0}
+.sp-lbl output{color:var(--white);letter-spacing:.02em;text-transform:none;font-weight:600}
+.pat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pat{min-width:0;display:flex;flex-direction:column;gap:8px;padding:7px 7px 10px;background:var(--panel2);border:1px solid #33302c;cursor:pointer;text-align:left;color:#ddd6ce;font:700 13px/1.1 var(--f-body);transition:border-color .2s}
+.pat canvas{width:100%;height:52px;display:block}
+.pat:hover{border-color:#5a534b}
+.pat[aria-pressed="true"]{border-color:var(--orange);box-shadow:inset 0 0 0 1px var(--orange);color:#fff}
+.pat-info{font-size:13.5px;color:var(--muted);margin:10px 0 0;min-height:42px;line-height:1.45}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:42px;height:42px;border:2px solid transparent;cursor:pointer;padding:0;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.sw.sm{width:34px;height:34px}
+.sw[aria-pressed="true"]{border-color:#fff;box-shadow:0 0 0 2px var(--orange)}
+.studio-panel .seg{width:100%}
+.studio-panel .seg button{flex:1;justify-content:center;padding:10px}
+.summary{margin-top:20px;padding:14px;background:#111010;border:1px dashed #4a443d;font-size:13.5px;color:var(--muted)}
+.summary b{display:block;color:var(--white);font-size:15px;margin-top:3px}
+.studio-panel .btn{margin-top:12px;justify-content:center}
+.studio-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
+
+/* ---------------- build-up (exploded section) ---------------- */
+.build{position:relative;background:#0b0b0b;border-block:1px solid var(--line);padding:0}
+.build-track{height:280vh}
+.build-sticky{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--hdr));height:calc(100vh - var(--hdr));display:grid;grid-template-columns:minmax(0,470px) minmax(0,1fr);gap:40px;align-items:center}
+.build-copy h2.display{font-size:clamp(28px,3.3vw,44px)}
+.layers{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:2px}
+.layers li{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:10px 14px;border-left:2px solid var(--line);opacity:.42;transition:opacity .3s,border-color .3s,background .3s}
+.layers li.on{opacity:1;border-left-color:var(--orange);background:linear-gradient(90deg,rgba(234,104,15,.12),transparent 80%)}
+.layers .ln{font:700 15px/1.5 var(--f-display);color:var(--orange-ink)}
+.layers b{display:block;font-size:15.5px}
+.layers small{display:block;font-size:13px;color:var(--muted);line-height:1.4;margin-top:2px}
+.build-stage{position:relative;height:100%;max-height:760px}
+.build-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bprog{position:absolute;left:0;right:0;bottom:24px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);pointer-events:none}
+.bprog i{flex:1;height:2px;background:#2c2a28;position:relative}
+.bprog i::after{content:"";position:absolute;inset:0;background:var(--orange);transform:scaleX(var(--bp,0));transform-origin:left}
+.ltags{position:absolute;inset:0;pointer-events:none}
+.ltag{opacity:0;position:absolute;left:0;top:0;font:700 11px/1 var(--f-display);letter-spacing:.1em;color:#fff;background:rgba(10,10,10,.85);border:1px solid #3a3631;padding:6px 8px;white-space:nowrap;transition:opacity .3s, border-color .3s;will-change:transform}
+.ltag.on{border-color:var(--orange);color:var(--orange-ink)}
+@media (max-width:980px){
+  .build{padding-block:72px}
+  .build-track{height:auto}
+  .build-sticky{position:relative;top:0;height:auto;grid-template-columns:1fr;gap:20px}
+  .build-stage{height:min(440px,100vw);order:2}
+  .layers li{opacity:1}
+  .bprog{display:none}
+}
+
+/* ---------------- services ---------------- */
+.svc-group{margin-top:40px}
+.svc-group > h3{font-family:var(--f-display);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;display:flex;gap:14px;align-items:center}
+.svc-group > h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.svc-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;perspective:1200px}
+@media (max-width:1100px){.svc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.svc{--rx:0deg;--ry:0deg;position:relative;display:flex;flex-direction:column;gap:14px;min-height:232px;padding:20px;background:var(--panel);text-decoration:none;border:1px solid var(--line);overflow:hidden;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:border-color .25s,transform .25s ease-out;transform-style:preserve-3d}
+.svc::before{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.svc:hover{border-color:#4a443d}
+.svc:hover::before{transform:scaleX(1)}
+.svc canvas{width:100%;height:88px;display:block;transform:translateZ(30px)}
+.svc svg.ic{width:46px;height:46px;color:var(--orange);margin-bottom:auto;transform:translateZ(30px)}
+.svc h4{margin:auto 0 0;font-family:var(--f-display);font-size:16px;font-weight:600;line-height:1.25;letter-spacing:0;transform:translateZ(20px)}
+.svc p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.45}
+.svc .go{position:absolute;right:16px;top:16px;width:26px;height:26px;color:#5d5750;transition:color .25s,transform .25s}
+.svc:hover .go{color:var(--orange);transform:translate(2px,-2px)}
+
+/* ---------------- process ---------------- */
+.process{background:var(--stone);color:var(--stone-ink)}
+.process .eyebrow{color:#a8460a}
+.process .lede{color:#5d5650}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;list-style:none;margin:0;padding:0;position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:#cfc6ba}
+.steps::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--orange);transform:scaleX(var(--sp,0));transform-origin:left;transition:transform .2s linear}
+.step{padding:30px 26px 8px 0;position:relative}
+.step + .step{padding-left:26px;border-left:1px solid #d6cdc1}
+.step .n{font-family:var(--f-display);font-weight:700;font-size:50px;line-height:1;color:var(--orange);letter-spacing:-.03em}
+.step h4{font-family:var(--f-display);font-size:18px;font-weight:600;margin:18px 0 8px}
+.step p{margin:0;font-size:15px;color:#5d5650}
+.step .tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--stone-ink);color:var(--stone);padding:6px 10px;clip-path:polygon(0 0,100% 0,calc(100% - 7px) 100%,0 100%)}
+.adv{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--stone-ink);color:var(--stone);padding:28px clamp(22px,4vw,40px);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
+.adv h3{margin:0;font-family:var(--f-display);font-size:21px;letter-spacing:-.01em;line-height:1.1}
+.adv h3 span{color:var(--orange)}
+.adv ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 24px;font-size:14.5px}
+.adv li{display:flex;gap:10px;align-items:baseline}
+.adv li::before{content:"";flex:none;width:8px;height:8px;background:var(--orange);transform:rotate(45deg) translateY(-1px)}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(3){padding-left:0;border-left:0}.step{padding-bottom:28px}.adv{grid-template-columns:1fr}.adv ul{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.step + .step{padding-left:0;border-left:0;border-top:1px solid #d6cdc1}.adv ul{grid-template-columns:1fr}}
+
+/* ---------------- projects ---------------- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{font:700 13.5px/1 var(--f-body);color:#ddd6ce;background:#1d1b19;border:1px solid #393530;padding:11px 15px;cursor:pointer;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+.chip:hover{border-color:#5a534b}
+.chip[aria-pressed="true"]{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.chip span{opacity:.6;margin-left:4px;font-weight:600}
+.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:250px;gap:12px}
+.proj{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;overflow:hidden;border:1px solid #33302c;background:linear-gradient(160deg,#1f1c1a,#121110);animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.proj::before{content:"";position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(45deg,transparent 0 26px,rgba(255,255,255,.035) 26px 28px),repeating-linear-gradient(-45deg,transparent 0 26px,rgba(255,255,255,.035) 26px 28px)}
+.proj .wm{position:absolute;right:-30px;top:-20px;width:58%;opacity:.06;color:var(--orange)}
+.proj.big{grid-column:span 2;grid-row:span 2;clip-path:polygon(0 0,100% 0,100% calc(100% - 40px),calc(100% - 40px) 100%,0 100%)}
+.proj small{position:relative;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);font-weight:700}
+.proj b{position:relative;font-family:var(--f-display);font-size:17px;font-weight:600;margin-top:6px}
+.proj span{position:relative;font-size:13px;color:var(--muted)}
+.proj .ba{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.proj .ba div{display:grid;place-items:center;font:700 12px var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:#6a635b}
+.proj .ba div+div{border-left:2px solid #fff;color:var(--orange-ink);background:rgba(234,104,15,.05)}
+.proj .ba i{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px;border-radius:50%;background:var(--orange);border:3px solid #fff}
+@media (max-width:860px){.proj-grid{grid-template-columns:1fr 1fr}.proj.big{grid-row:span 1;min-height:300px}}
+@media (max-width:520px){.proj-grid{grid-template-columns:1fr}.proj.big{grid-column:auto}}
+
+/* ---------------- reviews + area ---------------- */
+.duo{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:12px}
+@media (max-width:980px){.duo{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);padding:clamp(24px,4vw,40px)}
+.score{display:flex;align-items:baseline;gap:14px;margin:18px 0 6px}
+.score b{font-family:var(--f-display);font-size:74px;font-weight:700;line-height:.9;color:var(--orange);letter-spacing:-.03em}
+.score span{font-size:15px;color:var(--muted)}
+.slot{margin-top:24px;border:1px dashed #4a443d;padding:18px;font-size:14px;color:var(--muted);display:flex;gap:14px;align-items:center}
+.slot svg{flex:none;width:28px;height:28px;color:var(--orange)}
+.map{position:relative;margin:18px -8px 0}
+.map svg{display:block;width:100%;height:auto}
+.map .town{cursor:default}
+.map .town text{font:700 12px var(--f-body);fill:#e8e3dc;paint-order:stroke;stroke:#141312;stroke-width:4px;transition:fill .2s}
+.map .town .hidel{opacity:0;transition:opacity .2s}
+.map .town.hl .hidel{opacity:1}
+.map .town.hl text{fill:var(--orange-ink)}
+.map .town.hl .head{fill:#fff}
+.towns{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.towns li{font-size:13.5px;font-weight:600;padding:7px 11px;background:#24221f;border:1px solid #393530;cursor:default;transition:border-color .2s,color .2s}
+.towns li:hover,.towns li.hl{border-color:var(--orange);color:var(--orange-ink)}
+.towns li.hq{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.addr{margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}
+.addr dt{color:var(--muted)}.addr dd{margin:0}
+.map-note{font-size:11.5px;color:#6f6962;margin-top:8px}
+
+/* ---------------- quote (multi-step) ---------------- */
+.quote{background:var(--ink);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.quote::before{content:"";position:absolute;right:-8%;top:-30%;width:60%;aspect-ratio:1;max-width:100%;background:repeating-linear-gradient(45deg,transparent 0 46px,rgba(234,104,15,.06) 46px 48px),repeating-linear-gradient(-45deg,transparent 0 46px,rgba(234,104,15,.06) 46px 48px);pointer-events:none}
+.quote .wrap{position:relative;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:56px}
+@media (max-width:980px){.quote .wrap{grid-template-columns:1fr;gap:28px}}
+.contact-list{list-style:none;padding:0;margin:30px 0 0;display:grid;gap:14px}
+.contact-list li{display:flex;gap:14px;align-items:center;font-size:16px}
+.contact-list svg{width:20px;height:20px;color:var(--orange);flex:none}
+.contact-list .sel{user-select:all;font-weight:700;font-variant-numeric:tabular-nums}
+.qcard{background:var(--panel);border:1px solid var(--line);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
+.qprog{padding:22px clamp(20px,3.5vw,34px) 0}
+.qsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;list-style:none;margin:0;padding:0}
+.qsteps li{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6f6962;display:flex;flex-direction:column;gap:8px}
+.qsteps li::before{content:"";height:3px;background:#2e2b28}
+.qsteps li.on{color:var(--white)}.qsteps li.on::before{background:var(--orange)}
+.qsteps li.done{color:var(--orange-ink)}.qsteps li.done::before{background:var(--orange)}
+form{padding:22px clamp(20px,3.5vw,34px) clamp(22px,3.5vw,34px)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+fieldset[hidden]{display:none}
+legend{font-family:var(--f-display);font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0 0 14px;padding:0}
+.qlbl{font-size:13px;font-weight:600;color:#d8d3cc;margin:16px 0 8px;display:block}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt span{display:inline-block;font:600 14px/1 var(--f-body);padding:12px 14px;background:#121110;border:1px solid #3a3631;color:#ddd6ce;transition:border-color .2s,background .2s}
+.opt input:checked + span{background:var(--orange);border-color:var(--orange);color:var(--black)}
+.opt input:focus-visible + span{outline:3px solid var(--orange);outline-offset:2px}
+.opt:hover span{border-color:#5a534b}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.frow{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:13px;font-weight:600;color:#d8d3cc}
+.field label i{font-style:normal;color:var(--orange-ink)}
+.field input,.field select,.field textarea{font:500 16px/1.3 var(--f-body);color:var(--white);background:#121110;border:1px solid #3a3631;padding:13px 14px;border-radius:0;width:100%}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(234,104,15,.25)}
+.err{font-size:12.5px;color:#ff9b6b;min-height:0;display:block}
+.design-chip{display:flex;gap:12px;align-items:center;padding:12px 14px;background:#121110;border:1px solid #4a3a2c;margin-bottom:6px;font-size:14px}
+.design-chip canvas{width:56px;height:40px;flex:none}
+.design-chip b{display:block}
+.design-chip small{color:var(--muted)}
+.design-chip a{color:var(--orange-ink);font-weight:700}
+.qnav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;flex-wrap:wrap}
+.qnav .back{background:none;border:0;color:var(--muted);font:600 14px var(--f-body);cursor:pointer;padding:8px 0}
+.qnav .back:hover{color:#fff}
+.qnav small{font-size:12px;color:var(--muted);flex-basis:100%}
+.done{padding:clamp(24px,4vw,40px)}
+.done h3{font-family:var(--f-display);font-size:25px;letter-spacing:-.02em;margin:14px 0 8px}
+.done p{color:var(--muted);margin:0}
+
+/* footer */
+footer{background:#0a0a0a;border-top:1px solid var(--line);padding-block:56px 120px;font-size:14px;color:var(--muted)}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+footer h5{font-family:var(--f-display);color:var(--white);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer a{text-decoration:none}footer a:hover{color:var(--white)}
+footer .logo{width:150px;height:56px}
+.legal{grid-column:1/-1;border-top:1px solid var(--line);padding-top:22px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;font-size:12.5px}
+@media (max-width:860px){footer .wrap{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){footer .wrap{grid-template-columns:1fr}}
+.mbar{display:none}
+@media (max-width:760px){
+  .mbar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:55;padding-bottom:env(safe-area-inset-bottom,0px);background:var(--black);border-top:1px solid var(--line)}
+  .mbar a{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;font-weight:700;text-decoration:none;font-size:15px}
+  .mbar a:last-child{background:var(--orange);color:var(--black)}
+  .mbar svg{width:18px;height:18px}
+}
+.reveal{transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s}
+.reveal.pre{transform:translateY(28px)}
+@media (prefers-reduced-motion:reduce){.reveal.pre{transform:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    {{LOGO_SYMBOL}}
+    <symbol id="mark" viewBox="0 0 64 64"><path d="M6 12h9v7l-9 6z" fill="currentColor"/><path d="M15 22 32 9l18 12v22h-7V25L32 17l-10 7v19h-7z" fill="currentColor"/><path d="M28.5 15h7v47h-7z" fill="currentColor"/><path d="M2 43h60v7H2z" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="M6 18 18 6M8 6h10v10"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-drag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" d="M9 6 3 12l6 6M15 6l6 6-6 6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" d="m5 9 7 7 7-7"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM8.5 12l2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5z"/></symbol>
+    <symbol id="s-kitchen" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 22h40v20H4zM4 30h40M14 14h6l-3-8zM28 14h6M31 14V8M10 36h6M32 36h6"/></symbol>
+    <symbol id="s-pergola" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M6 14h36M4 20h40M10 14v28M38 14v28M18 14v-4M24 14v-4M30 14v-4M4 42h40"/></symbol>
+    <symbol id="s-wall" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 26h40v16H4zM4 34h40M16 26v8M30 26v8M10 34v8M24 34v8M38 34v8M24 6c4 4 6 8 0 14-6-6-4-10 0-14z"/></symbol>
+    <symbol id="s-screen" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 42V18L24 6l20 12v24zM4 42h40M16 42V24M32 42V24M4 30h40"/></symbol>
+    <symbol id="s-pool" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M6 10h36v28H6zM12 26c3-3 6 3 9 0s6 3 9 0 6 3 9 0M34 10v-4"/></symbol>
+  </defs>
+</svg>
+
+{{HEADER}}
+
+<main id="top">
+  <!-- HERO: explorable 3D backyard -->
+  <section class="hero" aria-labelledby="h1" style="padding:0">
+    <div class="hero-stage" id="heroStage">
+      <div class="hero-fallback"></div>
+      <canvas id="heroCanvas" aria-label="Interactive 3D backyard by iTOP Pavers: paver patio, pool deck, outdoor kitchen with pergola, and fire pit. Drag to look around."></canvas>
+      <div class="pins" id="heroPins"></div>
+      <button class="exit-view" id="exitView" type="button" hidden><svg><use href="#i-right"/></svg>Back to whole yard<kbd>Esc</kbd></button>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">iTOP Pavers · Northeast Florida</div>
+        <h1 id="h1" class="display">Crafting unique <em>outdoor</em> spaces.</h1>
+        <p class="lede">Patios, driveways, pool decks and complete outdoor living across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County. You see it in 3D before a single paver is laid.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#studio">Design yours in 3D <svg><use href="#i-down"/></svg></a>
+        </div>
+        <ul class="proof">
+          <li><b>32</b>&nbsp;Google reviews</li>
+          <li>Licensed <b>CBC&nbsp;1294954</b></li>
+          <li><b>10+</b>&nbsp;years building homes</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="explore" id="explore" aria-label="Explore the 3D backyard">
+      <div class="ex-head">
+        <h3>Explore the yard</h3>
+        <div class="seg" role="group" aria-label="Time of day">
+          <button type="button" data-tod="1" aria-pressed="true"><svg><use href="#i-moon"/></svg>Dusk</button>
+          <button type="button" data-tod="0" aria-pressed="false"><svg><use href="#i-sun"/></svg>Day</button>
+        </div>
+      </div>
+      <ul class="ex-list" id="exList"></ul>
+      <div class="ex-detail" id="exDetail" aria-live="polite">
+        <div class="ex-nav"><button class="ex-back" type="button" id="exBack"><svg><use href="#i-right"/></svg>Whole yard</button><button class="ex-next" type="button" id="exNext">Next <svg><use href="#i-right"/></svg></button></div>
+        <h4 id="exTitle"></h4>
+        <p id="exText"></p>
+        <a class="btn btn-primary" href="#quote" id="exCta">Price this feature <svg><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="ex-foot"><span>Drag to look around</span><a href="#studio">Design your patio <svg><use href="#i-down"/></svg></a></div>
+    </aside>
+  </section>
+
+  <div class="strip" role="list" aria-label="Why homeowners choose iTOP">
+    <div class="wrap">
+      <div role="listitem"><b>Free</b><span>On-site consultation &amp; estimate</span></div>
+      <div role="listitem"><b>3D</b><span>Design preview before you sign</span></div>
+      <div role="listitem"><b>Permits</b><span>Permits &amp; HOA paperwork handled</span></div>
+      <div role="listitem"><b>Licensed</b><span>Florida contractor CBC 1294954</span></div>
+    </div>
+  </div>
+
+  <!-- DESIGN STUDIO -->
+  <section class="studio" id="studio">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">3D design studio</div>
+          <h2 class="display">See it before we build it.</h2>
+        </div>
+        <p class="lede">Choose a laying pattern, paver colour and border. Drag the slider to compare a typical yard today with the finished iTOP patio, then send the design with your estimate request.</p>
+      </div>
+      <div class="studio-grid">
+        <div class="stage-card" id="studioCard">
+          <canvas id="studioCanvas" aria-label="3D before and after view of a paver patio. Drag to rotate."></canvas>
+          <span class="stag l" id="tagL">Today</span>
+          <span class="stag r" id="tagR">With iTOP</span>
+          <div class="split" id="split"><button class="knob" id="knob" type="button" role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% before, 50% after"><svg><use href="#i-split"/></svg></button></div>
+          <div class="stage-hint"><svg><use href="#i-drag"/></svg>Drag the scene to rotate · slide to compare</div>
+        </div>
+        <div class="studio-panel">
+          <div class="sp-lbl">Laying pattern <output id="patName">Herringbone 45°</output></div>
+          <div class="pat-grid" id="patterns" role="group" aria-label="Laying pattern">
+            <button class="pat" type="button" data-p="h45" aria-pressed="true"><canvas data-pat="h45" data-col="#cdbb9c" data-u="7"></canvas>Herringbone 45°</button>
+            <button class="pat" type="button" data-p="h90" aria-pressed="false"><canvas data-pat="h90" data-col="#cdbb9c" data-u="7"></canvas>Herringbone 90°</button>
+            <button class="pat" type="button" data-p="bond" aria-pressed="false"><canvas data-pat="bond" data-col="#cdbb9c" data-u="7"></canvas>Running bond</button>
+            <button class="pat" type="button" data-p="basket" aria-pressed="false"><canvas data-pat="basket" data-col="#cdbb9c" data-u="7"></canvas>Basketweave</button>
+          </div>
+          <p class="pat-info" id="patInfo"></p>
+          <div class="sp-lbl">Paver colour <output id="colName">Travertine</output></div>
+          <div class="swatches" id="colors" role="group" aria-label="Paver colour"></div>
+          <div class="sp-lbl">Border <output id="bordName">Charcoal</output></div>
+          <div class="swatches" id="borders" role="group" aria-label="Border colour"></div>
+          <div class="sp-lbl">View</div>
+          <div class="seg" role="group" aria-label="View mode">
+            <button type="button" data-view="compare" aria-pressed="true">Before / after</button>
+            <button type="button" data-view="after" aria-pressed="false">Finished only</button>
+          </div>
+          <div class="summary">Your design<b id="sumText">Herringbone 45° · Travertine · Charcoal border</b></div>
+          <a class="btn btn-primary" href="#quote" id="useDesign">Add this design to my estimate <svg><use href="#i-arrow"/></svg></a>
+          <p class="studio-note">Colours are representative. We bring real paver samples to your free on-site visit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILD-UP: exploded cross-section -->
+  <section class="build" id="build" aria-labelledby="build-h">
+    <div class="build-track" id="buildTrack">
+      <div class="wrap build-sticky">
+        <div class="build-copy">
+          <div class="eyebrow">Built to last</div>
+          <h2 class="display" id="build-h">What’s under every iTOP patio.</h2>
+          <p class="lede">The pavers are the part you see. What keeps them flat through Florida summers is everything underneath. Scroll to take one apart.</p>
+          <ol class="layers" id="layers"></ol>
+        </div>
+        <div class="build-stage">
+          <canvas id="buildCanvas" aria-label="3D exploded cross-section of a paver installation showing each layer."></canvas>
+          <div class="ltags" id="ltags"></div>
+          <div class="bprog" aria-hidden="true"><span>Assembled</span><i id="bprog"></i><span>Exploded</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Services</div>
+          <h2 class="display">Built by the space you want to use.</h2>
+        </div>
+        <p class="lede">From the driveway that greets you to the pool deck you live on all summer. One local crew, one point of contact, one standard of finish.</p>
+      </div>
+      <div class="svc-group">
+        <h3>Pavers</h3>
+        <div class="svc-grid">
+          <a class="svc" href="#quote" data-type="Patio"><svg class="go"><use href="#i-arrow"/></svg><canvas data-pat="h45" data-col="#cdbb9c"></canvas><h4>Patios</h4><p>Gathering space with clean borders and lasting base work.</p></a>
+          <a class="svc" href="#quote" data-type="Driveway"><svg class="go"><use href="#i-arrow"/></svg><canvas data-pat="h90" data-col="#8f8780"></canvas><h4>Driveways</h4><p>Interlocking pavers rated for daily vehicle loads.</p></a>
+          <a class="svc" href="#quote" data-type="Pool deck"><svg class="go"><use href="#i-arrow"/></svg><canvas data-pat="bond" data-col="#e7e0d3"></canvas><h4>Pool decks</h4><p>Light, slip-resistant surfaces around the water.</p></a>
+          <a class="svc" href="#quote" data-type="Walkway"><svg class="go"><use href="#i-arrow"/></svg><canvas data-pat="basket" data-col="#a35b3c"></canvas><h4>Walkways</h4><p>Paths that connect the front door, garden and backyard.</p></a>
+          <a class="svc" href="#quote" data-type="Paving maintenance"><svg class="go"><use href="#i-arrow"/></svg><canvas data-pat="bond" data-col="#4a4744"></canvas><h4>Paving maintenance</h4><p>Cleaning, joint sand, sealing and repairs.</p></a>
+        </div>
+      </div>
+      <div class="svc-group">
+        <h3>Outdoor living</h3>
+        <div class="svc-grid">
+          <a class="svc" href="#quote" data-type="Fiberglass pool"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-pool"/></svg><h4>Fiberglass pools</h4><p>Resort-style pools installed with matching decks.</p></a>
+          <a class="svc" href="#quote" data-type="Outdoor kitchen"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-kitchen"/></svg><h4>Outdoor kitchens</h4><p>Grills, counters and storage built for Florida weather.</p></a>
+          <a class="svc" href="#quote" data-type="Pergola or gazebo"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-pergola"/></svg><h4>Pergolas &amp; gazebos</h4><p>Shade structures sized to your patio.</p></a>
+          <a class="svc" href="#quote" data-type="Fire pit or retaining wall"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-wall"/></svg><h4>Retaining walls &amp; fire pits</h4><p>Seat walls, grade changes and a place to gather.</p></a>
+          <a class="svc" href="#quote" data-type="Screen enclosure"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-screen"/></svg><h4>Screen enclosures</h4><p>Bug-free outdoor rooms over pools and lanais.</p></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Our process</div>
+          <h2 class="display">Four steps. No surprises.</h2>
+        </div>
+        <p class="lede">You see the finished space in 3D, with a written estimate, before work begins. We pull the permits and keep you updated until the final walkthrough.</p>
+      </div>
+      <ol class="steps" id="steps">
+        <li class="step"><div class="n">01</div><h4>Share</h4><p>Tell us how you want to use the space. We visit, measure and talk through options.</p><span class="tag">Free visit</span></li>
+        <li class="step"><div class="n">02</div><h4>Design smart</h4><p>A 3D design with pattern, colour and layout, plus a clear written estimate.</p><span class="tag">3D preview</span></li>
+        <li class="step"><div class="n">03</div><h4>Handle permits</h4><p>We file the permits and HOA paperwork so you don’t have to.</p><span class="tag">Paperwork done</span></li>
+        <li class="step"><div class="n">04</div><h4>Bring to life</h4><p>Our crew builds it, cleans up and walks you through the finished project.</p><span class="tag">Final walkthrough</span></li>
+      </ol>
+      <div class="adv">
+        <h3>The iTOP<br><span>advantage</span></h3>
+        <ul>
+          <li>Free on-site estimate</li>
+          <li>3D design before you sign</li>
+          <li>Permits &amp; HOA paperwork handled</li>
+          <li>One crew, one point of contact</li>
+          <li>Licensed Florida contractor</li>
+          <li>Final walkthrough on every job</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Projects</div>
+          <h2 class="display">Real yards. Real Northeast Florida.</h2>
+        </div>
+        <p class="lede">Every photo here will be an iTOP job. Filter by the space you’re planning. Before-and-after sliders show the change.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+      <div class="proj-grid" id="projGrid"></div>
+      <div class="ctas"><a class="btn btn-ghost" href="#projects">View all projects <svg><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <section id="reviews" style="padding-top:0">
+    <div class="wrap duo">
+      <div class="card">
+        <div class="eyebrow">Reviews</div>
+        <div class="score"><b>32</b><span>Google reviews<br>from local homeowners</span></div>
+        <p class="lede">Read what Jacksonville and St. Johns County homeowners say about working with our crew.</p>
+        <div class="slot"><svg><use href="#i-star"/></svg><span>Live Google reviews carousel embeds here on the live site.</span></div>
+        <div class="ctas">
+          <a class="btn btn-ghost" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville+reviews" target="_blank" rel="noopener">Read reviews <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville" target="_blank" rel="noopener">Write a review</a>
+        </div>
+      </div>
+      <div class="card" id="area">
+        <div class="eyebrow">Service area</div>
+        <h2 class="display" style="font-size:clamp(26px,3vw,38px)">Rooted in Jacksonville.</h2>
+        <div class="map" id="map"></div>
+        <ul class="towns" id="towns"></ul>
+        <dl class="addr">
+          <dt>Office</dt><dd>6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258</dd>
+          <dt>Hours</dt><dd>Monday – Saturday</dd>
+        </dl>
+        <p class="map-note">Schematic map. Town list to be confirmed with iTOP.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote" id="quote">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Free estimate</div>
+        <h2 class="display">Let’s plan your outdoor space.</h2>
+        <p class="lede">Three quick steps. We call you within one business day to book a free on-site visit, and we bring your 3D design.</p>
+        <ul class="contact-list">
+          <li><svg><use href="#i-phone"/></svg><span class="sel">(904) 525-9191</span></li>
+          <li><svg><use href="#i-mail"/></svg><span class="sel">info@itoppavers.com</span></li>
+          <li><svg><use href="#i-pin"/></svg><span>6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258</span></li>
+        </ul>
+      </div>
+      <div class="qcard" id="qcard">
+        <div class="qprog"><ol class="qsteps" id="qsteps"><li class="on">Project</li><li>Details</li><li>Contact</li></ol></div>
+        <form id="qform" novalidate>
+          <fieldset data-step="1">
+            <legend>What are we building?</legend>
+            <div class="opts" id="typeOpts"></div>
+            <span class="err" id="e-type"></span>
+            <span class="qlbl" id="size-l">Approximate size</span>
+            <div class="opts" role="radiogroup" aria-labelledby="size-l">
+              <label class="opt"><input type="radio" name="size" value="Under 300 sq ft"><span>Under 300 sq ft</span></label>
+              <label class="opt"><input type="radio" name="size" value="300–600 sq ft"><span>300–600 sq ft</span></label>
+              <label class="opt"><input type="radio" name="size" value="600+ sq ft"><span>600+ sq ft</span></label>
+              <label class="opt"><input type="radio" name="size" value="Not sure"><span>Not sure</span></label>
+            </div>
+          </fieldset>
+          <fieldset data-step="2" hidden>
+            <legend>Your design &amp; timing</legend>
+            <div id="designBox"></div>
+            <span class="qlbl" id="time-l">When would you like to start?</span>
+            <div class="opts" role="radiogroup" aria-labelledby="time-l">
+              <label class="opt"><input type="radio" name="time" value="As soon as possible"><span>As soon as possible</span></label>
+              <label class="opt"><input type="radio" name="time" value="1–3 months"><span>1–3 months</span></label>
+              <label class="opt"><input type="radio" name="time" value="3+ months"><span>3+ months</span></label>
+              <label class="opt"><input type="radio" name="time" value="Just exploring"><span>Just exploring</span></label>
+            </div>
+            <span class="err" id="e-time"></span>
+            <div class="field" style="margin-top:16px"><label for="f-msg">Anything else? <span style="color:var(--muted);font-weight:500">(optional)</span></label><textarea id="f-msg" placeholder="Access, HOA, photos you can send later…"></textarea></div>
+          </fieldset>
+          <fieldset data-step="3" hidden>
+            <legend>Where do we call you?</legend>
+            <div class="frow">
+              <div class="field"><label for="f-name">Full name <i>*</i></label><input id="f-name" autocomplete="name"><span class="err" id="e-name"></span></div>
+              <div class="field"><label for="f-phone">Phone <i>*</i></label><input id="f-phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(904) 555-0100"><span class="err" id="e-phone"></span></div>
+            </div>
+            <div class="frow">
+              <div class="field"><label for="f-email">Email <i>*</i></label><input id="f-email" type="email" autocomplete="email"><span class="err" id="e-email"></span></div>
+              <div class="field"><label for="f-zip">ZIP code <i>*</i></label><input id="f-zip" inputmode="numeric" autocomplete="postal-code" maxlength="5"><span class="err" id="e-zip"></span></div>
+            </div>
+          </fieldset>
+          <div class="qnav">
+            <button type="button" class="back" id="qBack" hidden>← Back</button>
+            <button type="submit" class="btn btn-primary" id="qNext" style="margin-left:auto">Next <svg><use href="#i-right"/></svg></button>
+            <small>We use your details only to contact you about your project. See our Privacy Policy.</small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top" aria-label="iTOP Pavers home"><svg class="logo" role="img" aria-label="iTOP Pavers"><use href="#logo"/></svg></a>
+      <p style="margin:18px 0 0;max-width:34ch">Crafting unique home solutions across Northeast Florida.</p>
+    </div>
+    <div><h5>Pavers</h5><ul><li><a href="#services">Patios</a></li><li><a href="#services">Driveways</a></li><li><a href="#services">Pool decks</a></li><li><a href="#services">Walkways</a></li><li><a href="#services">Paving maintenance</a></li></ul></div>
+    <div><h5>Outdoor living</h5><ul><li><a href="#services">Fiberglass pools</a></li><li><a href="#services">Outdoor kitchens</a></li><li><a href="#services">Pergolas &amp; gazebos</a></li><li><a href="#services">Retaining walls &amp; fire pits</a></li><li><a href="#services">Screen enclosures</a></li></ul></div>
+    <div><h5>Contact</h5><ul><li style="user-select:all">(904) 525-9191</li><li style="user-select:all">info@itoppavers.com</li><li>6510 Columbia Park Dr, Suite 206<br>Jacksonville, FL 32258</li><li>Instagram @itoppaverss</li></ul></div>
+    <div class="legal"><span>© 2026 iTOP Pavers · Licensed Florida contractor CBC 1294954</span><span>Concept preview: photos and reviews are placeholders · Privacy Policy · Terms of Use</span></div>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Quick actions">
+  <a href="tel:+19045259191"><svg><use href="#i-phone"/></svg>Call</a>
+  <a href="#quote">Free estimate</a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+{{APP}}
+</script>
