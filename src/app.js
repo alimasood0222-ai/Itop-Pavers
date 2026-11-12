@@ -307,10 +307,11 @@ function validate(n){
   let ok=true, first=null;
   const chk=(id,cond,msg)=>{if(!setErr(id,cond?'':msg)){ok=false;first=first||$('#f-'+id);}};
   chk('name',v('f-name'),'Enter your name so we know who to ask for.');
-  const d=v('f-phone').replace(/\D/g,'');
-  chk('phone',d.length===10||(d.length===11&&d[0]==='1'),'Enter a 10-digit US phone number.');
+  /* International: optional leading +, then 7–15 digits (E.164 max); spaces, dashes, dots and brackets allowed */
+  const ph=v('f-phone'), d=ph.replace(/\D/g,'');
+  chk('phone',/^\+?[\d\s().-]+$/.test(ph)&&d.length>=7&&d.length<=15,'Enter a valid phone number, including country code if outside the US.');
   chk('email',/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('f-email')),'Enter an email like name@example.com.');
-  chk('zip',/^\d{5}$/.test(v('f-zip')),'Enter your 5-digit ZIP code.');
+  chk('zip',/^[A-Za-z0-9][A-Za-z0-9 -]{1,9}$/.test(v('f-zip')),'Enter your ZIP or postal code.');
   if(first)first.focus();
   return ok;
 }
@@ -324,31 +325,63 @@ qform.addEventListener('submit',e=>{
 });
 qBack.addEventListener('click',()=>showStep(qStep-1,true));
 
-/* ================= hero project planner ================= */
-const PLAN=[
-  {t:'Driveway',l:'Driveway',ic:'s-drive',img:'driveway-curved',title:'Curved driveway with charcoal border',f:'Driveway'},
-  {t:'Patio',l:'Patio',ic:'s-patio',img:'patio-firepit-lake',title:'Lakeside patio with fire pit & seat wall',f:'Patio'},
-  {t:'Pool deck',l:'Pool deck',ic:'s-pool',img:'pool-deck',title:'Pool deck with bullnose coping',f:'Pool deck'},
-  {t:'Walkway',l:'Walkway or entry',ic:'s-walk',img:'front-entry',title:'Front entry with curved paver steps',f:'Patio'},
-  {t:'Screen enclosure',l:'Screen enclosure',ic:'s-screen',img:'screen-enclosure',title:'Screen enclosure over a new patio',f:'Outdoor living'},
-  {t:'Not sure yet',l:'Something else',ic:'s-more',img:null,title:'Kitchens, pergolas, fire pits, pools & more'}
+/* ================= hero 3D project carousel ================= */
+const HC=[
+  {img:'driveway-gated',full:1,t:'Driveway',q:'Driveway',title:'Gated entry driveway'},
+  {img:'patio-firepit-lake',t:'Patio',q:'Patio',title:'Lakeside fire pit & seat wall'},
+  {img:'pool-deck',t:'Pool deck',q:'Pool deck',title:'Pool deck & coping'},
+  {img:'screen-enclosure',full:1,t:'Screen enclosure',q:'Screen enclosure',title:'Screen enclosure & patio'},
+  {img:'front-entry',t:'Entry',q:'Walkway',title:'Front entry & steps'},
+  {img:'patio-circle',full:1,t:'Patio',q:'Patio',title:'Circular garden patio'},
+  {img:'driveway-curved',t:'Driveway',q:'Driveway',title:'Curved driveway'},
+  {img:'pool-deck-travertine',t:'Pool deck',q:'Pool deck',title:'Travertine pool deck & spa'}
 ];
-const plOpts=$('#plOpts'), plPrev=$('#plPreview');
-plOpts.innerHTML=PLAN.map((p,i)=>`<button type="button" class="pl-opt" role="radio" aria-checked="${i===0}" data-i="${i}"><svg aria-hidden="true"><use href="#${p.ic}"/></svg>${esc(p.l)}</button>`).join('');
-let plCur=PLAN[0];
-function plShow(i){
-  plCur=PLAN[i];
-  plOpts.querySelectorAll('.pl-opt').forEach((b,k)=>{b.setAttribute('aria-checked',k===i);b.tabIndex=k===i?0:-1;});
-  const n=plCur.f?PROJ.filter(p=>p.t===plCur.f).length:0;
-  plPrev.innerHTML=plCur.img
-    ?`<img src="img/${plCur.img}-sm.webp" alt="${esc(plCur.title)} by iTOP Pavers"><div><small>Recent iTOP job</small><b>${esc(plCur.title)}</b><a href="#projects" data-f="${plCur.f}">See ${n} similar project${n===1?'':'s'} <svg><use href="#i-right"/></svg></a></div>`
-    :`<span class="ph"><svg><use href="#s-more"/></svg></span><div><small>Outdoor living</small><b>${esc(plCur.title)}</b><p>Tell us what you have in mind. We’ll plan it with you in 3D.</p></div>`;
+const HC_CHIPS=['Driveway','Patio','Pool deck','Entry','Screen enclosure'];
+const hcStage=$('#hcStage'), hcChips=$('#hcChips'), hcLive=$('#hcLive');
+hcStage.innerHTML=`<div class="hc-tilt">${HC.map((c,i)=>`<div class="hc-card" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${esc(c.title)}"><img src="img/${c.img}${c.full?'':'-sm'}.webp" alt="${esc(c.title)} by iTOP Pavers" ${i<3?'':'loading="lazy"'} decoding="async" draggable="false"><span class="hc-cap"><span><small>${esc(c.t)} · Recent iTOP job</small><b>${esc(c.title)}</b></span><a class="go" href="#quote" data-q="${esc(c.q)}">Get an estimate <svg><use href="#i-arrow"/></svg></a></span><i class="hc-prog"></i></div>`).join('')}</div>`;
+hcChips.innerHTML=HC_CHIPS.map(t=>`<button type="button" data-t="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join('');
+const hcCards=[...hcStage.querySelectorAll('.hc-card')], hcTilt=hcStage.querySelector('.hc-tilt');
+const HC_DUR=5200; let hcI=0, hcTimer=null, hcPaused=false;
+function hcLayout(){
+  const n=HC.length, narrow=innerWidth<=560, step=narrow?54:40, depth=narrow?150:220, rot=narrow?30:32;
+  hcCards.forEach((el,i)=>{
+    let k=i-hcI; if(k>n/2)k-=n; if(k<-n/2)k+=n;
+    const a=Math.abs(k);
+    el.style.setProperty('--x',(k*step)+'%'); el.style.setProperty('--z',(-a*depth)+'px'); el.style.setProperty('--ry',(-Math.sign(k)*Math.min(a,1)*rot)+'deg');
+    el.style.setProperty('--o',a>1?0:1); el.style.setProperty('--zi',10-a); el.style.setProperty('--b',a===0?1:(a===1?.62:.4));
+    el.classList.toggle('on',a===0); el.querySelector('.go').tabIndex=a===0?0:-1; el.setAttribute('aria-hidden',a!==0);
+    const pr=el.querySelector('.hc-prog'); pr.classList.remove('run'); if(a===0&&!hcPaused&&!reduce){void pr.offsetWidth;pr.classList.add('run');}
+  });
+  hcChips.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===HC[hcI].t));
+  hcLive.textContent=`${HC[hcI].title}, ${hcI+1} of ${HC.length}`;
 }
-plShow(0);
-plOpts.addEventListener('click',e=>{const b=e.target.closest('.pl-opt');if(b)plShow(+b.dataset.i);});
-plOpts.addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!k)return;e.preventDefault();const i=(PLAN.indexOf(plCur)+k+PLAN.length)%PLAN.length;plShow(i);plOpts.children[i].focus();});
-plPrev.addEventListener('click',e=>{const a=e.target.closest('a[data-f]');if(!a)return;const c=filters.querySelector(`[data-f="${a.dataset.f}"]`);c&&c.click();});
-$('#plGo').addEventListener('click',()=>selectType(plCur.t));
+function hcGo(i,user){hcI=(i+HC.length)%HC.length;hcLayout();if(user)hcRestart();}
+function hcRestart(){clearInterval(hcTimer);if(reduce||hcPaused)return;hcTimer=setInterval(()=>hcGo(hcI+1),HC_DUR);}
+hcStage.style.setProperty('--dur',HC_DUR+'ms');
+hcLayout(); hcRestart();
+$('#hcPrev').addEventListener('click',()=>hcGo(hcI-1,true));
+$('#hcNext').addEventListener('click',()=>hcGo(hcI+1,true));
+hcChips.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=HC.findIndex(c=>c.t===b.dataset.t);if(i>=0)hcGo(i,true);});
+hcStage.addEventListener('click',e=>{
+  const go=e.target.closest('.go'); if(go){selectType(go.dataset.q);return;}
+  const c=e.target.closest('.hc-card'); if(!c||hcDragged)return;
+  const i=+c.dataset.i; if(i!==hcI){e.preventDefault();hcGo(i,true);}else{const f=filters.querySelector(`[data-f="${PROJ.find(p=>p.img===HC[i].img)?.t||'All'}"]`);f&&f.click();$('#projects').scrollIntoView({behavior:reduce?'auto':'smooth'});}
+});
+hcStage.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();hcGo(hcI-1,true);hcCards[hcI].querySelector('.go').focus();}else if(e.key==='ArrowRight'){e.preventDefault();hcGo(hcI+1,true);hcCards[hcI].querySelector('.go').focus();}});
+// swipe / drag
+let hcX=null, hcDragged=false;
+hcStage.addEventListener('pointerdown',e=>{hcX=e.clientX;hcDragged=false;});
+hcStage.addEventListener('pointermove',e=>{if(hcX!==null&&Math.abs(e.clientX-hcX)>8)hcDragged=true;});
+hcStage.addEventListener('pointerup',e=>{if(hcX===null)return;const dx=e.clientX-hcX;hcX=null;if(Math.abs(dx)>40)hcGo(hcI+(dx<0?1:-1),true);setTimeout(()=>hcDragged=false,0);});
+hcStage.addEventListener('pointercancel',()=>{hcX=null;});
+// pause on hover/focus; subtle 3D tilt that follows the pointer
+const hc=$('#hc');
+const pause=v=>{hcPaused=v;if(v){clearInterval(hcTimer);hcCards[hcI].querySelector('.hc-prog').classList.remove('run');}else{hcLayout();hcRestart();}};
+hc.addEventListener('mouseenter',()=>pause(true)); hc.addEventListener('mouseleave',()=>{pause(false);hcTilt.style.transform='';});
+hc.addEventListener('focusin',()=>pause(true)); hc.addEventListener('focusout',e=>{if(!hc.contains(e.relatedTarget))pause(false);});
+if(fine.matches&&!reduce)hcStage.addEventListener('pointermove',e=>{const r=hcStage.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hcTilt.style.transform=`rotateY(${(x*8).toFixed(2)}deg) rotateX(${(-y*6).toFixed(2)}deg)`;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(hcTimer);else hcRestart();});
+addEventListener('resize',()=>hcLayout());
 
 /* layers list */
 $('#layers').innerHTML=LAYERS.map((l,i)=>`<li><span class="ln">0${i+1}</span><div><b>${esc(l.name)}</b><small>${esc(l.txt)}</small></div></li>`).join('');
