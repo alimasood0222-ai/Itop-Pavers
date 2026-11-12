@@ -1126,3 +1126,17 @@ section{padding-block:clamp(72px,8.5vw,120px)}
 @media (max-width:760px){.cta-in::after{background:linear-gradient(180deg,rgba(14,13,12,.82),rgba(14,13,12,.95))}}
 
 .cta-in::after{left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important;pointer-events:none}
+
+/* phones: video only behind the top of the hero (less zoom), fading into the dark below */
+@media (max-width:760px){
+  .hero{background:#0d0c0b}
+  .hero-bg{bottom:auto;height:min(520px,66svh)}
+  .hero-bg .hero-poster,.hero-bg .hero-video{object-position:50% 50%}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(13,12,11,.55) 0%,rgba(13,12,11,.62) 45%,rgba(13,12,11,.9) 80%,#0d0c0b 100%)!important}
+}
+
+@media (min-width:761px) and (max-width:1100px){
+  .hero{background:#0d0c0b}
+  .hero-bg{bottom:auto;height:min(640px,60svh)}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(13,12,11,.5) 0%,rgba(13,12,11,.6) 45%,rgba(13,12,11,.9) 80%,#0d0c0b 100%)!important}
+}
