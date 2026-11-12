@@ -1,4 +1,12 @@
-<title>iTOP Pavers</title>
+<title>iTOP Pavers | Paver Contractor in Jacksonville &amp; Northeast Florida</title>
+<meta name="description" content="Paver patios, driveways, pool decks and outdoor living across Jacksonville, St. Augustine and St. Johns County. Licensed Florida contractor CBC 1294954. Free on-site estimates: (904) 525-9191.">
+<meta name="theme-color" content="#131313">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iTOP Pavers | Paver Contractor in Northeast Florida">
+<meta property="og:description" content="Patios, driveways, pool decks and outdoor living. See your design in 3D before we build it. Free on-site estimates.">
+<meta property="og:url" content="https://itop-pavers.vercel.app/">
+<meta property="og:image" content="https://itop-pavers.vercel.app/img/driveway-gated.webp">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"iTOP Pavers","url":"https://itop-pavers.vercel.app/","telephone":"+1-904-525-9191","email":"info@itoppavers.com","image":"https://itop-pavers.vercel.app/img/driveway-gated.webp","address":{"@type":"PostalAddress","streetAddress":"6510 Columbia Park Dr, Suite 206","addressLocality":"Jacksonville","addressRegion":"FL","postalCode":"32258","addressCountry":"US"},"areaServed":["Jacksonville, FL","St. Augustine, FL","St. Johns County, FL"],"description":"Paver patios, driveways, pool decks and outdoor living in Northeast Florida. Licensed Florida contractor CBC 1294954."}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,13 +48,12 @@ h2.display{font-size:clamp(30px,4.1vw,54px);margin:14px 0 18px}
 
 /* ---------------- header ---------------- */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
-.util{background:#0a0a0a;border-bottom:1px solid #1f1d1b;height:40px;overflow:hidden;transition:height .3s ease,border-color .3s;font-size:12.5px;color:var(--muted)}
-.util .wrap{height:40px;display:flex;align-items:center;gap:20px}
-.util a,.util .u{display:inline-flex;align-items:center;gap:8px;text-decoration:none;white-space:nowrap}
+.util{background:#0a0a0a;border-bottom:1px solid #1c1a18;height:36px;overflow:hidden;transition:height .3s ease,border-color .3s;font-size:12px;letter-spacing:.02em;color:#8d8780}
+.util .wrap{height:36px;display:flex;align-items:center;gap:20px}
+.util a,.util .u{display:inline-flex;align-items:center;gap:7px;text-decoration:none;white-space:nowrap;transition:color .2s}
 .util a:hover{color:var(--white)}
-.util svg{width:14px;height:14px;color:var(--orange);flex:none}
-.util .sep{width:1px;height:14px;background:#2e2b28;flex:none}
-.util .r{margin-left:auto;display:flex;gap:20px;align-items:center}
+.util svg{width:12px;height:12px;color:var(--orange);flex:none;opacity:.9}
+.util .r{margin-left:auto;display:flex;gap:28px;align-items:center}
 .top.scrolled .util{height:0;border-bottom-color:transparent}
 .bar{position:relative;background:rgba(19,19,19,.86);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--line);transition:background .3s}
 .top.scrolled .bar,.top.mega-open .bar{background:rgba(14,14,14,.97)}
@@ -352,21 +359,43 @@ section{padding-block:clamp(72px,10vw,128px)}
 .chip:hover{border-color:#5a534b}
 .chip[aria-pressed="true"]{background:var(--orange);color:var(--black);border-color:var(--orange)}
 .chip span{opacity:.6;margin-left:4px;font-weight:600}
-.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:250px;gap:12px}
-.proj{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;overflow:hidden;border:1px solid #33302c;background:linear-gradient(160deg,#1f1c1a,#121110);animation:fade .4s ease}
+.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:260px;gap:12px}
+.proj{position:relative;display:block;padding:0;margin:0;border:0;overflow:hidden;background:#1a1918;color:var(--white);text-align:left;cursor:zoom-in;font:inherit;animation:fade .4s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.proj::before{content:"";position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(45deg,transparent 0 26px,rgba(255,255,255,.035) 26px 28px),repeating-linear-gradient(-45deg,transparent 0 26px,rgba(255,255,255,.035) 26px 28px)}
-.proj .wm{position:absolute;right:-30px;top:-20px;width:58%;opacity:.06;color:var(--orange)}
-.proj.big{grid-column:span 2;grid-row:span 2;clip-path:polygon(0 0,100% 0,100% calc(100% - 40px),calc(100% - 40px) 100%,0 100%)}
-.proj small{position:relative;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);font-weight:700}
-.proj b{position:relative;font-family:var(--f-display);font-size:17px;font-weight:600;margin-top:6px}
-.proj span{position:relative;font-size:13px;color:var(--muted)}
-.proj .ba{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
-.proj .ba div{display:grid;place-items:center;font:700 12px var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:#6a635b}
-.proj .ba div+div{border-left:2px solid #fff;color:var(--orange-ink);background:rgba(234,104,15,.05)}
-.proj .ba i{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px;border-radius:50%;background:var(--orange);border:3px solid #fff}
-@media (max-width:860px){.proj-grid{grid-template-columns:1fr 1fr}.proj.big{grid-row:span 1;min-height:300px}}
-@media (max-width:520px){.proj-grid{grid-template-columns:1fr}.proj.big{grid-column:auto}}
+.proj img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .4s;filter:saturate(.92)}
+.proj::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,8,8,.88) 100%);transition:opacity .3s}
+.proj:hover img,.proj:focus-visible img{transform:scale(1.045);filter:saturate(1)}
+.proj .pc{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:20px 22px;display:flex;flex-direction:column}
+.proj.big{grid-column:span 2;grid-row:span 2}
+.proj small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);font-weight:700}
+.proj b{font-family:var(--f-display);font-size:17px;font-weight:600;margin-top:6px;line-height:1.25}
+.proj.big b{font-size:24px}
+.proj .pc span{font-size:13px;color:#cfc9c1;margin-top:2px;max-height:0;opacity:0;overflow:hidden;transition:max-height .35s,opacity .35s}
+.proj:hover .pc span,.proj:focus-visible .pc span,.proj.big .pc span{max-height:40px;opacity:1}
+.proj .zoom{position:absolute;z-index:1;top:16px;right:16px;width:36px;height:36px;padding:9px;background:rgba(15,15,15,.7);color:#fff;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s}
+.proj:hover .zoom,.proj:focus-visible .zoom{opacity:1;transform:none}
+.proj:focus-visible{outline-offset:-3px}
+@media (hover:none){.proj .pc span{max-height:40px;opacity:1}}
+@media (max-width:860px){.proj-grid{grid-template-columns:1fr 1fr;grid-auto-rows:210px}.proj.big{grid-row:span 2}}
+@media (max-width:520px){.proj-grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px;gap:8px}.proj .pc{padding:12px}.proj b{font-size:14px}.proj.big b{font-size:18px}.proj small{font-size:10px}.proj:not(.big) .pc span{display:none}}
+.proj-more{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
+.proj-more p{margin:0;max-width:56ch}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:80;background:rgba(6,6,6,.94);display:grid;grid-template-rows:1fr auto;padding:64px clamp(16px,6vw,96px) 24px;animation:fade .25s ease}
+.lb[hidden]{display:none}
+.lb figure{margin:0;min-height:0;display:grid;place-items:center}
+.lb img{max-width:100%;max-height:calc(100vh - 200px);max-height:calc(100dvh - 200px);object-fit:contain;display:block;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb-cap{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:18px;gap:2px}
+.lb-cap small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);font-weight:700}
+.lb-cap b{font-family:var(--f-display);font-size:19px;font-weight:600}
+.lb-cap span{font-size:14px;color:var(--muted)}
+.lb-btn{position:absolute;width:48px;height:48px;display:grid;place-items:center;background:#1c1b1a;border:1px solid #3a3631;color:#fff;cursor:pointer;padding:0;transition:border-color .2s,background .2s}
+.lb-btn:hover{border-color:var(--orange)}
+.lb-btn svg{width:20px;height:20px}
+#lbClose{top:12px;right:12px;font-size:26px;line-height:1}
+#lbPrev{left:12px;top:50%;margin-top:-24px}#lbPrev svg{transform:rotate(180deg)}
+#lbNext{right:12px;top:50%;margin-top:-24px}
+@media (max-width:620px){#lbPrev,#lbNext{top:auto;bottom:16px;margin:0}.lb{padding-bottom:80px}.lb img{max-height:calc(100dvh - 260px)}}
 
 /* ---------------- reviews + area ---------------- */
 .duo{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:12px}
@@ -375,8 +404,14 @@ section{padding-block:clamp(72px,10vw,128px)}
 .score{display:flex;align-items:baseline;gap:14px;margin:18px 0 6px}
 .score b{font-family:var(--f-display);font-size:74px;font-weight:700;line-height:.9;color:var(--orange);letter-spacing:-.03em}
 .score span{font-size:15px;color:var(--muted)}
-.slot{margin-top:24px;border:1px dashed #4a443d;padding:18px;font-size:14px;color:var(--muted);display:flex;gap:14px;align-items:center}
-.slot svg{flex:none;width:28px;height:28px;color:var(--orange)}
+.rev-card{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.rev-card .rev-in{padding:clamp(24px,4vw,40px);padding-bottom:36px}
+.stars{display:flex;gap:4px;color:var(--orange);margin-top:4px}
+.stars svg{width:18px;height:18px}
+.rev-photo{position:relative;margin:auto 0 0;min-height:240px;flex:1;overflow:hidden}
+.rev-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rev-photo::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--panel) 0%,rgba(26,25,24,.2) 38%,rgba(10,10,10,.75) 100%)}
+.rev-photo figcaption{position:absolute;z-index:2;left:clamp(24px,4vw,40px);bottom:20px;font-size:12.5px;color:#d4cec6}
 .map{position:relative;margin:18px -8px 0}
 .map svg{display:block;width:100%;height:auto}
 .map .town{cursor:default}
@@ -643,6 +678,24 @@ footer .logo{width:150px;height:56px}
     </div>
   </section>
 
+  <section id="projects" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Recent work</div>
+          <h2 class="display">Real yards. Real Northeast Florida.</h2>
+        </div>
+        <p class="lede">Driveways, pool decks, patios and entries built by our own crew. Tap any photo to see it larger.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+      <div class="proj-grid" id="projGrid"></div>
+      <div class="proj-more">
+        <p>Planning something similar? We’ll visit, measure and bring paver samples, free.</p>
+        <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
   <section class="process" id="process">
     <div class="wrap">
       <div class="sec-head">
@@ -672,32 +725,18 @@ footer .logo{width:150px;height:56px}
     </div>
   </section>
 
-  <section id="projects">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Projects</div>
-          <h2 class="display">Real yards. Real Northeast Florida.</h2>
-        </div>
-        <p class="lede">Every photo here will be an iTOP job. Filter by the space you’re planning. Before-and-after sliders show the change.</p>
-      </div>
-      <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
-      <div class="proj-grid" id="projGrid"></div>
-      <div class="ctas"><a class="btn btn-ghost" href="#projects">View all projects <svg><use href="#i-arrow"/></svg></a></div>
-    </div>
-  </section>
-
-  <section id="reviews" style="padding-top:0">
+  <section id="reviews">
     <div class="wrap duo">
-      <div class="card">
-        <div class="eyebrow">Reviews</div>
-        <div class="score"><b>32</b><span>Google reviews<br>from local homeowners</span></div>
-        <p class="lede">Read what Jacksonville and St. Johns County homeowners say about working with our crew.</p>
-        <div class="slot"><svg><use href="#i-star"/></svg><span>Live Google reviews carousel embeds here on the live site.</span></div>
-        <div class="ctas">
-          <a class="btn btn-ghost" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville+reviews" target="_blank" rel="noopener">Read reviews <svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville" target="_blank" rel="noopener">Write a review</a>
+      <div class="card rev-card">
+        <div class="rev-in">
+          <div class="eyebrow">Reviews</div>
+          <div class="score"><b>32</b><span>Google reviews<br>from local homeowners</span></div>
+          <p class="lede">Read what Jacksonville and St. Johns County homeowners say about working with our crew, in their own words on Google.</p>
+          <div class="ctas">
+            <a class="btn btn-primary" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville+reviews" target="_blank" rel="noopener">Read our Google reviews <svg><use href="#i-arrow"/></svg></a>
+          </div>
         </div>
+        <figure class="rev-photo"><img src="img/patio-firepit-lake-sm.webp" alt="Lakeside paver patio with fire pit and seat wall by iTOP Pavers" loading="lazy" decoding="async"><figcaption>Lakeside fire pit &amp; seat wall · iTOP Pavers</figcaption></figure>
       </div>
       <div class="card" id="area">
         <div class="eyebrow">Service area</div>
@@ -708,7 +747,6 @@ footer .logo{width:150px;height:56px}
           <dt>Office</dt><dd>6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258</dd>
           <dt>Hours</dt><dd>Monday – Saturday</dd>
         </dl>
-        <p class="map-note">Schematic map. Town list to be confirmed with iTOP.</p>
       </div>
     </div>
   </section>
@@ -784,9 +822,17 @@ footer .logo{width:150px;height:56px}
     <div><h5>Pavers</h5><ul><li><a href="#services">Patios</a></li><li><a href="#services">Driveways</a></li><li><a href="#services">Pool decks</a></li><li><a href="#services">Walkways</a></li><li><a href="#services">Paving maintenance</a></li></ul></div>
     <div><h5>Outdoor living</h5><ul><li><a href="#services">Fiberglass pools</a></li><li><a href="#services">Outdoor kitchens</a></li><li><a href="#services">Pergolas &amp; gazebos</a></li><li><a href="#services">Retaining walls &amp; fire pits</a></li><li><a href="#services">Screen enclosures</a></li></ul></div>
     <div><h5>Contact</h5><ul><li style="user-select:all">(904) 525-9191</li><li style="user-select:all">info@itoppavers.com</li><li>6510 Columbia Park Dr, Suite 206<br>Jacksonville, FL 32258</li><li>Instagram @itoppaverss</li></ul></div>
-    <div class="legal"><span>© 2026 iTOP Pavers · Licensed Florida contractor CBC 1294954</span><span>Concept preview: photos and reviews are placeholders · Privacy Policy · Terms of Use</span></div>
+    <div class="legal"><span>© 2026 iTOP Pavers · Licensed Florida contractor CBC 1294954</span><span>Privacy Policy · Terms of Use</span></div>
   </div>
 </footer>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo" hidden>
+  <figure><img id="lbImg" alt=""></figure>
+  <div class="lb-cap" id="lbCap" aria-live="polite"></div>
+  <button class="lb-btn" id="lbClose" type="button" aria-label="Close">×</button>
+  <button class="lb-btn" id="lbPrev" type="button" aria-label="Previous photo"><svg><use href="#i-right"/></svg></button>
+  <button class="lb-btn" id="lbNext" type="button" aria-label="Next photo"><svg><use href="#i-right"/></svg></button>
+</div>
 
 <nav class="mbar" aria-label="Quick actions">
   <a href="tel:+19045259191"><svg><use href="#i-phone"/></svg>Call</a>

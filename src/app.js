@@ -170,21 +170,44 @@ $$('.svc').forEach(c=>{
 });
 
 /* ================= projects ================= */
+/* Real iTOP job photos from the client's site and Instagram (assets/photos -> dist/img). `full` = larger file for the lightbox. */
 const PROJ=[
-  {t:'Patio',big:true,ba:true,title:'Before / after: backyard patio',sub:'Drag-to-compare slider, ready for the first iTOP job photos'},
-  {t:'Pool deck',title:'Pool deck & coping'},{t:'Driveway',title:'Herringbone driveway'},
-  {t:'Patio',title:'Patio & fire pit'},{t:'Outdoor living',title:'Outdoor kitchen & pergola'},
-  {t:'Driveway',title:'Driveway & front walkway'},{t:'Pool deck',title:'Fiberglass pool & deck'},
-  {t:'Outdoor living',title:'Screen enclosure'},{t:'Patio',title:'Courtyard in basketweave'}
+  {t:'Driveway',img:'driveway-gated',full:1,big:1,title:'Gated entry driveway',sub:'Tumbled pavers with a charcoal soldier course'},
+  {t:'Patio',img:'patio-firepit-lake',title:'Lakeside fire pit & seat wall',sub:'Built-in fire pit wrapped by a curved seat wall'},
+  {t:'Pool deck',img:'pool-deck',title:'Pool deck & coping',sub:'Blended pavers with bullnose coping'},
+  {t:'Patio',img:'front-entry',title:'Front entry & steps',sub:'Curved paver steps up to the front porch'},
+  {t:'Outdoor living',img:'screen-enclosure',full:1,title:'Screen enclosure & patio',sub:'Screened outdoor room over a new paver patio'},
+  {t:'Driveway',img:'driveway-curved',title:'Curved driveway',sub:'Charcoal border following the curve'},
+  {t:'Pool deck',img:'pool-deck-travertine',title:'Travertine pool deck & spa',sub:'Natural travertine around a raised spa'},
+  {t:'Patio',img:'patio-circle',full:1,title:'Circular garden patio',sub:'Round patio with a soldier-course edge'},
+  {t:'Driveway',img:'driveway-long',title:'Long driveway with border',sub:'Light blend framed in charcoal'},
+  {t:'Driveway',img:'driveway-terracotta',title:'Terracotta-blend driveway',sub:'Warm tones to match a tile roof'},
+  {t:'Driveway',img:'driveway-3car',title:'Three-car driveway',sub:'Full replacement in a tan blend'},
+  {t:'Driveway',img:'driveway-border',title:'Driveway with soldier border',sub:'Clean lines from the street to the door'}
 ];
-const FILT=[['All','All'],['Patio','Patios'],['Pool deck','Pool decks'],['Driveway','Driveways'],['Outdoor living','Outdoor living']];
+const FILT=[['All','All work'],['Driveway','Driveways'],['Patio','Patios & entries'],['Pool deck','Pool decks'],['Outdoor living','Outdoor living']];
 const filters=$('#filters'), grid=$('#projGrid');
 filters.innerHTML=FILT.map(([k,l],i)=>`<button class="chip" type="button" data-f="${k}" aria-pressed="${i===0}">${l}<span>${k==='All'?PROJ.length:PROJ.filter(p=>p.t===k).length}</span></button>`).join('');
+let shown=[];
 function renderProj(f){
-  grid.innerHTML=PROJ.filter(p=>f==='All'||p.t===f).map(p=>`<div class="proj${p.big&&f==='All'?' big':''}">${p.ba&&f==='All'?'<div class="ba" aria-hidden="true"><div>Before</div><div>After</div><i></i></div>':`<svg class="wm" aria-hidden="true"><use href="#mark"/></svg>`}<small>${esc(p.t)}</small><b>${esc(p.title)}</b><span>${esc(p.sub||'Photo pending: awaiting iTOP project photography')}</span></div>`).join('');
+  shown=PROJ.filter(p=>f==='All'||p.t===f);
+  grid.innerHTML=shown.map((p,i)=>`<button type="button" class="proj${p.big&&f==='All'?' big':''}" data-i="${i}" aria-label="View photo: ${esc(p.title)}"><img src="img/${p.img}-sm.webp" alt="${esc(p.title)} by iTOP Pavers" loading="lazy" decoding="async"><span class="pc"><small>${esc(p.t)}</small><b>${esc(p.title)}</b><span>${esc(p.sub)}</span></span><svg class="zoom" aria-hidden="true"><use href="#i-arrow"/></svg></button>`).join('');
 }
 renderProj('All');
 filters.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;filters.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderProj(b.dataset.f);});
+
+/* lightbox */
+const lb=$('#lightbox'), lbImg=$('#lbImg'), lbCap=$('#lbCap');
+let lbI=0, lbFrom=null;
+function lbShow(i){lbI=(i+shown.length)%shown.length;const p=shown[lbI];lbImg.src=`img/${p.img}${p.full?'':'-sm'}.webp`;lbImg.alt=p.title+' by iTOP Pavers';lbCap.innerHTML=`<small>${esc(p.t)} · ${lbI+1} / ${shown.length}</small><b>${esc(p.title)}</b><span>${esc(p.sub)}</span>`;}
+function lbOpen(i){lbFrom=document.activeElement;lbShow(i);lb.hidden=false;document.documentElement.classList.add('lock');$('#lbClose').focus();}
+function lbClose(){lb.hidden=true;document.documentElement.classList.remove('lock');lbFrom&&lbFrom.focus();}
+grid.addEventListener('click',e=>{const b=e.target.closest('.proj');if(b)lbOpen(+b.dataset.i);});
+$('#lbClose').addEventListener('click',lbClose);
+$('#lbPrev').addEventListener('click',()=>lbShow(lbI-1));
+$('#lbNext').addEventListener('click',()=>lbShow(lbI+1));
+lb.addEventListener('click',e=>{if(e.target===lb)lbClose();});
+document.addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')lbClose();else if(e.key==='ArrowLeft')lbShow(lbI-1);else if(e.key==='ArrowRight')lbShow(lbI+1);});
 
 /* ================= service-area map (schematic, tilted) ================= */
 (function(){
@@ -340,7 +363,7 @@ exList.addEventListener('click',e=>{const b=e.target.closest('button');if(b)show
 $('#exBack').addEventListener('click',()=>{showSpot(null);const b=exList.querySelector('button');b&&b.focus();});
 exNext.addEventListener('click',()=>showSpot(exNext.dataset.spot));
 exitView.addEventListener('click',()=>showSpot(null));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&curSpot&&!openId&&!mnav.classList.contains('open'))showSpot(null);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&curSpot&&!openId&&lb.hidden&&!mnav.classList.contains('open'))showSpot(null);});
 $$('[data-tod]').forEach(b=>b.addEventListener('click',()=>{$$('[data-tod]').forEach(x=>x.setAttribute('aria-pressed',x===b));heroApi.tod&&heroApi.tod(+b.dataset.tod);}));
 
 /* layers list */

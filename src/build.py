@@ -1,8 +1,8 @@
 import pathlib
 # Paths are relative to the project root (one level up from src/).
 R=pathlib.Path(__file__).resolve().parent.parent
-page=(R/'src/page.html').read_text(); app=(R/'src/app.js').read_text()
-vb=(R/'assets/logo/vb.txt').read_text().strip(); o=(R/'assets/logo/o.txt').read_text().strip(); d=(R/'assets/logo/d.txt').read_text().strip()
+page=(R/'src/page.html').read_text(encoding='utf-8'); app=(R/'src/app.js').read_text(encoding='utf-8')
+vb=(R/'assets/logo/vb.txt').read_text(encoding='utf-8').strip(); o=(R/'assets/logo/o.txt').read_text(encoding='utf-8').strip(); d=(R/'assets/logo/d.txt').read_text(encoding='utf-8').strip()
 logo=f'<symbol id="logo" viewBox="{vb}"><path fill="#EA680F" fill-rule="evenodd" d="{o}"/><path fill="currentColor" fill-rule="evenodd" d="{d}"/></symbol>'
 AR='<svg class="ar"><use href="#i-arrow"/></svg>'
 def ml_c(t,d,pat,col): return f'<a class="ml" href="#services"><canvas data-pat="{pat}" data-col="{col}" aria-hidden="true"></canvas><span><b>{t}</b><small>{d}</small></span>{AR}</a>'
@@ -11,15 +11,10 @@ pav=[("Patios","Gathering space with clean, lasting edges","h45","#cdbb9c"),("Dr
 liv=[("Fiberglass pools","Resort-style pools with matching decks","s-pool"),("Outdoor kitchens","Grills and counters built for Florida","s-kitchen"),("Pergolas &amp; gazebos","Shade structures sized to your patio","s-pergola"),("Retaining walls &amp; fire pits","Seat walls, grade changes, a place to gather","s-wall"),("Screen enclosures","Bug-free outdoor rooms over pools and lanais","s-screen")]
 header=f'''<header class="top" id="hdr">
   <div class="util"><div class="wrap">
-    <a href="#area"><svg><use href="#i-pin"/></svg>Serving Jacksonville, St. Augustine &amp; St. Johns County</a>
-    <span class="sep hide-md"></span>
-    <span class="u hide-md"><svg><use href="#i-clock"/></svg>Mon – Sat · Free on-site estimates</span>
+    <a href="#area"><svg><use href="#i-pin"/></svg>Jacksonville · St. Augustine · St. Johns County</a>
     <div class="r">
       <a href="#reviews"><svg><use href="#i-star"/></svg>32 Google reviews</a>
-      <span class="sep"></span>
-      <span class="u"><svg><use href="#i-shield"/></svg>Licensed CBC 1294954</span>
-      <span class="sep"></span>
-      <span class="u"><svg><use href="#i-ig"/></svg>@itoppaverss</span>
+      <span class="u hide-md"><svg><use href="#i-shield"/></svg>Licensed Florida contractor · CBC 1294954</span>
     </div>
   </div></div>
   <div class="bar">
@@ -70,18 +65,22 @@ header=f'''<header class="top" id="hdr">
     <div class="mnav-foot">
       <a class="mphone" href="tel:+19045259191"><span class="ci"><svg><use href="#i-phone"/></svg></span><span><small>Call or WhatsApp</small><b>(904) 525-9191</b></span></a>
       <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
-      <p>Licensed CBC 1294954 · Mon – Sat · @itoppaverss</p>
+      <p>Licensed CBC 1294954 · Free on-site estimates</p>
     </div>
   </div>
 </div>'''
 out=page.replace('{{LOGO_SYMBOL}}',logo).replace('{{HEADER}}',header).replace('{{APP}}',app)
 # 1) Claude Artifact version (no doctype/head; the artifact host adds the skeleton)
-(R/'dist/artifact.html').write_text(out)
+(R/'dist/artifact.html').write_text(out,encoding='utf-8')
 # 2) Standalone web page: head content = everything before the inline SVG sprite
 i=out.index('<svg width="0"')
 full=('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
       '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
       +out[:i]+'</head>\n<body>\n'+out[i:]+'\n</body>\n</html>\n')
 (R/'dist').mkdir(exist_ok=True)
-(R/'dist/index.html').write_text(full)
+(R/'dist/index.html').write_text(full,encoding='utf-8')
+# Project photos (real iTOP jobs, optimised WebP) -> dist/img/
+import shutil
+img=R/'dist/img'; img.mkdir(exist_ok=True)
+for f in (R/'assets/photos').glob('*.webp'): shutil.copy2(f,img/f.name)
 print('Built dist/index.html and dist/artifact.html', len(full), 'bytes')
