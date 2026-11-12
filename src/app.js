@@ -456,15 +456,16 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
   const POS={patio:{pos:[-1.2,.35,-4.8],view:{t:[-1.5,0,-4.6],r:20,az:.3,el:.58}},pool:{pos:[6.6,.4,1.8],view:{t:[6.6,0,1.8],r:19,az:.9,el:.55}},kitchen:{pos:[-6.8,1.7,-7.4],view:{t:[-7.1,1.1,-7],r:13.5,az:.55,el:.1}},fire:{pos:[-5.2,1.15,1.8],view:{t:[-5.2,.4,1.4],r:14.5,az:-.45,el:.5}}};
   const SPOTS=heroApi.spots.map(x=>Object.assign({},x,POS[x.id]||POS.patio));
   const scene=new T.Scene(), cam=new T.PerspectiveCamera(33,1,.1,700);
-  const M={stucco:std(0xe7e1d6,.95),trim:std(0x1c1b1a,.55),roof:std(0x2b2927,.8),base:std(0xb3a280,1),lawn:std(0x3e6234,1),metal:std(0x2b2927,.45,.35),
+  const M={stucco:std(0xe7e1d6,.95),trim:std(0x1c1b1a,.55),roof:std(0x2b2927,.8),base:std(0xb3a280,1),lawn:new T.MeshStandardMaterial({color:0xffffff,roughness:1}),fence:std(0x3b3029,.82),metal:std(0x2b2927,.45,.35),
     stone:std(0x8c8174,.95),block:std(0xd6cdbf,.9),cap:std(0x3a3633,.7),granite:std(0x1d1d1d,.3),steel:std(0xc0c4c8,.3,.85),coping:std(0xece6db,.75),
-    white:std(0xf1eee8,.8),wood:std(0x7a5a3f,.75),orange:std(0xea680f,.7),trunk:std(0x8a735c,1),border:std(0x34322f,.8),hedge:std(0x2f5129,1),
-    leaf:new T.MeshStandardMaterial({color:0x3f6e35,roughness:.9,side:T.DoubleSide}),leaf2:new T.MeshStandardMaterial({color:0x31592b,roughness:.9,side:T.DoubleSide}),
+    white:std(0xf1eee8,.8),wood:std(0x7a5a3f,.75),canvas:std(0xd8d0c2,.95),trunk:std(0x80705f,1),border:std(0x34322f,.8),hedge:new T.MeshStandardMaterial({color:0x7c8656,roughness:.9,side:T.DoubleSide}),
+    leaf:new T.MeshStandardMaterial({color:0x5a6a42,roughness:.9,side:T.DoubleSide}),leaf2:new T.MeshStandardMaterial({color:0x4b5a37,roughness:.9,side:T.DoubleSide}),
     glass:new T.MeshStandardMaterial({color:0x1f2b31,roughness:.12,metalness:.4,emissive:0xffa75e,emissiveIntensity:0}),
-    tile:new T.MeshStandardMaterial({color:0x58b9cf,roughness:.35,emissive:0x12a8cc,emissiveIntensity:0}),
-    water:new T.MeshStandardMaterial({color:0x2fb0d0,roughness:.05,metalness:.25,transparent:true,opacity:.8,emissive:0x0a6c88,emissiveIntensity:0}),
+    tile:new T.MeshStandardMaterial({color:0x86b4ba,roughness:.4,emissive:0x0f6a78,emissiveIntensity:0}),
+    water:new T.MeshStandardMaterial({color:0x3f8f9c,roughness:.06,metalness:.25,transparent:true,opacity:.86,emissive:0x0a4f5c,emissiveIntensity:0}),
     bulb:new T.MeshBasicMaterial({color:0xffd59a}),lamp:new T.MeshStandardMaterial({color:0x2a2826,emissive:0xffc27a,emissiveIntensity:0})};
   M.tile.map=speckle({base:240,spread:14,rep:6});
+  M.lawn.map=grassTex(false,34);
   M.stone.map=speckle({base:220,spread:40,n:3200,dot:2.6,rep:2});
 
   /* sky dome */
@@ -537,12 +538,14 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
   const LG=feature(6.4,5.5,2.2), lb=(w,h,d,m,x,y,z)=>addBox(LG,w,h,d,m,x-6.4,y,z-5.5);
   [5,7.8].forEach(x=>{lb(.7,.26,1.6,M.trim,x,.33,5.5);lb(.78,.1,1.9,M.white,x,.5,5.45);const b=lb(.78,.08,.85,M.white,x,.8,6.2);b.rotation.x=.75;});
   lb(.05,2.5,.05,M.metal,6.4,1.45,5.6);
-  const can=new T.Mesh(new T.ConeGeometry(1.45,.5,8),M.orange);can.position.set(0,2.62,.1);can.castShadow=true;LG.add(can);
+  const can=new T.Mesh(new T.ConeGeometry(1.75,.28,4,1),M.canvas);can.rotation.y=Math.PI/4;can.position.set(0,2.74,.1);can.castShadow=true;LG.add(can);
+  const hem=new T.Mesh(new T.BoxGeometry(2.42,.07,2.42),M.canvas);hem.position.set(0,2.58,.1);hem.castShadow=true;LG.add(hem);
   /* landscape */
-  addBox(scene,.9,1.1,16,M.hedge,-11.6,.55,-1.2);
+  const fence=(x,z0,z1)=>{for(let z=z0;z<=z1+.01;z+=2.4)addBox(scene,.14,1.9,.14,M.fence,x,.95,z);for(let k=0;k<10;k++)addBox(scene,.05,.13,z1-z0,M.fence,x+.06,.16+k*.18,(z0+z1)/2);};
+  fence(-11.9,-9.4,7.4);fence(16.6,-9.4,7.4);
   palm(scene,14.6,-8.2,5.8,.16,.3,M.trunk,[M.leaf,M.leaf2]);palm(scene,15.4,2.8,4.9,-.18,2,M.trunk,[M.leaf,M.leaf2]);
   palm(scene,-12.6,-7.8,6.2,.14,1,M.trunk,[M.leaf,M.leaf2]);palm(scene,-13,4.6,5,.2,4,M.trunk,[M.leaf,M.leaf2]);
-  [[14.3,-4,.6],[14.6,-1.5,.5],[14.2,6,.55],[-11.6,7.6,.6],[12,8.6,.45],[3,8.4,.4],[-4,8.6,.5]].forEach(([x,z,s])=>shrub(scene,x,z,s,M.hedge));
+  [[14.3,-4,.6],[14.6,-1.5,.5],[14.2,6,.55],[-11,7.9,.6],[12,8.6,.45],[3,8.4,.4],[-4,8.6,.5],[-11,-3,.55],[-11,2.5,.5],[8,8.5,.45],[-8,8.5,.5]].forEach(([x,z,s])=>{for(let k=0;k<3;k++)grassClump(scene,x+(k-1)*.45,z+(k%2)*.3,s*2,30,M.hedge,.18,.32);});
   [-8,-4,0,4,8,12].forEach(x=>{addBox(scene,.09,.5,.09,M.trim,x,.25,7.6);const c=new T.Mesh(new T.CylinderGeometry(.09,.09,.08,10),M.lamp);c.position.set(x,.54,7.6);scene.add(c);});
 
   /* lights */
@@ -556,8 +559,8 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
   /* time of day */
   const col=h=>new T.Color(h).convertSRGBToLinear(), scol=h=>new T.Color(h);
   const TOD=[
-    {skyTop:scol('#4f86d1'),skyMid:scol('#dbe7f0'),skyBot:scol('#76876a'),fog:col('#cbd8e0'),fN:80,fF:240,hS:col('#e6f2ff'),hG:col('#5a4a3a'),hI:.8,sC:col('#fff3e0'),sI:2.4,sP:new T.Vector3(18,32,16),lawn:col('#4d7a3c'),hedge:col('#335a2c'),glass:.04,bulb:col('#4a4540'),lamp:0,tile:.05,water:.12,fire:.5,pool:0,perg:0,inside:0},
-    {skyTop:scol('#11172e'),skyMid:scol('#e37a3c'),skyBot:scol('#24160f'),fog:col('#6a463a'),fN:60,fF:180,hS:col('#e6c2b0'),hG:col('#2a1d16'),hI:.62,sC:col('#ffa468'),sI:1.55,sP:new T.Vector3(38,9,12),lawn:col('#3d5f31'),hedge:col('#2c4a26'),glass:1.1,bulb:col('#ffd59a'),lamp:1.5,tile:.55,water:.6,fire:3,pool:2.6,perg:1.7,inside:2}
+    {skyTop:scol('#7aa0cf'),skyMid:scol('#e6ecef'),skyBot:scol('#8c8f78'),fog:col('#d5dcdf'),fN:80,fF:240,hS:col('#e6f2ff'),hG:col('#5a4a3a'),hI:.8,sC:col('#fff3e0'),sI:2.4,sP:new T.Vector3(18,32,16),lawn:col('#e4e8d6'),hedge:col('#8e9663'),glass:.04,bulb:col('#4a4540'),lamp:0,tile:.05,water:.12,fire:.5,pool:0,perg:0,inside:0},
+    {skyTop:scol('#1a2133'),skyMid:scol('#c98c66'),skyBot:scol('#231b16'),fog:col('#5d4c43'),fN:60,fF:180,hS:col('#e6c2b0'),hG:col('#2a1d16'),hI:.62,sC:col('#ffbf93'),sI:1.5,sP:new T.Vector3(38,9,12),lawn:col('#c9ccb4'),hedge:col('#7a7f54'),glass:1.1,bulb:col('#ffd59a'),lamp:1.5,tile:.55,water:.6,fire:3,pool:2.6,perg:1.7,inside:2}
   ];
   const tc=new T.Color();
   function applyTod(v){
