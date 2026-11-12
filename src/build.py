@@ -223,6 +223,17 @@ def crumbs_html(crumbs):
     items = ''.join(f'<li><a href="{p}">{e(n)}</a></li>' if i < len(crumbs) - 1 else f'<li aria-current="page">{e(n)}</li>' for i, (n, p) in enumerate(crumbs))
     return f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{items}</ol></nav>'
 def eyebrow(t): return f'<p class="eyebrow">{e(t)}</p>'
+def reveal_shot():
+    r = REVEAL_SHOT
+    return f'''<section class="rshot" aria-labelledby="rshot-h">
+    <div class="rshot-stick">
+      <figure class="rshot-frame"><img src="{img(r['img'], False)}" srcset="{img(r['img'])} 720w, {img(r['img'], False)} 1600w" sizes="100vw" alt="{e(r['alt'])}" loading="lazy" decoding="async"></figure>
+      <p class="rshot-pre" aria-hidden="true">{e(r['pre'])}</p>
+      <div class="wrap rshot-copy">{eyebrow(r['eyebrow'])}<h2 class="display" id="rshot-h">{e(r['h2'])}</h2><p>{e(r['sub'])}</p>
+        <div class="ctas"><a class="btn btn-primary" href="/projects/">See our projects {ARROW}</a><a class="btn btn-ghost" href="/get-a-quote/">Get a free estimate</a></div></div>
+    </div>
+  </section>'''
+
 def sec_head(eb, h2, lede, hid=None):
     idattr = f' id="{hid}"' if hid else ''
     return f'<div class="sec-head"><div>{eyebrow(eb)}<h2 class="display"{idattr}>{h2}</h2></div><p class="lede">{lede}</p></div>'
@@ -589,6 +600,7 @@ def p_home():
       <div class="ex-foot"><span>{ic('i-drag')}Drag to look around</span><a href="#studio">Choose your pavers {ic('i-down')}</a></div>
     </aside>
   </section>
+  {reveal_shot()}
   {services_section()}
   {styles_explorer()}
   {finder_section()}

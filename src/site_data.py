@@ -347,3 +347,9 @@ HERO_SPOTS = [
     dict(id='fire', name='Fire pit & seat wall', type='Fire pit or retaining wall',
          text='A built-in fire pit wrapped by a curved seat wall in matching block. The spot everyone ends up at.'),
 ]
+
+# Full-bleed photo moment right under the 3D hero (scroll grows the photo to full screen).
+REVEAL_SHOT = dict(img='driveway-gated', pre='That was 3D. This is a real iTOP job.',
+                   eyebrow='Recent iTOP job', h2='Built to be the first thing you see.',
+                   sub='Gated entry driveway: tumbled pavers with a charcoal soldier course.',
+                   alt='Gated entry driveway with tumbled pavers and a charcoal soldier course, built by iTOP Pavers')

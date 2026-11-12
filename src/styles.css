@@ -908,7 +908,7 @@ footer .f-brand p{margin:16px 0 0;max-width:36ch}
   repeating-linear-gradient(90deg,var(--edge,var(--sand)) 0 52px,transparent 52px 56px) -28px 0/calc(100% + 28px) 8px no-repeat}
 
 /* perf: rendering cost (Lighthouse mobile) */
-main>section:not(:first-child):not(.build),main>.trust{content-visibility:auto;contain-intrinsic-size:auto 900px}
+main>section:not(:first-child):not(.build):not(.rshot),main>.trust{content-visibility:auto;contain-intrinsic-size:auto 900px}
 .phero-bg img{filter:none}
 @media (max-width:760px){
   .bar .wrap,.top.scrolled .bar .wrap,.show-nav button,.show-lic,.phero-ph figcaption,.sx-label,.sx-view,.mbar,.scrim{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
@@ -1349,3 +1349,43 @@ section{padding-block:clamp(72px,8.5vw,120px)}
 .h3d-proof li::before{display:inline-block;vertical-align:middle;margin:-2px 8px 0 0}
 .hero3d{margin-top:-82px}
 @media (max-width:760px){.hero3d{margin-top:-68px}}
+
+/* =====================================================================
+   Wow pass (2026-11-13): hero entrance + full-bleed photo moment
+   ===================================================================== */
+/* hero copy arrives in sequence (transform-led so the text is never hidden for long) */
+@media (prefers-reduced-motion:no-preference){
+  .h3d-copy>*{animation:h3dIn 1s cubic-bezier(.2,.7,.2,1) both}
+  .h3d-copy>:nth-child(2){animation-delay:.08s}.h3d-copy>:nth-child(3){animation-delay:.2s}
+  .h3d-copy>:nth-child(4){animation-delay:.32s}.h3d-copy>:nth-child(5){animation-delay:.44s}
+  .h3d-explore{animation:h3dIn 1s cubic-bezier(.2,.7,.2,1) .9s both}
+}
+@keyframes h3dIn{from{opacity:.01;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* full-bleed photo: framed card that opens to the full screen while you scroll */
+.rshot{--p:1;position:relative;padding:0!important;background:#0b0b0b;color:#fff}
+.rshot.live{height:240vh}
+.rshot-stick{position:relative;height:min(88vh,820px);overflow:hidden}
+.rshot.live .rshot-stick{position:sticky;top:0;height:100vh;height:100svh}
+.rshot-frame{--ix:22%;--iy:15%;position:absolute;inset:0;margin:0;overflow:hidden;
+  clip-path:inset(calc((1 - var(--p)) * var(--iy)) calc((1 - var(--p)) * var(--ix)) round calc((1 - var(--p)) * 18px));will-change:clip-path}
+.rshot-frame img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(calc(1.16 - .16 * var(--p)));transform-origin:50% 60%}
+.rshot-frame::before,.rshot-frame::after{content:"";position:absolute;inset:0;pointer-events:none}
+.rshot-frame::before{background:rgba(10,10,10,.42);opacity:calc(1 - var(--p))}
+.rshot-frame::after{background:linear-gradient(0deg,rgba(9,9,9,.9) 0%,rgba(9,9,9,.45) 34%,rgba(9,9,9,0) 62%),linear-gradient(180deg,rgba(9,9,9,.45),transparent 22%);opacity:var(--p)}
+.rshot-pre{position:absolute;left:50%;top:50%;width:min(86vw,560px);margin:0;transform:translate(-50%,calc(-50% - var(--p) * 60px));text-align:center;
+  font-size:clamp(22px,2.4vw,34px);line-height:1.2;font-weight:600;letter-spacing:-.02em;color:#fff;opacity:calc(1 - var(--p) * 2.6);pointer-events:none}
+.rshot:not(.live) .rshot-pre{display:none}
+.rshot-copy{position:absolute;left:0;right:0;bottom:clamp(36px,8vh,88px);opacity:clamp(0,(var(--p) - .62) * 3,1);transform:translateY(calc((1 - var(--p)) * 46px))}
+.rshot-copy h2.display{color:#fff;max-width:13ch;font-size:clamp(36px,5vw,72px);line-height:1.02;margin:8px 0 12px}
+.rshot-copy p:not(.eyebrow){color:rgba(255,255,255,.82);max-width:46ch;margin:0 0 22px;font-size:16.5px}
+.rshot-copy .eyebrow{color:#ff9a52}
+.rshot-copy .btn-ghost{color:#fff;border-color:rgba(255,255,255,.35)}
+@media (max-width:760px){
+  .rshot.live{height:200vh}
+  .rshot-frame{--ix:7%;--iy:20%}
+  .rshot-copy h2.display{font-size:clamp(32px,9vw,44px)}
+  .rshot-copy{bottom:96px}
+  .rshot-copy .ctas{flex-direction:column;align-items:stretch}
+}
+@media (prefers-reduced-motion:reduce){.rshot.live{height:auto}.rshot.live .rshot-stick{position:relative;height:min(88vh,820px)}}

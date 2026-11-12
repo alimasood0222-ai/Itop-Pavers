@@ -270,6 +270,13 @@ function sxPhoto(){const st=$('.sx-stage');if(!st)return;st.classList.remove('m3
 (function(){const st=$('.sx-stage');if(!st||!('IntersectionObserver' in window))return;let tm=0;
   new IntersectionObserver(es=>{const v=es[es.length-1].isIntersecting;clearTimeout(tm);if(v&&st.classList.contains('m3d')&&!st.classList.contains('drawn'))tm=setTimeout(()=>{if(!st.classList.contains('drawn'))sxPhoto();},6500);},{threshold:.3}).observe(st);})();
 
+/* ---------------- full-bleed photo moment: the photo grows from a framed card to full screen as you scroll ---------------- */
+(function(){const sec=$('.rshot');if(!sec||reduce)return;let q=0;
+  const f=()=>{q=0;const r=sec.getBoundingClientRect(),span=Math.max(1,r.height-innerHeight);if(r.bottom<-50||r.top>innerHeight+50)return;
+    sec.style.setProperty('--p',Math.min(1,clamp(-r.top/span,0,1)/.6).toFixed(4));};
+  sec.style.setProperty('--p',0);sec.classList.add('live');
+  addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(f);},{passive:true});addEventListener('resize',f);f();})();
+
 /* ---------------- 3D backyard hero: explore panel (works on the static HTML; the 3D scene hooks in via heroApi) ---------------- */
 const heroApi={}; let curSpot=null;
 const explore=$('#explore');
@@ -569,13 +576,18 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
     scene.fog.color.copy(m('fog'));scene.fog.near=lerp(a.fN,b.fN,v);scene.fog.far=lerp(a.fF,b.fF,v);
     hemi.color.copy(m('hS'));hemi.groundColor.copy(m('hG'));hemi.intensity=lerp(a.hI,b.hI,v);
     sun.color.copy(m('sC'));sun.intensity=lerp(a.sI,b.sI,v);sun.position.copy(a.sP).lerp(b.sP,v);
-    M.lawn.color.copy(m('lawn'));M.hedge.color.copy(m('hedge'));M.bulb.color.copy(m('bulb'));
-    M.glass.emissiveIntensity=lerp(a.glass,b.glass,v);M.lamp.emissiveIntensity=lerp(a.lamp,b.lamp,v);
-    M.tile.emissiveIntensity=lerp(a.tile,b.tile,v);M.water.emissiveIntensity=lerp(a.water,b.water,v);
-    fireBase=lerp(a.fire,b.fire,v);poolL.intensity=lerp(a.pool,b.pool,v);pergL.intensity=lerp(a.perg,b.perg,v);insideL.intensity=lerp(a.inside,b.inside,v);
+    /* lights switch on one after another as the sky darkens: house, fire, string lights, pool, path lamps */
+    const on=th=>{const k=clamp((v-th)/.16,0,1);return k*k*(3-2*k);}, lw=on(.4), lf=on(.5), lp=on(.6), lq=on(.7), ll=on(.8);
+    M.lawn.color.copy(m('lawn'));M.hedge.color.copy(m('hedge'));M.bulb.color.copy(a.bulb).lerp(b.bulb,lp);
+    M.glass.emissiveIntensity=lerp(a.glass,b.glass,lw);insideL.intensity=lerp(a.inside,b.inside,lw);
+    fireBase=lerp(a.fire,b.fire,lf);pergL.intensity=lerp(a.perg,b.perg,lp);
+    M.tile.emissiveIntensity=lerp(a.tile,b.tile,lq);M.water.emissiveIntensity=lerp(a.water,b.water,lq);poolL.intensity=lerp(a.pool,b.pool,lq);
+    M.lamp.emissiveIntensity=lerp(a.lamp,b.lamp,ll);
   }
-  let fireBase=0, todV=1, todT=1; applyTod(1);
-  heroApi.tod=v=>{todT=v;if(reduce){todV=v;applyTod(v);}st.kick();};
+  /* intro: starts in late-afternoon light, the sun sets while the camera swoops in and the yard lights up */
+  let fireBase=0, todV=reduce?1:.12, todT=todV, todRate=3.2; applyTod(todV);
+  if(!reduce)setTimeout(()=>{todT=1;todRate=.55;st.kick();},900);
+  heroApi.tod=v=>{todT=v;todRate=3.2;if(reduce){todV=v;applyTod(v);}st.kick();};
 
   /* camera */
   let narrow=innerWidth<=980;
@@ -619,7 +631,7 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
     if(tw){const k=clamp((now-tw.start)/tw.dur,0,1),e=ease(k);orbit.t.lerpVectors(tw.a.t,tw.b.t,e);orbit.r=lerp(tw.a.r,tw.b.r,e);orbit.az=orbit.tAz=lerp(tw.a.az,tw.b.az,e);orbit.el=orbit.tEl=lerp(tw.a.el,tw.b.el,e);if(k>=1){const cb=tw.done;tw=null;cb&&cb();}more=true;}
     else if(!reduce&&!spot&&!orbit.drag&&introDone){orbit.idle+=dt;if(orbit.idle>2.5)orbit.tAz+=dt*.028;}
     if(orbit.apply(cam,dt))more=true;
-    if(Math.abs(todV-todT)>.002){todV+=(todT-todV)*Math.min(1,dt*3.2);applyTod(todV);more=true;}
+    if(Math.abs(todV-todT)>.002){todV+=todRate<1?Math.sign(todT-todV)*Math.min(Math.abs(todT-todV),dt*todRate*(.35+Math.abs(todT-todV))):(todT-todV)*Math.min(1,dt*todRate);applyTod(todV);more=true;}
     fields.forEach(f=>{if(f.tick(now))more=true;});
     rising.forEach(r=>{const t=clamp(((now-fields[0].start)/1000-r.delay)/.7,0,1);if(t<1&&!reduce)more=true;const e=t<1?1+2.2*Math.pow(t-1,3)+1.2*Math.pow(t-1,2):1;r.g.scale.setScalar(reduce?1:Math.max(1e-4,e));});
     if(!reduce){const tt=now/1000;
