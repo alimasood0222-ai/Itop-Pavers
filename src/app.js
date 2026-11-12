@@ -138,6 +138,18 @@ if('IntersectionObserver' in window){
   sio.observe($('.hero'));
 }
 
+/* sliding nav indicator: follows hover/focus, rests on the open menu or the section in view */
+(function(){
+  const ind=$('.nl-ind'), mn=$('.mainnav'); if(!ind||!mn)return;
+  let hover=false;
+  const to=el=>{if(!el||!el.offsetWidth){ind.classList.remove('on');return;}const r=el.getBoundingClientRect(),m=mn.getBoundingClientRect();ind.style.width=r.width+'px';ind.style.transform=`translateX(${(r.left-m.left).toFixed(1)}px)`;ind.classList.add('on');};
+  const rest=()=>to($('.nl[aria-expanded="true"]')||$('.nl[data-active="1"]'));
+  $$('.menu .nl').forEach(l=>{l.addEventListener('mouseenter',()=>{hover=true;to(l);});l.addEventListener('focus',()=>to(l));});
+  mn.addEventListener('mouseleave',()=>{hover=false;rest();});
+  new MutationObserver(()=>{if(!hover)rest();}).observe(mn,{subtree:true,attributes:true,attributeFilter:['data-active','aria-expanded']});
+  addEventListener('resize',()=>{if(!hover)rest();});
+})();
+
 /* scroll-linked bits */
 const scrollers=[];
 let ticking=false;
