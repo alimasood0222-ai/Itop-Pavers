@@ -1,18 +1,8 @@
-<title>iTOP Pavers | Paver Contractor in Jacksonville &amp; Northeast Florida</title>
-<meta name="description" content="Paver patios, driveways, pool decks and outdoor living across Jacksonville, St. Augustine and St. Johns County. Licensed Florida contractor CBC 1294954. Free on-site estimates: (904) 525-9191.">
-<meta name="theme-color" content="#131313">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23131313'/%3E%3Cg fill='%23EA680F'%3E%3Cpath d='M6 12h9v7l-9 6z'/%3E%3Cpath d='M15 22 32 9l18 12v22h-7V25L32 17l-10 7v19h-7z'/%3E%3Cpath d='M28.5 15h7v47h-7z'/%3E%3Cpath d='M2 43h60v7H2z'/%3E%3C/g%3E%3C/svg%3E">
-<meta property="og:type" content="website">
-<meta property="og:title" content="iTOP Pavers | Paver Contractor in Northeast Florida">
-<meta property="og:description" content="Patios, driveways, pool decks and outdoor living. See your design in 3D before we build it. Free on-site estimates.">
-<meta property="og:url" content="https://itop-pavers.vercel.app/">
-<meta property="og:image" content="https://itop-pavers.vercel.app/img/driveway-gated.webp">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"iTOP Pavers","url":"https://itop-pavers.vercel.app/","telephone":"+1-904-525-9191","email":"info@itoppavers.com","image":"https://itop-pavers.vercel.app/img/driveway-gated.webp","address":{"@type":"PostalAddress","streetAddress":"6510 Columbia Park Dr, Suite 206","addressLocality":"Jacksonville","addressRegion":"FL","postalCode":"32258","addressCountry":"US"},"areaServed":["Jacksonville, FL","St. Augustine, FL","St. Johns County, FL"],"sameAs":["https://www.facebook.com/itoppavers/","https://www.instagram.com/itoppavers/"],"description":"Paver patios, driveways, pool decks and outdoor living in Northeast Florida. Licensed Florida contractor CBC 1294954."}</script>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-<style>
+/* Poppins, self-hosted (latin subset), only the weights in use */
+@font-face{font-family:"Poppins";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/poppins-400.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format("woff2")}
 /* iTOP Pavers concept v3. Dark brand canvas. Three live 3D scenes: hero backyard, design studio (before/after), exploded build-up. */
 :root{
   --black:#131313; --ink:#0b0b0b; --panel:#1a1918; --panel2:#141312; --line:#2c2a28;
@@ -676,343 +666,262 @@ h2.display{font-size:clamp(34px,4.4vw,62px);line-height:1.02}
 @media (prefers-reduced-motion:reduce){.reveal.pre{opacity:1;transform:none}}
 .quote::before{display:none}
 .quote{background:radial-gradient(50% 60% at 85% 30%,rgba(234,104,15,.08),transparent 70%),#0d0c0b}
-</style>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    {{LOGO_SYMBOL}}
-    <symbol id="mark" viewBox="0 0 64 64"><path d="M6 12h9v7l-9 6z" fill="currentColor"/><path d="M15 22 32 9l18 12v22h-7V25L32 17l-10 7v19h-7z" fill="currentColor"/><path d="M28.5 15h7v47h-7z" fill="currentColor"/><path d="M2 43h60v7H2z" fill="currentColor"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="M6 18 18 6M8 6h10v10"/></symbol>
-    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M12 5v14M6 13l6 6 6-6"/></symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-    <symbol id="i-drag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3"/></symbol>
-    <symbol id="i-split" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" d="M9 6 3 12l6 6M15 6l6 6-6 6"/></symbol>
-    <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" d="m5 9 7 7 7-7"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM8.5 12l2.5 2.5 4.5-5"/></symbol>
-    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
-    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"/></symbol>
-    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5z"/></symbol>
-    <symbol id="s-kitchen" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 22h40v20H4zM4 30h40M14 14h6l-3-8zM28 14h6M31 14V8M10 36h6M32 36h6"/></symbol>
-    <symbol id="s-pergola" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M6 14h36M4 20h40M10 14v28M38 14v28M18 14v-4M24 14v-4M30 14v-4M4 42h40"/></symbol>
-    <symbol id="s-wall" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 26h40v16H4zM4 34h40M16 26v8M30 26v8M10 34v8M24 34v8M38 34v8M24 6c4 4 6 8 0 14-6-6-4-10 0-14z"/></symbol>
-    <symbol id="s-screen" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 42V18L24 6l20 12v24zM4 42h40M16 42V24M32 42V24M4 30h40"/></symbol>
-    <symbol id="s-drive" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M18 44 22 4M30 44 26 4M24 10v4M24 20v4M24 30v4M24 40v2M6 44h36"/></symbol>
-    <symbol id="s-patio" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M4 30h40l-6 14H10zM4 30l8-6h24l8 6M17 30l-2 14M31 30l2 14M24 24V8M14 12c4-6 16-6 20 0"/></symbol>
-    <symbol id="s-walk" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M14 44h12l-4-10h10l-4-10h8L30 4M14 44 8 34h10L14 24h8"/></symbol>
-    <symbol id="s-more" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M8 8h14v14H8zM26 8h14v14H26zM8 26h14v14H8zM33 26v14M26 33h14"/></symbol>
-    <symbol id="s-pool" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-width="2.5" d="M6 10h36v28H6zM12 26c3-3 6 3 9 0s6 3 9 0 6 3 9 0M34 10v-4"/></symbol>
-  </defs>
-</svg>
+/* =====================================================================
+   Multi-page design layer (Nov 2026): light/dark rhythm, photo heroes,
+   paver-edge divider, trust cards and content components.
+   ===================================================================== */
+:root{--sand:#f4efe7;--sand2:#ebe4d8;--ink2:#2a2724;--ink-mute:#62594f}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--orange);color:var(--black);padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+p.eyebrow{margin:0}
+.more-link{margin:18px 0 0}.more-link a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:var(--orange-ink)}.more-link a svg{width:15px;height:15px}
+.h-md{font-size:clamp(26px,2.6vw,36px)!important;margin:0 0 18px}
+.h-sm{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
+.sec-tight{padding-block:clamp(64px,8vw,104px)}
+.svc h3{margin:0;font-family:var(--f-display);font-size:16px;font-weight:600;line-height:1.25}
+.step h3{font-family:var(--f-display);font-size:18px;font-weight:600;margin:18px 0 8px}
+footer .fh{font-family:var(--f-display);color:var(--white);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+footer .wrap{grid-template-columns:1.5fr 1fr 1fr 1fr 1.25fr}
+footer .f-brand p{margin:16px 0 0;max-width:36ch}
+.nap{font-style:normal;display:grid;gap:8px}
+.nap a{text-decoration:none}.nap a:hover{color:var(--white)}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:14px 0 0;font-size:13.5px}
+.hours dt{color:var(--white);font-weight:600}.hours dd{margin:0}
+@media (max-width:1100px){footer .wrap{grid-template-columns:1fr 1fr 1fr}.f-brand{grid-column:1/-1}}
+@media (max-width:560px){footer .wrap{grid-template-columns:1fr 1fr}}
 
-{{HEADER}}
+/* ---- light sections (warm stone) ---- */
+.light{background:var(--sand);color:var(--ink2)}
+.light .lede{color:var(--ink-mute)}
+.light .eyebrow{color:#8a5a2b}
+.light h2,.light h3,.light h4{color:var(--ink2)}
+.light .svc-group>h3{color:#8c8279}.light .svc-group>h3::after{background:rgba(0,0,0,.1)}
+.light .svc{background:#fff;border-color:rgba(0,0,0,.07);color:var(--ink2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.light .svc:hover{background:#fff;border-color:rgba(234,104,15,.45);box-shadow:0 24px 50px -28px rgba(60,40,20,.35);transform:translateY(-3px)}
+.light .svc p{color:#6b635b}.light .svc .ic{color:var(--orange)}
+.light .svc .go{background:rgba(255,255,255,.88);color:#2a2724}
+.svc{transition:border-color .25s,background .25s,transform .3s,box-shadow .3s}
+.light .proj-more{color:var(--ink-mute);border-top-color:rgba(0,0,0,.1)}
+.light .chip{background:#fff;border-color:rgba(0,0,0,.12);color:var(--ink2)}
+.light .chip[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--black)}
+.light .card{background:#fff;border-color:rgba(0,0,0,.07);color:var(--ink2)}
+.light .card .lede{color:var(--ink-mute)}
+.light .btn-ghost{background:rgba(0,0,0,.03);color:var(--ink2);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.light .btn-ghost:hover{background:rgba(0,0,0,.06);box-shadow:inset 0 0 0 1px rgba(0,0,0,.35)}
+.light .more-link a{color:#b14f0a}
+.light .towns li{background:#f7f3ec;border-color:rgba(0,0,0,.1);color:var(--ink2)}
+.light .towns li.hq{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.light #area .map{background:#141312;border-radius:18px;padding:10px 8px 4px;margin-inline:0}
+.light .addr dt{color:#8c8279}
 
-<main id="top">
-  <!-- HERO: explorable 3D backyard -->
-  <section class="hero" aria-labelledby="h1" style="padding:0">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <div class="eyebrow">Paver contractor · Northeast Florida</div>
-        <h1 id="h1" class="display"><span class="l1">Outdoor spaces,</span> <em>built to last.</em></h1>
-        <p class="lede">Paver driveways, patios, pool decks and outdoor living across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County. Planned with you and built by our own crew.</p>
-        <div class="ctas">
-          <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="tel:+19045259191"><svg><use href="#i-phone"/></svg>(904) 525-9191</a>
-        </div>
-        <ul class="proof">
-          <li><b>10+</b>&nbsp;years experience</li>
-          <li>Free on-site estimates</li>
-          <li>Permits &amp; HOA handled</li>
-        </ul>
-      </div>
-      <div class="show" id="show" aria-roledescription="carousel" aria-label="Recent iTOP projects">
-        <div class="show-3d" id="show3d">
-          <div class="show-stage" id="showStage">
-            <div class="show-slides" id="showSlides"></div>
-            <div class="show-bars" id="showBars" aria-hidden="true"></div>
-            <div class="show-cap" id="showCap"></div>
-            <div class="show-nav">
-              <button type="button" id="showPrev" aria-label="Previous project"><svg><use href="#i-right"/></svg></button>
-              <button type="button" id="showNext" aria-label="Next project"><svg><use href="#i-right"/></svg></button>
-            </div>
-          </div>
-          <div class="show-lic"><svg><use href="#i-shield"/></svg><span>Licensed<br><b>CBC 1294954</b></span></div>
-        </div>
-        <div class="show-thumbs" id="showThumbs" role="group" aria-label="Choose a project photo"></div>
-        <p class="sr" id="showLive" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
+/* ---- paver-edge divider (running-bond silhouette) ---- */
+.paver-edge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(24px,3.2vw,48px);fill:var(--edge,var(--sand));z-index:4;pointer-events:none}
+.edge-dark{--edge:#0d0c0b}
+.hero{border-bottom:0}
 
-  <div class="strip" role="list" aria-label="Why homeowners choose iTOP">
-    <div class="wrap">
-      <div role="listitem"><b>Free</b><span>On-site consultation &amp; estimate</span></div>
-      <div role="listitem"><b>3D</b><span>Design preview before you sign</span></div>
-      <div role="listitem"><b>Permits</b><span>Permits &amp; HOA paperwork handled</span></div>
-      <div role="listitem"><b>Licensed</b><span>Florida contractor CBC 1294954</span></div>
-    </div>
-  </div>
+/* ---- trust cards under the hero ---- */
+.trust{background:var(--sand);padding:30px 0 6px;position:relative;z-index:5}
+.trust-in{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tcard{display:flex;gap:14px;align-items:flex-start;padding:18px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:18px;box-shadow:0 18px 40px -30px rgba(60,40,20,.4)}
+.tic{flex:none;width:44px;height:44px;border-radius:12px;background:#131313;color:var(--orange);display:grid;place-items:center}
+.tic svg{width:22px;height:22px}
+.tcard b{display:block;font:600 15px/1.3 var(--f-display);color:var(--ink2)}
+.tcard span{display:block;font-size:13px;color:var(--ink-mute);margin-top:3px;line-height:1.4}
+@media (max-width:1000px){.trust-in{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.trust-in{grid-template-columns:1fr}.tcard{padding:14px}}
 
-  <!-- DESIGN STUDIO -->
-  <section class="studio" id="studio">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Paver styles</div>
-          <h2 class="display">Choose your pavers.</h2>
-        </div>
-        <p class="lede">These are the Tremron collections we install most across Northeast Florida. Pick a style and a colour blend, then add it to your estimate. We bring real samples to your free on-site visit.</p>
-      </div>
-      <div class="sx">
-        <div class="sx-stage m3d">
-          <figure class="sx-tex"><img id="sxTex" alt="" decoding="async"></figure>
-          <canvas id="sxCanvas" aria-label="3D sample of your selected pavers with border and base layers. Drag to rotate."></canvas>
-          <div class="sx-view" role="group" aria-label="Preview mode">
-            <button type="button" data-sxv="3d" aria-pressed="true">3D view</button>
-            <button type="button" data-sxv="photo" aria-pressed="false">Close-up photo</button>
-          </div>
-          <div class="sx-hint"><svg><use href="#i-drag"/></svg>Drag to rotate</div>
-          <div class="sx-label"><small id="sxColl">Olde Towne</small><b id="sxColor">Sand Dune</b></div>
-          <figure class="sx-inst"><img id="sxInst" alt="" loading="lazy" decoding="async"><figcaption id="sxInstCap">Installed · Photo: Tremron</figcaption></figure>
-        </div>
-        <div class="sx-panel">
-          <div class="sp-lbl">1 · Collection</div>
-          <div class="sx-colls" id="sxColls" role="radiogroup" aria-label="Paver collection"></div>
-          <div class="sp-lbl">2 · Colour blend <output id="sxColorName">Sand Dune</output></div>
-          <div class="sx-sw" id="sxSw" role="radiogroup" aria-label="Colour blend"></div>
-          <div class="sp-lbl">3 · Border <output id="sxBordName">Charcoal</output></div>
-          <div class="sx-sw sx-bord" id="sxBord" role="radiogroup" aria-label="Border"></div>
-          <div class="summary">Your selection<b id="sumText">Olde Towne · Sand Dune</b></div>
-          <a class="btn btn-primary" href="#quote" id="useDesign">Add to my estimate <svg><use href="#i-arrow"/></svg></a>
-          <p class="studio-note">Product photos courtesy of Tremron. Colours vary by batch and screen. Final selection is made from real samples.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+/* ---- inner page hero with full-bleed photo ---- */
+.phero{position:relative;overflow:hidden;isolation:isolate;background:#0d0c0b;margin-top:-82px;padding:150px 0 clamp(90px,9vw,130px)}
+.phero-bg{position:absolute;inset:0;z-index:-2}
+.phero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transform:scale(1.03)}
+.phero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,12,11,.96) 0%,rgba(13,12,11,.88) 42%,rgba(13,12,11,.62) 70%,rgba(13,12,11,.75) 100%),linear-gradient(0deg,rgba(13,12,11,.7),transparent 45%)}
+.phero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(50% 60% at 85% 30%,rgba(234,104,15,.14),transparent 70%);pointer-events:none}
+.phero-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.phero.short .phero-in{grid-template-columns:minmax(0,860px)}
+.phero h1{font-size:clamp(36px,4.4vw,64px);line-height:1.03;margin:14px 0 20px;text-wrap:balance}
+.phero .answer{font-size:18px;color:#e2dcd4;max-width:62ch}
+.phero .ctas{margin-top:28px}
+.lic-note{display:flex;align-items:center;gap:9px;margin:20px 0 0;font-size:13.5px;color:#b9b2a9}
+.lic-note svg{width:17px;height:17px;color:var(--orange);flex:none}
+.crumbs ol{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:#a39b91}
+.crumbs li+li::before{content:"/";margin-right:6px;color:#5d5650}
+.crumbs a{text-decoration:none;color:#d6d0c8}.crumbs a:hover{color:var(--orange-ink)}
+.phero-ph{position:relative;margin:0;border-radius:26px;overflow:hidden;aspect-ratio:4/3.2;box-shadow:0 60px 110px -50px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.12)}
+.phero-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.phero-ph.portrait{aspect-ratio:1;max-width:460px;justify-self:end;background:#000}
+.phero-ph figcaption{position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;background:rgba(15,15,15,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:12.5px;color:#e8e3dc;border:1px solid rgba(255,255,255,.14)}
+.phero-ic{justify-self:end;width:min(100%,400px);aspect-ratio:1;border-radius:26px;display:grid;place-content:center;justify-items:center;gap:18px;padding:30px;text-align:center;background:linear-gradient(145deg,rgba(234,104,15,.16),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);color:#d6d0c8}
+.phero-ic svg{width:120px;height:120px;color:var(--orange)}
+.phero-ic p{margin:0;font-size:16px;max-width:26ch}
+.phero.center{text-align:center}.phero.center .wrap{max-width:820px}.phero.center .lede{margin-inline:auto}
+.phero.legal-h{padding-bottom:56px}.phero.legal-h h1{font-size:clamp(34px,4vw,54px)}
+.big404{font:700 clamp(90px,14vw,180px)/1 var(--f-display);color:var(--orange);margin:0;letter-spacing:-.05em}
+@media (max-width:1000px){.phero-in{grid-template-columns:1fr;gap:36px}.phero-ph.portrait,.phero-ic{justify-self:start}.phero-ic{width:100%;aspect-ratio:auto}}
+@media (max-width:760px){.phero{margin-top:-68px;padding-top:112px}.phero .answer{font-size:16.5px}}
 
-  <!-- BUILD-UP: exploded cross-section -->
-  <section class="build" id="build" aria-labelledby="build-h">
-    <div class="build-track" id="buildTrack">
-      <div class="wrap build-sticky">
-        <div class="build-copy">
-          <div class="eyebrow">Built to last</div>
-          <h2 class="display" id="build-h">What’s under every iTOP patio.</h2>
-          <p class="lede">The pavers are the part you see. What keeps them flat through Florida summers is everything underneath. Scroll to take one apart.</p>
-          <ol class="layers" id="layers"></ol>
-        </div>
-        <div class="build-stage">
-          <canvas id="buildCanvas" aria-label="3D exploded cross-section of a paver installation showing each layer."></canvas>
-          <div class="ltags" id="ltags"></div>
-          <div class="bprog" aria-hidden="true"><span>Assembled</span><i id="bprog"></i><span>Exploded</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+/* ---- service page body ---- */
+.svc-cols{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:56px;align-items:start}
+.ticks{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:10px}
+.ticks li{position:relative;padding-left:30px;line-height:1.5}
+.ticks li::before{content:"";position:absolute;left:0;top:.25em;width:19px;height:19px;border-radius:50%;background:var(--orange) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23131313' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L21 7.4 19.6 6z'/%3E%3C/svg%3E") center/13px no-repeat}
+.ticks.big li{font-size:17px;padding-block:3px}
+.ticks a{color:inherit;text-decoration-color:rgba(234,104,15,.6);text-underline-offset:3px}
+.why{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.why li{padding:18px 18px 16px;border-radius:16px;background:#fff;border:1px solid rgba(0,0,0,.06)}
+.why b{display:block;font:600 16px/1.3 var(--f-display);color:var(--ink2)}
+.why span{display:block;margin-top:5px;font-size:14px;color:var(--ink-mute)}
+.svc-aside{position:sticky;top:110px;padding:26px;border-radius:24px;background:#131313;color:#fff;box-shadow:0 40px 80px -40px rgba(30,20,10,.6)}
+.svc-aside .eyebrow{color:var(--orange-ink)}
+.aside-h{font:700 24px/1.15 var(--f-display);letter-spacing:-.02em;margin:10px 0 8px;color:#fff}
+.svc-aside>p{color:#bdb6ad;font-size:15px;margin:0 0 18px}
+.svc-aside .btn{width:100%;justify-content:center}
+.aside-call{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:12px;padding:12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);text-decoration:none;font-weight:700;color:#fff}
+.aside-call svg{width:17px;height:17px;color:var(--orange)}
+.svc-aside .lic-note{justify-content:center}
+.svc-aside .nap{margin:6px 0 4px;color:#d6d0c8}
+.svc-aside .hours{color:#bdb6ad;margin-bottom:18px}
+.prose-lite p{font-size:16.5px;line-height:1.75;color:var(--ink-mute);max-width:68ch}
+.prose-lite .lede{color:var(--ink2);font-size:18px}
+@media (max-width:1000px){.svc-cols{grid-template-columns:1fr}.svc-aside{position:relative;top:0}}
+@media (max-width:560px){.why{grid-template-columns:1fr}}
 
-  <section id="services">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Services</div>
-          <h2 class="display">Built by the space you want to use.</h2>
-        </div>
-        <p class="lede">From the driveway that greets you to the pool deck you live on all summer. One local crew, one point of contact, one standard of finish.</p>
-      </div>
-      <div class="svc-group">
-        <h3>Pavers</h3>
-        <div class="svc-grid">
-          <a class="svc" href="#quote" data-type="Patio"><svg class="go"><use href="#i-arrow"/></svg><span class="svc-ph"><img src="img/patio-firepit-lake-sm.webp" alt="Paver patio with fire pit by iTOP Pavers" loading="lazy" decoding="async"></span><h4>Patios</h4><p>Gathering space with clean borders and lasting base work.</p></a>
-          <a class="svc" href="#quote" data-type="Driveway"><svg class="go"><use href="#i-arrow"/></svg><span class="svc-ph"><img src="img/driveway-curved-sm.webp" alt="Paver driveway by iTOP Pavers" loading="lazy" decoding="async"></span><h4>Driveways</h4><p>Interlocking pavers rated for daily vehicle loads.</p></a>
-          <a class="svc" href="#quote" data-type="Pool deck"><svg class="go"><use href="#i-arrow"/></svg><span class="svc-ph"><img src="img/pool-deck-sm.webp" alt="Paver pool deck by iTOP Pavers" loading="lazy" decoding="async"></span><h4>Pool decks</h4><p>Light, slip-resistant surfaces around the water.</p></a>
-          <a class="svc" href="#quote" data-type="Walkway"><svg class="go"><use href="#i-arrow"/></svg><span class="svc-ph"><img src="img/front-entry-sm.webp" alt="Paver walkway and entry steps by iTOP Pavers" loading="lazy" decoding="async"></span><h4>Walkways</h4><p>Paths that connect the front door, garden and backyard.</p></a>
-          <a class="svc" href="#quote" data-type="Paving maintenance"><svg class="go"><use href="#i-arrow"/></svg><span class="svc-ph"><img src="img/driveway-terracotta-sm.webp" alt="Cleaned and sealed paver driveway by iTOP Pavers" loading="lazy" decoding="async"></span><h4>Paving maintenance</h4><p>Cleaning, joint sand, sealing and repairs.</p></a>
-        </div>
-      </div>
-      <div class="svc-group">
-        <h3>Outdoor living</h3>
-        <div class="svc-grid">
-          <a class="svc" href="#quote" data-type="Fiberglass pool"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-pool"/></svg><h4>Fiberglass pools</h4><p>Resort-style pools installed with matching decks.</p></a>
-          <a class="svc" href="#quote" data-type="Outdoor kitchen"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-kitchen"/></svg><h4>Outdoor kitchens</h4><p>Grills, counters and storage built for Florida weather.</p></a>
-          <a class="svc" href="#quote" data-type="Pergola or gazebo"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-pergola"/></svg><h4>Pergolas &amp; gazebos</h4><p>Shade structures sized to your patio.</p></a>
-          <a class="svc" href="#quote" data-type="Fire pit or retaining wall"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-wall"/></svg><h4>Retaining walls &amp; fire pits</h4><p>Seat walls, grade changes and a place to gather.</p></a>
-          <a class="svc" href="#quote" data-type="Screen enclosure"><svg class="go"><use href="#i-arrow"/></svg><svg class="ic"><use href="#s-screen"/></svg><h4>Screen enclosures</h4><p>Bug-free outdoor rooms over pools and lanais.</p></a>
-        </div>
-      </div>
-    </div>
-  </section>
+/* ---- process: dark (alternates with light sections) ---- */
+.process{background:#0f0e0d;color:var(--white)}
+.process .eyebrow{color:#a39b91}.process .lede{color:#b3aca3}
+.process .steps::before{background:#2c2a28}
+.process .step + .step{border-left-color:#2c2a28}
+.process .step p{color:#b3aca3}
+.process .step .tag{background:#24211e;color:#e8e3dc}
+.process .adv{background:linear-gradient(135deg,#1d1a17,#151311);border:1px solid var(--stroke)}
+@media (max-width:520px){.process .step + .step{border-top-color:#2c2a28}}
 
-  <section id="projects" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Recent work</div>
-          <h2 class="display">Real yards. Real Northeast Florida.</h2>
-        </div>
-        <p class="lede">Driveways, pool decks, patios and entries built by our own crew. Tap any photo to see it larger.</p>
-      </div>
-      <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
-      <div class="proj-grid" id="projGrid"></div>
-      <div class="proj-more">
-        <p>Planning something similar? We’ll visit, measure and bring paver samples, free.</p>
-        <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
-      </div>
-    </div>
-  </section>
+/* ---- FAQ ---- */
+.faq-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}
+.faq-side{position:sticky;top:110px}
+.faq{display:grid;gap:10px}
+.qa{border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);transition:border-color .2s,background .2s}
+.qa[open]{border-color:rgba(234,104,15,.45)}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;cursor:pointer;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary h3{margin:0;font:600 16.5px/1.35 var(--f-display)}
+.qa summary svg{flex:none;width:16px;height:16px;color:var(--orange);transition:transform .25s}
+.qa[open] summary svg{transform:rotate(180deg)}
+.qa-a{padding:0 20px 18px}.qa-a p{margin:0;color:#c9c3bb;line-height:1.7}
+.light .qa{background:#fff;border-color:rgba(0,0,0,.07)}
+.light .qa[open]{border-color:rgba(234,104,15,.55);box-shadow:0 20px 40px -32px rgba(60,40,20,.5)}
+.light .qa-a p{color:var(--ink-mute)}
+.faq-page{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:start}
+.faq-toc{position:sticky;top:110px;padding:20px;border-radius:18px;background:#fff;border:1px solid rgba(0,0,0,.07)}
+.faq-toc ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}
+.faq-toc a{display:block;padding:7px 10px;border-radius:10px;text-decoration:none;color:var(--ink2);font-size:14px}
+.faq-toc a:hover{background:var(--sand)}
+.faq-group{margin-bottom:46px;scroll-margin-top:110px}
+@media (max-width:1000px){.faq-wrap,.faq-page{grid-template-columns:1fr;gap:28px}.faq-side,.faq-toc{position:relative;top:0}}
 
-  <section class="process" id="process">
-    <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow">Our process</div>
-          <h2 class="display">Four steps. No surprises.</h2>
-        </div>
-        <p class="lede">You see the finished space in 3D, with a written estimate, before work begins. We pull the permits and keep you updated until the final walkthrough.</p>
-      </div>
-      <ol class="steps" id="steps">
-        <li class="step"><div class="n">01</div><h4>Share</h4><p>Tell us how you want to use the space. We visit, measure and talk through options.</p><span class="tag">Free visit</span></li>
-        <li class="step"><div class="n">02</div><h4>Design smart</h4><p>A 3D design with pattern, colour and layout, plus a clear written estimate.</p><span class="tag">3D preview</span></li>
-        <li class="step"><div class="n">03</div><h4>Handle permits</h4><p>We file the permits and HOA paperwork so you don’t have to.</p><span class="tag">Paperwork done</span></li>
-        <li class="step"><div class="n">04</div><h4>Bring to life</h4><p>Our crew builds it, cleans up and walks you through the finished project.</p><span class="tag">Final walkthrough</span></li>
-      </ol>
-      <div class="adv">
-        <h3>The iTOP<br><span>advantage</span></h3>
-        <ul>
-          <li>Free on-site estimate</li>
-          <li>3D design before you sign</li>
-          <li>Permits &amp; HOA paperwork handled</li>
-          <li>One crew, one point of contact</li>
-          <li>Licensed Florida contractor</li>
-          <li>Final walkthrough on every job</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+/* ---- patterns, comparison, collections ---- */
+.pats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pat-card{padding:12px 12px 18px;border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,.07)}
+.pat-card canvas{width:100%;height:150px;display:block;border-radius:12px}
+.pat-card h3{margin:16px 6px 4px;font:600 18px/1.2 var(--f-display)}
+.pat-card p{margin:0 6px;font-size:14px;color:var(--ink-mute)}
+.pat-card .best{font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#b14f0a;margin-bottom:6px}
+.tbl-wrap{overflow-x:auto;border-radius:20px;border:1px solid var(--stroke)}
+.cmp{width:100%;border-collapse:collapse;min-width:640px;font-size:14.5px}
+.cmp th,.cmp td{padding:15px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--stroke)}
+.cmp thead th{font:600 15px var(--f-display);color:var(--orange-ink);background:rgba(255,255,255,.03)}
+.cmp tbody th{font-weight:600;color:var(--white);width:18%}
+.cmp td{color:#c9c3bb}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
+.cmp tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+.colls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.coll{padding:10px 10px 18px;border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,.07)}
+.coll img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block}
+.coll h3{margin:14px 6px 4px;font:600 17px/1.2 var(--f-display)}
+.coll p{margin:0 6px;font-size:13.5px;color:var(--ink-mute)}
+.coll .blends{margin-top:8px;font-size:12.5px;color:#8c8279}
+@media (max-width:1000px){.pats{grid-template-columns:1fr 1fr}.colls{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.colls{grid-template-columns:1fr 1fr}.pat-card canvas{height:110px}}
+.svc-grid.rel{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1000px){.svc-grid.rel{grid-template-columns:1fr 1fr}}
 
-  <section id="reviews">
-    <div class="wrap duo">
-      <div class="card rev-card">
-        <div class="rev-in">
-          <div class="eyebrow">Reviews</div>
-          <h2 class="display" style="font-size:clamp(26px,3vw,40px)">Hear it from our homeowners.</h2>
-          <p class="lede">Read what Jacksonville and St. Johns County homeowners say about working with our crew, in their own words on Google.</p>
-          <div class="ctas">
-            <a class="btn btn-primary" href="https://www.google.com/search?q=iTop+Pavers+Jacksonville+reviews" target="_blank" rel="noopener">Read our Google reviews <svg><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-        <figure class="rev-photo"><img src="img/patio-firepit-lake-sm.webp" alt="Lakeside paver patio with fire pit and seat wall by iTOP Pavers" loading="lazy" decoding="async"><figcaption>Lakeside fire pit &amp; seat wall · iTOP Pavers</figcaption></figure>
-      </div>
-      <div class="card" id="area">
-        <div class="eyebrow">Service area</div>
-        <h2 class="display" style="font-size:clamp(26px,3vw,38px)">Rooted in Jacksonville.</h2>
-        <div class="map" id="map"></div>
-        <ul class="towns" id="towns"></ul>
-        <dl class="addr">
-          <dt>Office</dt><dd>6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258</dd>
-          <dt>Hours</dt><dd>Monday – Saturday</dd>
-        </dl>
-      </div>
-    </div>
-  </section>
+/* ---- about teaser ---- */
+.about-t{background:var(--sand);color:var(--ink2)}
+.about-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}
+.about-ph{position:relative;margin:0;border-radius:28px;overflow:hidden;background:#0d0c0b;aspect-ratio:1;box-shadow:0 50px 90px -50px rgba(40,25,10,.6)}
+.about-ph::after{content:"";position:absolute;inset:auto 0 0 0;height:8px;background:var(--orange)}
+.about-ph img{width:100%;height:100%;object-fit:cover}
+.about-t .lede{color:var(--ink-mute)}.about-t .eyebrow{color:#8a5a2b}.about-t h2{color:var(--ink2)}
+.about-t .ticks{margin:22px 0 26px}
+.about-t .btn-ghost{background:#131313;color:#fff;box-shadow:none}.about-t .btn-ghost:hover{background:#000}
+@media (max-width:900px){.about-in{grid-template-columns:1fr;gap:32px}.about-ph{max-width:420px}}
 
-  <section class="quote" id="quote">
-    <div class="wrap">
-      <div>
-        <div class="eyebrow">Free estimate</div>
-        <h2 class="display">Let’s plan your outdoor space.</h2>
-        <p class="lede">Three quick steps. We call you within one business day to book a free on-site visit, and we bring real paver samples.</p>
-        <ul class="contact-list">
-          <li><svg><use href="#i-phone"/></svg><span class="sel">(904) 525-9191</span></li>
-          <li><svg><use href="#i-mail"/></svg><span class="sel">info@itoppavers.com</span></li>
-          <li><svg><use href="#i-pin"/></svg><span>6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258</span></li>
-        </ul>
-      </div>
-      <div class="qcard" id="qcard">
-        <div class="qprog"><ol class="qsteps" id="qsteps"><li class="on">Project</li><li>Details</li><li>Contact</li></ol></div>
-        <form id="qform" novalidate>
-          <fieldset data-step="1">
-            <legend>What are we building?</legend>
-            <div class="opts" id="typeOpts"></div>
-            <span class="err" id="e-type"></span>
-            <span class="qlbl" id="size-l">Approximate size</span>
-            <div class="opts" role="radiogroup" aria-labelledby="size-l">
-              <label class="opt"><input type="radio" name="size" value="Under 300 sq ft"><span>Under 300 sq ft</span></label>
-              <label class="opt"><input type="radio" name="size" value="300–600 sq ft"><span>300–600 sq ft</span></label>
-              <label class="opt"><input type="radio" name="size" value="600+ sq ft"><span>600+ sq ft</span></label>
-              <label class="opt"><input type="radio" name="size" value="Not sure"><span>Not sure</span></label>
-            </div>
-          </fieldset>
-          <fieldset data-step="2" hidden>
-            <legend>Your design &amp; timing</legend>
-            <div id="designBox"></div>
-            <span class="qlbl" id="time-l">When would you like to start?</span>
-            <div class="opts" role="radiogroup" aria-labelledby="time-l">
-              <label class="opt"><input type="radio" name="time" value="As soon as possible"><span>As soon as possible</span></label>
-              <label class="opt"><input type="radio" name="time" value="1–3 months"><span>1–3 months</span></label>
-              <label class="opt"><input type="radio" name="time" value="3+ months"><span>3+ months</span></label>
-              <label class="opt"><input type="radio" name="time" value="Just exploring"><span>Just exploring</span></label>
-            </div>
-            <span class="err" id="e-time"></span>
-            <div class="field" style="margin-top:16px"><label for="f-msg">Anything else? <span style="color:var(--muted);font-weight:500">(optional)</span></label><textarea id="f-msg" placeholder="Access, HOA, photos you can send later…"></textarea></div>
-          </fieldset>
-          <fieldset data-step="3" hidden>
-            <legend>Where do we call you?</legend>
-            <div class="frow">
-              <div class="field"><label for="f-name">Full name <i>*</i></label><input id="f-name" autocomplete="name"><span class="err" id="e-name"></span></div>
-              <div class="field"><label for="f-phone">Phone <i>*</i></label><input id="f-phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(904) 555-0100 or +92 300 1234567"><span class="err" id="e-phone"></span></div>
-            </div>
-            <div class="frow">
-              <div class="field"><label for="f-email">Email <i>*</i></label><input id="f-email" type="email" autocomplete="email"><span class="err" id="e-email"></span></div>
-              <div class="field"><label for="f-zip">ZIP / postal code <i>*</i></label><input id="f-zip" autocomplete="postal-code" maxlength="10"><span class="err" id="e-zip"></span></div>
-            </div>
-          </fieldset>
-          <div class="qnav">
-            <button type="button" class="back" id="qBack" hidden>← Back</button>
-            <button type="submit" class="btn btn-primary" id="qNext" style="margin-left:auto">Next <svg><use href="#i-right"/></svg></button>
-            <small>We use your details only to contact you about your project. See our Privacy Policy.</small>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-</main>
+/* ---- CTA band ---- */
+.cta-band{padding:clamp(56px,7vw,96px) 0}
+.cta-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px;padding:clamp(28px,4vw,48px);border-radius:28px;background:linear-gradient(120deg,#f07a24 0%,#e35f08 100%);color:#131313;position:relative;overflow:hidden}
+.cta-in::after{content:"";position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);pointer-events:none}
+.cta-in h2{margin:0 0 6px;font-size:clamp(26px,3vw,40px);color:#131313}
+.cta-in p{margin:0;font-weight:500;max-width:56ch}
+.cta-in .btn-primary{background:#131313;color:#fff}.cta-in .btn-primary:hover{background:#000}
+.cta-in .btn-ghost{background:transparent;color:#131313;box-shadow:inset 0 0 0 2px rgba(19,19,19,.5)}
+.cta-in .btn-ghost:hover{box-shadow:inset 0 0 0 2px #131313;background:rgba(255,255,255,.12)}
+.cta-in .ctas{margin:0;position:relative;z-index:1}
 
-<footer>
-  <div class="wrap">
-    <div>
-      <a class="brand" href="#top" aria-label="iTOP Pavers home"><svg class="logo" role="img" aria-label="iTOP Pavers"><use href="#logo"/></svg></a>
-      <p style="margin:18px 0 0;max-width:34ch">Paver driveways, patios, pool decks and outdoor living across Northeast Florida.</p>
-      <div class="social">
-        <a href="https://www.facebook.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Facebook"><svg><use href="#i-fb"/></svg></a>
-        <a href="https://www.instagram.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Instagram (@itoppavers)"><svg><use href="#i-ig"/></svg></a>
-      </div>
-    </div>
-    <div><h5>Pavers</h5><ul><li><a href="#services">Patios</a></li><li><a href="#services">Driveways</a></li><li><a href="#services">Pool decks</a></li><li><a href="#services">Walkways</a></li><li><a href="#services">Paving maintenance</a></li></ul></div>
-    <div><h5>Outdoor living</h5><ul><li><a href="#services">Fiberglass pools</a></li><li><a href="#services">Outdoor kitchens</a></li><li><a href="#services">Pergolas &amp; gazebos</a></li><li><a href="#services">Retaining walls &amp; fire pits</a></li><li><a href="#services">Screen enclosures</a></li></ul></div>
-    <div><h5>Contact</h5><ul><li style="user-select:all">(904) 525-9191</li><li style="user-select:all">info@itoppavers.com</li><li>6510 Columbia Park Dr, Suite 206<br>Jacksonville, FL 32258</li><li><a href="https://www.instagram.com/itoppavers/" target="_blank" rel="noopener">Instagram @itoppavers</a></li></ul></div>
-    <div class="legal"><span>© 2026 iTOP Pavers · Licensed Florida contractor CBC 1294954</span><span>Privacy Policy · Terms of Use</span></div>
-  </div>
-</footer>
+/* ---- contact cards ---- */
+.contact-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.cc{padding:22px;border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,.07)}
+.cc>svg{width:44px;height:44px;padding:11px;border-radius:12px;background:#131313;color:var(--orange)}
+.cc h2{margin:16px 0 6px;font:600 17px var(--f-display);color:var(--ink2)}
+.cc div,.cc p{color:var(--ink-mute);font-size:15px;margin:0}
+.cc a{color:var(--ink2);font-weight:600}
+.cc .hours{margin:0;color:var(--ink-mute)}.cc .hours dt{color:var(--ink2)}
+@media (max-width:1000px){.contact-cards{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.contact-cards{grid-template-columns:1fr}}
 
-<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Project photo" hidden>
-  <figure><img id="lbImg" alt=""></figure>
-  <div class="lb-cap" id="lbCap" aria-live="polite"></div>
-  <button class="lb-btn" id="lbClose" type="button" aria-label="Close">×</button>
-  <button class="lb-btn" id="lbPrev" type="button" aria-label="Previous photo"><svg><use href="#i-right"/></svg></button>
-  <button class="lb-btn" id="lbNext" type="button" aria-label="Next photo"><svg><use href="#i-right"/></svg></button>
-</div>
+/* ---- legal prose ---- */
+.prose{max-width:820px;margin:0 auto;background:#fff;border-radius:24px;padding:clamp(24px,5vw,56px);border:1px solid rgba(0,0,0,.06);color:var(--ink2);font-size:15.5px;line-height:1.75;overflow-wrap:anywhere}
+.prose h2{font:700 21px/1.3 var(--f-display);letter-spacing:-.01em;margin:36px 0 10px;color:var(--ink2)}
+.prose h3{font:600 17px/1.35 var(--f-display);margin:26px 0 8px;color:var(--ink2)}
+.prose p,.prose li{color:#4f4740}.prose a{color:#b14f0a}
+.prose ul,.prose ol{padding-left:22px}
+.prose table{border-collapse:collapse;width:100%;font-size:14px}.prose td,.prose th{border:1px solid rgba(0,0,0,.1);padding:8px}
 
-<nav class="mbar" aria-label="Quick actions">
-  <a href="tel:+19045259191"><svg><use href="#i-phone"/></svg>Call</a>
-  <a href="#quote">Free estimate</a>
-</nav>
+/* ---- misc ---- */
+.contact-list a{text-decoration:none}
+.design-chip a{color:var(--orange-ink)}
+.sx-poster,.build-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;transition:opacity .5s}
+.has3d .sx-poster,.has3d .build-poster,.no3d .sx-poster{opacity:0}
+.sx-stage:not(.m3d) .sx-poster{opacity:0}
+.build-stage{margin:0}
+.proj[hidden]{display:none}
+#reviews.light .rev-card{background:#131313;color:#fff;border:0}
+#reviews.light .rev-card .lede{color:#b3aca3}
+#reviews.light .rev-card h2{color:#fff}
+#reviews.light .rev-card .eyebrow{color:#a39b91}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-{{APP}}
-</script>
+/* fixes: trust icon tile; paver-edge as a fine running-bond strip */
+.tcard .tic{display:grid;margin:0;color:var(--orange);font-size:0}
+.tcard .tic svg{width:22px;height:22px}
+.paver-edge{position:absolute;left:0;right:0;bottom:-1px;height:30px;z-index:4;pointer-events:none;fill:none;
+  background:linear-gradient(var(--edge,var(--sand)),var(--edge,var(--sand))) 0 20px/100% 11px no-repeat,
+  repeating-linear-gradient(90deg,var(--edge,var(--sand)) 0 52px,transparent 52px 56px) 0 10px/100% 8px no-repeat,
+  repeating-linear-gradient(90deg,var(--edge,var(--sand)) 0 52px,transparent 52px 56px) -28px 0/calc(100% + 28px) 8px no-repeat}
+
+/* perf: rendering cost (Lighthouse mobile) */
+main>section:not(:first-child):not(.build),main>.trust{content-visibility:auto;contain-intrinsic-size:auto 900px}
+.phero-bg img{filter:none}
+@media (max-width:760px){
+  .bar .wrap,.top.scrolled .bar .wrap,.show-nav button,.show-lic,.phero-ph figcaption,.sx-label,.sx-view,.mbar,.scrim{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .bar .wrap{background:rgba(16,15,14,.94)}
+  .reveal{transition-duration:.5s}
+}
+
+@media (max-width:560px){.proof{flex-direction:column;flex-wrap:nowrap;gap:6px}.proof li{padding:0!important;border:0!important}}
+
+/* scroll-driven reveal (no JS, no forced layout); unsupported browsers just show content */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    .sec-head,.svc,.step,.tcard,.pat-card,.coll,.qa,.cc,.why li,.proj-grid,.sx,.about-in,.adv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+  }
+}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}

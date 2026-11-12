@@ -3,14 +3,16 @@
 Context for Claude Code. Read README.md for structure and the build command.
 
 ## Workflow
-- Edit files in `src/`, then run `python3 src/build.py`. Never edit `dist/`.
-- `src/page.html` holds the CSS and markup, `src/app.js` holds all JS, and `src/build.py` generates the header/menus and assembles the page.
+- Multi-page static site. Edit `src/site_data.py` (facts/copy), `src/build.py` (page templates, JSON-LD, sitemap, robots, llms.txt, vercel.json), `src/styles.css`, `src/app.js`; then run `python3 src/build.py`. Never edit `dist/`.
+- Facts and copy live ONLY in `src/site_data.py`; the visible text and the schema are both generated from it.
+- `app.js` enhances static HTML; every module must check its markup exists. Meaningful text must be in the HTML (no JS-only content).
 - Preview: `cd dist && python3 -m http.server 8000`.
 - After visual changes, check desktop (1440–1600 px wide, including a short 780 px tall viewport) and mobile (360/390 px). Make sure there's no horizontal scroll: `document.documentElement.scrollWidth === innerWidth`.
+- SEO docs: `docs/seo/` (plan, redirects, schema, keyword map, off-site checklist, client questions).
 
 ## Decisions already made with the client (don't revert without asking)
 - **Name and logo:** "iTOP Pavers", using the client's logo, vectorised from `assets/logo/itop-pavers-logo-original.png`. On dark backgrounds: orange mark, white wordmark.
-- **Colours:** orange `#EA680F`, black `#131313`, white. Dark theme throughout. Primary buttons use **black text on orange** (white on orange fails contrast for small text).
+- **Colours:** orange `#EA680F`, black `#131313`, white, plus a warm stone `#f4efe7` for light sections (added 2026-11-12 to alternate light/dark, at the user's request, using itop-pools.vercel.app as the quality bar). Primary buttons use **black text on orange** (white on orange fails contrast for small text).
 - **Fonts:** **Poppins** everywhere, to match the client's current site itoppavers.com. Headings 700, sub-headings 600, body 400 at 16 px. Already tried and rejected: Archivo Expanded, Unbounded, Inter Tight.
 - **Look:** sleek and professional, not childish. The 3D studio uses an architectural-render look: muted realistic grass, ornamental grasses, slatted fence, soft warm light and sprite flames. Avoid saturated cartoon colours, cone shapes and ball shrubs.
 - **Hero (changed 2026-11-12):** no 3D backyard (dropped as toy-like). Text on the left; on the right a large rounded photo showcase of real iTOP jobs (crossfade, thumbnails, licence badge in 3D depth). Keep the headline to two lines on desktop so the CTAs stay above the fold. Avoid "AI-looking" touches: glowing pill labels, grid backdrops, button glows.
