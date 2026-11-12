@@ -1200,3 +1200,17 @@ section{padding-block:clamp(72px,8.5vw,120px)}
   .sx-panel .sx-sw{flex-wrap:wrap}
   .rev-card h2{font-size:clamp(24px,7vw,30px)}
 }
+
+/* 3D sample: show the still render until the first live frame is drawn */
+.sx-stage.m3d:not(.drawn) .sx-poster{opacity:1}
+.sx-stage.m3d:not(.drawn) #sxCanvas{opacity:0}
+/* paver finder result: fixed-height photo strip (Safari let a 100%-height grid image spill over the text) */
+.fd-res{grid-template-rows:auto auto}
+.fd-res>img{height:200px;max-height:200px;position:static}
+@media (max-width:760px){.fd-res>img{height:160px;max-height:160px}}
+.fd-res-in{position:relative;z-index:1;background:#16130f}
+@media (max-width:760px){
+  .hero-stats{margin-top:-28px;padding-bottom:40px;row-gap:16px}
+  .hero-stats span{font-size:12.5px}
+  .hero-vctl{left:auto;right:16px;bottom:auto;top:92px}
+}

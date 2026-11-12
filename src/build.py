@@ -227,7 +227,7 @@ def sec_head(eb, h2, lede, hid=None):
     idattr = f' id="{hid}"' if hid else ''
     return f'<div class="sec-head"><div>{eyebrow(eb)}<h2 class="display"{idattr}>{h2}</h2></div><p class="lede">{lede}</p></div>'
 
-PAVER_EDGE = '<div class="paver-edge" aria-hidden="true"></div>'
+PAVER_EDGE = ''  # brick edge strip removed (read as decorative/AI); sections meet on a clean straight line
 
 TRUST = [('i-shield', 'Licensed contractor', f'Florida {BIZ["licence"]}'), ('i-clip', 'Permits & HOA handled', 'Engineering and approvals done for you'),
          ('i-team', 'One team, start to finish', 'Pavers, pools, kitchens & enclosures'), ('i-ruler', 'Free on-site estimate', 'Measured, detailed and in writing')]
@@ -538,7 +538,7 @@ def why_section():
 </section>"""
 
 def hero_stats():
-    items = [('10+ years', 'Building outdoor spaces'), ('Free estimate', 'On-site, measured, in writing'), ('Licensed', f'Florida {BIZ["licence"]}'), ('One team', 'Pavers, pools & enclosures')]
+    items = [('10+ years', 'Building outdoor spaces'), ('Licensed', f'Florida {BIZ["licence"]}'), ('Permits & HOA', 'Handled for you'), ('Free estimate', 'On-site, measured, in writing')]
     return '<div class="wrap hero-stats" role="list">' + ''.join(f'<div role="listitem"><b>{e(a)}</b><span>{e(b)}</span></div>' for a, b in items) + '</div>'
 
 def js_data(proj=True, styles=False, hero=False):
@@ -589,7 +589,6 @@ def p_home():
     {hero_stats()}
     {PAVER_EDGE}
   </section>
-  {trust_bar()}
   {services_section()}
   {styles_explorer()}
   {finder_section()}

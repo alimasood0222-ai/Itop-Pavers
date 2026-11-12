@@ -258,8 +258,13 @@ if(show){
   document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(timer);else restart();});
 }
 
+
+/* 3D safety net: if the sample block hasn't drawn a few seconds after it is on screen, show the close-up photo instead */
+function sxPhoto(){const st=$('.sx-stage');if(!st)return;st.classList.remove('m3d');$$('[data-sxv]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.sxv==='photo'));}
+(function(){const st=$('.sx-stage');if(!st||!('IntersectionObserver' in window))return;let tm=0;
+  new IntersectionObserver(es=>{const v=es[es.length-1].isIntersecting;clearTimeout(tm);if(v&&st.classList.contains('m3d')&&!st.classList.contains('drawn'))tm=setTimeout(()=>{if(!st.classList.contains('drawn'))sxPhoto();},6500);},{threshold:.3}).observe(st);})();
 /* ---------------- 3D: Three.js is loaded only when a 3D canvas is near the viewport ---------------- */
-function no3d(){document.documentElement.classList.add('no3d');$$('#buildCanvas,#sxCanvas').forEach(c=>c.style.visibility='hidden');const s=$('.sx-stage');s&&s.classList.remove('m3d');}
+function no3d(){document.documentElement.classList.add('no3d');$$('#buildCanvas,#sxCanvas').forEach(c=>c.style.visibility='hidden');sxPhoto();}
 const canvases3d=$$('canvas[data-3d]');
 if(canvases3d.length){
   let gl=false; try{const t=document.createElement('canvas');gl=!!(t.getContext('webgl')||t.getContext('experimental-webgl'));}catch(_){}
@@ -289,7 +294,7 @@ class Stage{
   init(){
     if(this.ready)return;
     const r=this.renderer=new T.WebGLRenderer({canvas:this.canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
-    r.setPixelRatio(Math.min(devicePixelRatio||1,2));
+    r.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<760?1.5:2));
     r.outputEncoding=T.sRGBEncoding; r.toneMapping=T.ACESFilmicToneMapping; r.toneMappingExposure=this.exposure;
     r.localClippingEnabled=true;
     if(this.shadows){r.shadowMap.enabled=true;r.shadowMap.type=T.PCFSoftShadowMap;}
@@ -419,7 +424,7 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
   const scene=new T.Scene(), cam=new T.PerspectiveCamera(30,1,.1,100);
   scene.add(new T.HemisphereLight(0xfff6ec,0x2a2219,.5));
   const key=new T.DirectionalLight(0xfff1e0,1.3);key.position.set(5,9,4);key.castShadow=true;
-  key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:1,far:30});key.shadow.bias=-.0004;key.shadow.radius=4;scene.add(key);
+  key.shadow.mapSize.set(innerWidth<760?1024:2048,innerWidth<760?1024:2048);Object.assign(key.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:1,far:30});key.shadow.bias=-.0004;key.shadow.radius=4;scene.add(key);
   const rim=new T.DirectionalLight(0xffd2a8,.45);rim.position.set(-6,3,-5);scene.add(rim);
   // dimensions (metres): paved field + soldier border + layers below
   const W=3.0,D=2.2,B=.2,PH=.08,SAND=.035,BASE=.16,SOIL=.26,TILE=.95;
@@ -446,14 +451,15 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
     bordX.map=bordX.bumpMap=tex(bs,(W+2*B)/.9,B/.9*1.6); bordZ.map=bordZ.bumpMap=tex(bs,D/.9,B/.9*1.6,Math.PI/2);
     bordX.needsUpdate=bordZ.needsUpdate=true; st.kick();
   };
-  st.onInit=()=>sx3d.set();
+  st.onInit=()=>{sx3d.set();canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();sxPhoto();});};
   sx3d.kick=()=>st.kick();
-  st.onResize=(w,h)=>{cam.aspect=w/h;cam.fov=w/h<1.05?38:30;orb.r=w/h<1.05?7.8:6.5;cam.updateProjectionMatrix();};
+  st.onResize=(w,h)=>{const a=w/h;cam.aspect=a;cam.fov=a<1.05?40:a<1.45?36:30;orb.r=a<1.05?8.4:a<1.45?7.9:6.5;cam.updateProjectionMatrix();};
   st.onFrame=(dt)=>{
     if(!stage.classList.contains('m3d'))return false;
     if(auto&&!reduce)orb.tAz+=dt*.12;
     const moving=orb.apply(cam,dt);
     st.renderer.render(scene,cam);
+    if(!stage.classList.contains('drawn')&&surf.map&&surf.map.image)stage.classList.add('drawn');
     return moving||(auto&&!reduce);
   };
 })();
