@@ -25,7 +25,7 @@ Context for Claude Code. Read README.md for structure and the build command.
   - phone (904) 525-9191
   - info@itoppavers.com
   - office: 6510 Columbia Park Dr, Suite 206, Jacksonville, FL 32258
-  - Instagram @itoppaverss
+  - Instagram @itoppavers (https://www.instagram.com/itoppavers/), Facebook https://www.facebook.com/itoppavers/ (confirmed by the user 2026-11-12)
 - Project photos and the reviews widget are placeholders until the client supplies them.
 - Leads must not be lost. The live form should post to GoHighLevel.
 

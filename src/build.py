@@ -58,6 +58,7 @@ header=f'''<header class="top" id="hdr">
     <div class="mnav-foot">
       <a class="mphone" href="tel:+19045259191"><span class="ci"><svg><use href="#i-phone"/></svg></span><span><small>Call or WhatsApp</small><b>(904) 525-9191</b></span></a>
       <a class="btn btn-primary" href="#quote">Get a free estimate <svg><use href="#i-arrow"/></svg></a>
+      <div class="social" style="justify-content:center;margin-top:6px"><a href="https://www.facebook.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Facebook"><svg><use href="#i-fb"/></svg></a><a href="https://www.instagram.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Instagram"><svg><use href="#i-ig"/></svg></a></div>
       <p>Licensed CBC 1294954 · Free on-site estimates</p>
     </div>
   </div>

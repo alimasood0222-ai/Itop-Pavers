@@ -33,8 +33,10 @@ const COLLS=[
   {id:'stonehurst',name:'Stonehurst',d:'A textured surface with the character of natural cut stone.',c:[['sand-dune','Sand Dune'],['sierra','Sierra'],['autumn-blend','Autumn Blend'],['glacier','Glacier']]},
   {id:'brick',name:'4×8 Brick',d:'The classic brick shape, ideal for herringbone driveways and borders.',c:[['tan','Tan'],['taupe','Taupe'],['sandstone','Sandstone'],['natural','Natural'],['granite','Granite'],['charcoal','Charcoal'],['heritage','Heritage'],['santa-fe','Santa Fe']]}
 ];
-const design={coll:COLLS[0],color:COLLS[0].c[0],used:false};
-const designText=()=>`${design.coll.name} · ${design.color[1]}`;
+const BORD=[{id:'charcoal',name:'Charcoal',tex:['brick','charcoal']},{id:'match',name:'Matching',tex:null},{id:'tan',name:'Tan',tex:['brick','tan']}];
+const design={coll:COLLS[0],color:COLLS[0].c[0],border:BORD[0],used:false};
+const designText=()=>`${design.coll.name} · ${design.color[1]} · ${design.border.name} border`;
+const sx3d={};
 const texSrc=(cid,col,t)=>`img/pavers/${cid}-${col}${t?'-t':''}.webp`;
 
 /* ================= paver layouts (unit = paver width; paver = 2×1) ================= */
@@ -255,9 +257,17 @@ function sxRender(){
   if(sxInst.dataset.c!==c.id){sxInst.dataset.c=c.id;sxInst.src=`img/pavers/installed-${c.id}.webp`;sxInst.alt=`${c.name} pavers installed`;}
   $('#sxColl').textContent=c.name; $('#sxColor').textContent=col[1]; $('#sxColorName').textContent=col[1];
   $('#sxInstCap').textContent=`${c.name}, installed · Photo: Tremron`;
+  const bt=b=>b.tex?texSrc(b.tex[0],b.tex[1],1):texSrc(c.id,col[0],1);
+  $('#sxBord').innerHTML=BORD.map(b=>`<button type="button" class="sx-c" role="radio" aria-checked="${b===design.border}" tabindex="${b===design.border?0:-1}" aria-label="${b.name} border" title="${b.name}"><img src="${bt(b)}" alt=""><i>${b.name}</i></button>`).join('');
+  $('#sxBordName').textContent=design.border.name;
   $('#sumText').textContent=designText();
+  sx3d.set&&sx3d.set();
   if(design.used)renderDesignBox();
 }
+function sxBord(i){design.border=BORD[i];sxRender();}
+$('#sxBord').addEventListener('click',e=>{const b=e.target.closest('.sx-c');if(b)sxBord([...$('#sxBord').children].indexOf(b));});
+radioKeys($('#sxBord'),'.sx-c',sxBord);
+$$('[data-sxv]').forEach(b=>b.addEventListener('click',()=>{$$('[data-sxv]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('.sx-stage').classList.toggle('m3d',b.dataset.sxv==='3d');sx3d.kick&&sx3d.kick();}));
 function sxColl(i){const c=COLLS[i];if(c===design.coll)return;const keep=c.c.find(x=>x[1]===design.color[1]);design.coll=c;design.color=keep||c.c[0];sxRender();}
 function sxColor(i){design.color=design.coll.c[i];sxRender();}
 sxColls.addEventListener('click',e=>{const b=e.target.closest('.sx-coll');if(b)sxColl(+b.dataset.i);});
@@ -345,7 +355,7 @@ $('#layers').innerHTML=LAYERS.map((l,i)=>`<li><span class="ln">0${i+1}</span><di
 
 /* ================= 3D ================= */
 const T=window.THREE;
-function no3d(){document.documentElement.classList.add('no3d');$$('#buildCanvas').forEach(c=>c.style.visibility='hidden');}
+function no3d(){document.documentElement.classList.add('no3d');$$('#buildCanvas,#sxCanvas').forEach(c=>c.style.visibility='hidden');$('.sx-stage').classList.remove('m3d');}
 if(!T){no3d();return;}
 try{const t=document.createElement('canvas');if(!(t.getContext('webgl')||t.getContext('experimental-webgl')))throw 0;}catch(e){no3d();return;}
 
@@ -484,6 +494,52 @@ function palm(parent,x,z,h,lean,rotY,trunkMat,leafMats){
     const f=new T.Mesh(geo,leafMats[i%2]);f.castShadow=true;f.position.set(px,py,0);f.rotation.y=i/10*Math.PI*2+Math.random()*.2;f.rotation.z=(Math.random()-.5)*.25;g.add(f);
   }
 }
+
+/* ============ PAVER STYLES: 3D sample block built from the real product photo ============ */
+(function sxBlock(){
+  const canvas=$('#sxCanvas'), stage=$('.sx-stage');
+  const st=new Stage(canvas,{lazy:true,shadows:true,exposure:.9});
+  const scene=new T.Scene(), cam=new T.PerspectiveCamera(30,1,.1,100);
+  scene.add(new T.HemisphereLight(0xfff6ec,0x2a2219,.5));
+  const key=new T.DirectionalLight(0xfff1e0,1.3);key.position.set(5,9,4);key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:1,far:30});key.shadow.bias=-.0004;key.shadow.radius=4;scene.add(key);
+  const rim=new T.DirectionalLight(0xffd2a8,.45);rim.position.set(-6,3,-5);scene.add(rim);
+  // dimensions (metres): paved field + soldier border + layers below
+  const W=3.0,D=2.2,B=.2,PH=.08,SAND=.035,BASE=.16,SOIL=.26,TILE=.95;
+  const loader=new T.TextureLoader(), cache={};
+  const tex=(src,rx,ry,rot)=>{const k=src+rx+ry+(rot||0);if(cache[k])return cache[k];const t=loader.load(src,()=>st.kick());t.encoding=T.sRGBEncoding;t.wrapS=t.wrapT=T.MirroredRepeatWrapping;t.repeat.set(rx,ry);if(rot){t.center.set(.5,.5);t.rotation=rot;}t.anisotropy=Math.min(8,st.renderer?st.renderer.capabilities.getMaxAnisotropy():4);return cache[k]=t;};
+  const surf=new T.MeshStandardMaterial({roughness:.86,metalness:0,bumpScale:.018});
+  const side=new T.MeshStandardMaterial({roughness:.9,color:0xb9b2a8});
+  const bordX=new T.MeshStandardMaterial({roughness:.84,bumpScale:.014}), bordZ=bordX.clone();
+  const field=new T.Mesh(new T.BoxGeometry(W,PH,D),[side,side,surf,side,side,side]);field.position.y=-PH/2;field.castShadow=field.receiveShadow=true;scene.add(field);
+  const edges=[[W+2*B,B,0,(D+B)/2,bordX],[W+2*B,B,0,-(D+B)/2,bordX],[B,D,(W+B)/2,0,bordZ],[B,D,-(W+B)/2,0,bordZ]];
+  edges.forEach(([w,d,x,z,m])=>{const e=new T.Mesh(new T.BoxGeometry(w,PH+.004,d),[side,side,m,side,side,side]);e.position.set(x,-PH/2+.002,z);e.castShadow=e.receiveShadow=true;scene.add(e);});
+  const TW=W+2*B,TD=D+2*B;let y=-PH;
+  [[SAND,speckle({base:222,spread:26,n:7000,dot:1,rep:3}),0xd6c08f],[BASE,speckle({base:185,spread:70,n:3000,dot:5,rep:2}),0x9a958e],[SOIL,speckle({base:190,spread:50,n:5000,dot:2.5,rep:2}),0x6f4f35]].forEach(([h,t,c])=>{
+    const m=new T.Mesh(new T.BoxGeometry(TW,h,TD),new T.MeshStandardMaterial({color:c,map:t,roughness:.97}));m.position.y=y-h/2;m.castShadow=m.receiveShadow=true;scene.add(m);y-=h;});
+  const ground=new T.Mesh(new T.PlaneGeometry(40,40),new T.ShadowMaterial({opacity:.42}));ground.rotation.x=-Math.PI/2;ground.position.y=y-.001;ground.receiveShadow=true;scene.add(ground);
+  linScene(scene);
+  const orb=Orbit(canvas,{t:[0,-.25,.15],r:6.5,az:.62,el:.52,minEl:.22,maxEl:1.15});
+  let auto=true; orb.onUser=()=>{auto=false;stage.classList.add('touched');}; orb.kick=()=>st.kick();
+  sx3d.set=()=>{
+    const c=design.coll,col=design.color,b=design.border;
+    const s=texSrc(c.id,col[0]);
+    const t=tex(s,W/TILE,D/TILE); surf.map=t; surf.bumpMap=t; surf.needsUpdate=true;
+    const bs=b.tex?texSrc(b.tex[0],b.tex[1]):s;
+    bordX.map=bordX.bumpMap=tex(bs,(W+2*B)/.9,B/.9*1.6); bordZ.map=bordZ.bumpMap=tex(bs,D/.9,B/.9*1.6,Math.PI/2);
+    bordX.needsUpdate=bordZ.needsUpdate=true; st.kick();
+  };
+  st.onInit=()=>sx3d.set();
+  sx3d.kick=()=>st.kick();
+  st.onResize=(w,h)=>{cam.aspect=w/h;cam.fov=w/h<1.05?38:30;orb.r=w/h<1.05?7.8:6.5;cam.updateProjectionMatrix();};
+  st.onFrame=(dt)=>{
+    if(!stage.classList.contains('m3d'))return false;
+    if(auto&&!reduce)orb.tAz+=dt*.12;
+    const moving=orb.apply(cam,dt);
+    st.renderer.render(scene,cam);
+    return moving||(auto&&!reduce);
+  };
+})();
 
 /* ============ BUILD-UP: exploded cross-section ============ */
 (function build(){

@@ -7,7 +7,7 @@
 <meta property="og:description" content="Patios, driveways, pool decks and outdoor living. See your design in 3D before we build it. Free on-site estimates.">
 <meta property="og:url" content="https://itop-pavers.vercel.app/">
 <meta property="og:image" content="https://itop-pavers.vercel.app/img/driveway-gated.webp">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"iTOP Pavers","url":"https://itop-pavers.vercel.app/","telephone":"+1-904-525-9191","email":"info@itoppavers.com","image":"https://itop-pavers.vercel.app/img/driveway-gated.webp","address":{"@type":"PostalAddress","streetAddress":"6510 Columbia Park Dr, Suite 206","addressLocality":"Jacksonville","addressRegion":"FL","postalCode":"32258","addressCountry":"US"},"areaServed":["Jacksonville, FL","St. Augustine, FL","St. Johns County, FL"],"description":"Paver patios, driveways, pool decks and outdoor living in Northeast Florida. Licensed Florida contractor CBC 1294954."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"iTOP Pavers","url":"https://itop-pavers.vercel.app/","telephone":"+1-904-525-9191","email":"info@itoppavers.com","image":"https://itop-pavers.vercel.app/img/driveway-gated.webp","address":{"@type":"PostalAddress","streetAddress":"6510 Columbia Park Dr, Suite 206","addressLocality":"Jacksonville","addressRegion":"FL","postalCode":"32258","addressCountry":"US"},"areaServed":["Jacksonville, FL","St. Augustine, FL","St. Johns County, FL"],"sameAs":["https://www.facebook.com/itoppavers/","https://www.instagram.com/itoppavers/"],"description":"Paver patios, driveways, pool decks and outdoor living in Northeast Florida. Licensed Florida contractor CBC 1294954."}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -216,6 +216,27 @@ section{padding-block:clamp(72px,10vw,128px)}
 .sx-tex{position:absolute;inset:0;margin:0}
 .sx-tex img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:opacity .35s ease}
 .sx-tex img.ld{opacity:.35}
+.sx-stage.m3d{background:radial-gradient(90% 80% at 50% 38%,#2a2622 0%,#151311 55%,#0b0a09 100%)}
+.sx-stage.m3d .sx-tex{opacity:0;visibility:hidden}
+.sx-stage.m3d .sx-inst{width:min(30%,230px)}
+.sx-tex{transition:opacity .35s}
+#sxCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y;opacity:0;visibility:hidden;transition:opacity .35s}
+#sxCanvas:active{cursor:grabbing}
+.sx-stage.m3d #sxCanvas{opacity:1;visibility:visible}
+.sx-view{position:absolute;z-index:3;top:18px;left:18px;display:inline-flex;background:rgba(12,12,12,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #3a3631;padding:3px;gap:2px}
+.sx-view button{border:0;background:none;color:#cfc8bf;font:700 12.5px/1 var(--f-body);padding:9px 13px;cursor:pointer}
+.sx-view button[aria-pressed="true"]{background:var(--orange);color:var(--black)}
+.no3d .sx-view{display:none}
+.sx-hint{position:absolute;z-index:2;top:22px;right:20px;display:flex;align-items:center;gap:7px;font-size:12px;color:#bdb6ad;pointer-events:none;transition:opacity .4s}
+.sx-hint svg{width:15px;height:15px;color:var(--orange)}
+@media (max-width:560px){.sx-hint{display:none}.sx-view{top:12px;left:12px}}
+.sx-stage:not(.m3d) .sx-hint,.sx-stage.touched .sx-hint,.no3d .sx-hint{opacity:0}
+.sx-stage.m3d::after{background:linear-gradient(0deg,rgba(8,8,8,.35),transparent 30%)}
+.sx-sw.sx-bord{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sx-bord .sx-c{aspect-ratio:auto;display:flex;flex-direction:column;background:var(--panel2);border:1px solid #33302c;padding:5px 5px 7px;gap:6px}
+.sx-bord .sx-c img{aspect-ratio:3/1;height:auto}
+.sx-bord .sx-c i{font:600 12px/1 var(--f-body);font-style:normal;color:#ddd6ce;text-align:left}
+.sx-bord .sx-c::after{inset:-1px}
 .sx-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 100% at 30% 30%,transparent 55%,rgba(0,0,0,.45)),linear-gradient(0deg,rgba(8,8,8,.55),transparent 35%)}
 .sx-label{position:absolute;z-index:2;left:24px;bottom:22px;display:flex;flex-direction:column;background:rgba(14,14,14,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-left:3px solid var(--orange);padding:12px 18px 13px}
 .sx-label small{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);font-weight:700}
@@ -450,6 +471,10 @@ footer h5{font-family:var(--f-display);color:var(--white);font-size:13px;letter-
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 footer a{text-decoration:none}footer a:hover{color:var(--white)}
 footer .logo{width:150px;height:56px}
+.social{display:flex;gap:10px;margin-top:22px}
+.social a{width:42px;height:42px;display:grid;place-items:center;border:1px solid #34302c;background:#151413;color:#e8e3dc;transition:background .2s,border-color .2s,color .2s}
+.social a:hover{background:var(--orange);border-color:var(--orange);color:var(--black)}
+.social svg{width:19px;height:19px}
 .legal{grid-column:1/-1;border-top:1px solid var(--line);padding-top:22px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;font-size:12.5px}
 @media (max-width:860px){footer .wrap{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){footer .wrap{grid-template-columns:1fr}}
@@ -481,6 +506,7 @@ footer .logo{width:150px;height:56px}
     <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" d="m5 9 7 7 7-7"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6zM8.5 12l2.5 2.5 4.5-5"/></symbol>
     <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path stroke="currentColor" stroke-width="2" d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5z"/></symbol>
@@ -551,8 +577,14 @@ footer .logo{width:150px;height:56px}
         <p class="lede">These are the Tremron collections we install most across Northeast Florida. Pick a style and a colour blend, then add it to your estimate. We bring real samples to your free on-site visit.</p>
       </div>
       <div class="sx">
-        <div class="sx-stage">
+        <div class="sx-stage m3d">
           <figure class="sx-tex"><img id="sxTex" alt="" decoding="async"></figure>
+          <canvas id="sxCanvas" aria-label="3D sample of your selected pavers with border and base layers. Drag to rotate."></canvas>
+          <div class="sx-view" role="group" aria-label="Preview mode">
+            <button type="button" data-sxv="3d" aria-pressed="true">3D view</button>
+            <button type="button" data-sxv="photo" aria-pressed="false">Close-up photo</button>
+          </div>
+          <div class="sx-hint"><svg><use href="#i-drag"/></svg>Drag to rotate</div>
           <div class="sx-label"><small id="sxColl">Olde Towne</small><b id="sxColor">Sand Dune</b></div>
           <figure class="sx-inst"><img id="sxInst" alt="" loading="lazy" decoding="async"><figcaption id="sxInstCap">Installed · Photo: Tremron</figcaption></figure>
         </div>
@@ -561,6 +593,8 @@ footer .logo{width:150px;height:56px}
           <div class="sx-colls" id="sxColls" role="radiogroup" aria-label="Paver collection"></div>
           <div class="sp-lbl">2 · Colour blend <output id="sxColorName">Sand Dune</output></div>
           <div class="sx-sw" id="sxSw" role="radiogroup" aria-label="Colour blend"></div>
+          <div class="sp-lbl">3 · Border <output id="sxBordName">Charcoal</output></div>
+          <div class="sx-sw sx-bord" id="sxBord" role="radiogroup" aria-label="Border"></div>
           <div class="summary">Your selection<b id="sumText">Olde Towne · Sand Dune</b></div>
           <a class="btn btn-primary" href="#quote" id="useDesign">Add to my estimate <svg><use href="#i-arrow"/></svg></a>
           <p class="studio-note">Product photos courtesy of Tremron. Colours vary by batch and screen. Final selection is made from real samples.</p>
@@ -759,11 +793,15 @@ footer .logo{width:150px;height:56px}
   <div class="wrap">
     <div>
       <a class="brand" href="#top" aria-label="iTOP Pavers home"><svg class="logo" role="img" aria-label="iTOP Pavers"><use href="#logo"/></svg></a>
-      <p style="margin:18px 0 0;max-width:34ch">Crafting unique home solutions across Northeast Florida.</p>
+      <p style="margin:18px 0 0;max-width:34ch">Paver driveways, patios, pool decks and outdoor living across Northeast Florida.</p>
+      <div class="social">
+        <a href="https://www.facebook.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Facebook"><svg><use href="#i-fb"/></svg></a>
+        <a href="https://www.instagram.com/itoppavers/" target="_blank" rel="noopener" aria-label="iTOP Pavers on Instagram (@itoppavers)"><svg><use href="#i-ig"/></svg></a>
+      </div>
     </div>
     <div><h5>Pavers</h5><ul><li><a href="#services">Patios</a></li><li><a href="#services">Driveways</a></li><li><a href="#services">Pool decks</a></li><li><a href="#services">Walkways</a></li><li><a href="#services">Paving maintenance</a></li></ul></div>
     <div><h5>Outdoor living</h5><ul><li><a href="#services">Fiberglass pools</a></li><li><a href="#services">Outdoor kitchens</a></li><li><a href="#services">Pergolas &amp; gazebos</a></li><li><a href="#services">Retaining walls &amp; fire pits</a></li><li><a href="#services">Screen enclosures</a></li></ul></div>
-    <div><h5>Contact</h5><ul><li style="user-select:all">(904) 525-9191</li><li style="user-select:all">info@itoppavers.com</li><li>6510 Columbia Park Dr, Suite 206<br>Jacksonville, FL 32258</li><li>Instagram @itoppaverss</li></ul></div>
+    <div><h5>Contact</h5><ul><li style="user-select:all">(904) 525-9191</li><li style="user-select:all">info@itoppavers.com</li><li>6510 Columbia Park Dr, Suite 206<br>Jacksonville, FL 32258</li><li><a href="https://www.instagram.com/itoppavers/" target="_blank" rel="noopener">Instagram @itoppavers</a></li></ul></div>
     <div class="legal"><span>© 2026 iTOP Pavers · Licensed Florida contractor CBC 1294954</span><span>Privacy Policy · Terms of Use</span></div>
   </div>
 </footer>
