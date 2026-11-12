@@ -10,13 +10,6 @@ def ml_i(t,d,ic): return f'<a class="ml" href="#services"><span class="mi"><svg>
 pav=[("Patios","Gathering space with clean, lasting edges","h45","#cdbb9c"),("Driveways","Interlocking pavers rated for daily traffic","h90","#8f8780"),("Pool decks","Light, slip-resistant surfaces around water","bond","#e7e0d3"),("Walkways","Paths from the front door to the backyard","basket","#a35b3c"),("Paving maintenance","Cleaning, joint sand, sealing and repairs","bond","#4a4744")]
 liv=[("Fiberglass pools","Resort-style pools with matching decks","s-pool"),("Outdoor kitchens","Grills and counters built for Florida","s-kitchen"),("Pergolas &amp; gazebos","Shade structures sized to your patio","s-pergola"),("Retaining walls &amp; fire pits","Seat walls, grade changes, a place to gather","s-wall"),("Screen enclosures","Bug-free outdoor rooms over pools and lanais","s-screen")]
 header=f'''<header class="top" id="hdr">
-  <div class="util"><div class="wrap">
-    <a href="#area"><svg><use href="#i-pin"/></svg>Jacksonville · St. Augustine · St. Johns County</a>
-    <div class="r">
-      <a href="#reviews"><svg><use href="#i-star"/></svg>32 Google reviews</a>
-      <span class="u hide-md"><svg><use href="#i-shield"/></svg>Licensed Florida contractor · CBC 1294954</span>
-    </div>
-  </div></div>
   <div class="bar">
     <div class="wrap">
       <a class="brand" href="#top" aria-label="iTOP Pavers home"><svg class="logo" role="img" aria-label="iTOP Pavers"><use href="#logo"/></svg></a>
@@ -24,7 +17,7 @@ header=f'''<header class="top" id="hdr">
         <ul class="menu">
           <li class="has-mega"><button class="nl" type="button" data-mega="mm-pavers" data-sec="services" aria-expanded="false" aria-controls="mm-pavers">Pavers<svg class="chev"><use href="#i-chev"/></svg></button></li>
           <li class="has-mega"><button class="nl" type="button" data-mega="mm-living" aria-expanded="false" aria-controls="mm-living">Outdoor Living<svg class="chev"><use href="#i-chev"/></svg></button></li>
-          <li><a class="nl" href="#studio" data-sec="studio"><span class="badge3d">3D</span>Design Studio</a></li>
+          <li><a class="nl" href="#studio" data-sec="studio">Paver Styles</a></li>
           <li><a class="nl" href="#projects" data-sec="projects">Projects</a></li>
           <li><a class="nl" href="#process" data-sec="process">Our Process</a></li>
         </ul>
@@ -40,7 +33,7 @@ header=f'''<header class="top" id="hdr">
   <div class="mega" id="mm-pavers" role="region" aria-label="Paver services">
     <div class="wrap mega-in">
       <div><div class="mega-h">Paver services</div><div class="mega-grid">{''.join(ml_c(*x) for x in pav)}</div></div>
-      <a class="mega-feature" href="#studio"><span class="tag2">3D design studio</span><b>Design your patio in 3D</b><p>Try four laying patterns, five colours and three borders, then compare before and after.</p><span class="fl">Open the studio <svg><use href="#i-arrow"/></svg></span></a>
+      <a class="mega-feature" href="#studio"><span class="tag2">Paver styles</span><b>Choose your pavers</b><p>Browse five Tremron collections and their colour blends, then add your pick to your estimate.</p><span class="fl">Browse styles <svg><use href="#i-arrow"/></svg></span></a>
     </div>
     <div class="mega-foot"><div class="wrap"><span>Free on-site estimate</span><span>Permits handled</span><span>Licensed CBC 1294954</span><a href="#services">All paver services <svg><use href="#i-arrow"/></svg></a></div></div>
   </div>
@@ -57,7 +50,7 @@ header=f'''<header class="top" id="hdr">
   <div class="mnav-in">
     <details class="macc"><summary>Pavers<svg><use href="#i-chev"/></svg></summary><ul>{''.join(f'<li><a href="#services">{x[0]}</a></li>' for x in pav)}</ul></details>
     <details class="macc"><summary>Outdoor Living<svg><use href="#i-chev"/></svg></summary><ul>{''.join(f'<li><a href="#services">{x[0]}</a></li>' for x in liv)}</ul></details>
-    <a class="mlink" href="#studio">Design Studio <span class="badge3d">3D</span><svg><use href="#i-arrow"/></svg></a>
+    <a class="mlink" href="#studio">Paver Styles<svg><use href="#i-arrow"/></svg></a>
     <a class="mlink" href="#projects">Projects<svg><use href="#i-arrow"/></svg></a>
     <a class="mlink" href="#process">Our Process<svg><use href="#i-arrow"/></svg></a>
     <a class="mlink" href="#reviews">Reviews<svg><use href="#i-arrow"/></svg></a>
@@ -83,4 +76,7 @@ full=('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
 import shutil
 img=R/'dist/img'; img.mkdir(exist_ok=True)
 for f in (R/'assets/photos').glob('*.webp'): shutil.copy2(f,img/f.name)
+# Paver styles (Tremron product photos) -> dist/img/pavers/
+pv=img/'pavers'; pv.mkdir(exist_ok=True)
+for f in (R/'assets/pavers').glob('*.webp'): shutil.copy2(f,pv/f.name)
 print('Built dist/index.html and dist/artifact.html', len(full), 'bytes')
