@@ -231,6 +231,11 @@ if(hv){
   hctl.addEventListener('click',()=>{if(hv.paused){hv.play();hctl.setAttribute('aria-label','Pause background video');hctl.classList.remove('paused');}else{hv.pause();hctl.setAttribute('aria-label','Play background video');hctl.classList.add('paused');}});
   document.addEventListener('visibilitychange',()=>{if(!hv.src)return;if(document.hidden)hv.pause();else if(!hctl.classList.contains('paused'))hv.play().catch(()=>{});});
 }
+
+/* phone quick-action bar: stays hidden while the page's own CTAs are on screen */
+(function(){const bar=document.querySelector('.mbar'),c=document.querySelector('main .ctas');if(!bar)return;
+  if(!c||!('IntersectionObserver' in window)){document.body.classList.add('mbar-on');return;}
+  new IntersectionObserver(es=>{const e=es[es.length-1];document.body.classList.toggle('mbar-on',!e.isIntersecting&&e.boundingClientRect.top<0);}).observe(c);})();
 /* ---------------- hero showcase ---------------- */
 const show=$('#show');
 if(show){

@@ -569,7 +569,7 @@ def p_home():
       <div class="hero-copy">
         {eyebrow('Paver contractor · Northeast Florida')}
         <h1 id="h1" class="display"><span class="l1">Outdoor spaces,</span> <em>built to last.</em></h1>
-        <p class="lede">iTOP Pavers builds paver driveways, patios, pool decks and complete outdoor living across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County. Planned with you and built by our own crew.</p>
+        <p class="lede">iTOP Pavers builds paver driveways, patios and pool decks<span class="lede-more">, plus complete outdoor living,</span> across Jacksonville, St.&nbsp;Augustine and St.&nbsp;Johns County.<span class="lede-more"> Planned with you and built by our own crew.</span></p>
         <div class="ctas"><a class="btn btn-primary" href="/get-a-quote/">Get a free estimate {ARROW}</a><a class="btn btn-ghost" href="/styles/">Design yours in 3D {ARROW}</a></div>
       </div>
       <div class="show" id="show" aria-roledescription="carousel" aria-label="Recent iTOP Pavers projects">
