@@ -337,63 +337,53 @@ qform.addEventListener('submit',e=>{
 });
 qBack.addEventListener('click',()=>showStep(qStep-1,true));
 
-/* ================= hero 3D project carousel ================= */
+/* ================= hero showcase: big real project photos, 3D depth layers ================= */
 const HC=[
-  {img:'driveway-gated',full:1,t:'Driveway',q:'Driveway',title:'Gated entry driveway'},
-  {img:'patio-firepit-lake',t:'Patio',q:'Patio',title:'Lakeside fire pit & seat wall'},
-  {img:'pool-deck',t:'Pool deck',q:'Pool deck',title:'Pool deck & coping'},
-  {img:'screen-enclosure',full:1,t:'Screen enclosure',q:'Screen enclosure',title:'Screen enclosure & patio'},
-  {img:'front-entry',t:'Entry',q:'Walkway',title:'Front entry & steps'},
-  {img:'patio-circle',full:1,t:'Patio',q:'Patio',title:'Circular garden patio'},
-  {img:'driveway-curved',t:'Driveway',q:'Driveway',title:'Curved driveway'},
-  {img:'pool-deck-travertine',t:'Pool deck',q:'Pool deck',title:'Travertine pool deck & spa'}
+  {img:'driveway-gated',full:1,t:'Driveway',q:'Driveway',title:'Gated entry driveway',sub:'Tumbled pavers with a charcoal soldier course'},
+  {img:'patio-firepit-lake',t:'Patio',q:'Patio',title:'Lakeside fire pit & seat wall',sub:'Built-in fire pit wrapped by a curved seat wall'},
+  {img:'pool-deck',t:'Pool deck',q:'Pool deck',title:'Pool deck & coping',sub:'Blended pavers with bullnose coping'},
+  {img:'screen-enclosure',full:1,t:'Screen enclosure',q:'Screen enclosure',title:'Screen enclosure & patio',sub:'Screened outdoor room over a new paver patio'},
+  {img:'front-entry',t:'Entry',q:'Walkway',title:'Front entry & steps',sub:'Curved paver steps up to the front porch'},
+  {img:'patio-circle',full:1,t:'Patio',q:'Patio',title:'Circular garden patio',sub:'Round patio with a soldier-course edge'}
 ];
-const HC_CHIPS=['Driveway','Patio','Pool deck','Entry','Screen enclosure'];
-const hcStage=$('#hcStage'), hcChips=$('#hcChips'), hcLive=$('#hcLive');
-hcStage.innerHTML=`<div class="hc-tilt">${HC.map((c,i)=>`<div class="hc-card" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${esc(c.title)}"><img src="img/${c.img}${c.full?'':'-sm'}.webp" alt="${esc(c.title)} by iTOP Pavers" ${i<3?'':'loading="lazy"'} decoding="async" draggable="false"><span class="hc-cap"><span><small>${esc(c.t)} · Recent iTOP job</small><b>${esc(c.title)}</b></span><a class="go" href="#quote" data-q="${esc(c.q)}">Get an estimate <svg><use href="#i-arrow"/></svg></a></span><i class="hc-prog"></i></div>`).join('')}</div>`;
-hcChips.innerHTML=HC_CHIPS.map(t=>`<button type="button" data-t="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join('');
-const hcCards=[...hcStage.querySelectorAll('.hc-card')], hcTilt=hcStage.querySelector('.hc-tilt');
-const HC_DUR=5200; let hcI=0, hcTimer=null, hcPaused=false;
-function hcLayout(){
-  const n=HC.length, narrow=innerWidth<=560, step=narrow?54:40, depth=narrow?150:220, rot=narrow?30:32;
-  hcCards.forEach((el,i)=>{
-    let k=i-hcI; if(k>n/2)k-=n; if(k<-n/2)k+=n;
-    const a=Math.abs(k);
-    el.style.setProperty('--x',(k*step)+'%'); el.style.setProperty('--z',(-a*depth)+'px'); el.style.setProperty('--ry',(-Math.sign(k)*Math.min(a,1)*rot)+'deg');
-    el.style.setProperty('--o',a>1?0:1); el.style.setProperty('--zi',10-a); el.style.setProperty('--b',a===0?1:(a===1?.62:.4));
-    el.classList.toggle('on',a===0); el.querySelector('.go').tabIndex=a===0?0:-1; el.setAttribute('aria-hidden',a!==0);
-    const pr=el.querySelector('.hc-prog'); pr.classList.remove('run'); if(a===0&&!hcPaused&&!reduce){void pr.offsetWidth;pr.classList.add('run');}
-  });
-  hcChips.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===HC[hcI].t));
-  hcLive.textContent=`${HC[hcI].title}, ${hcI+1} of ${HC.length}`;
+const shSlides=$('#showSlides'), shBars=$('#showBars'), shCap=$('#showCap'), shThumbs=$('#showThumbs'), shLive=$('#showLive'), sh3d=$('#show3d'), shStage=$('#showStage'), show=$('#show');
+const src=c=>`img/${c.img}${c.full?'':'-sm'}.webp`;
+shSlides.innerHTML=HC.map((c,i)=>`<figure class="show-slide" aria-hidden="${i!==0}"><img src="${src(c)}" alt="${esc(c.title)} by iTOP Pavers" ${i?'loading="lazy"':'fetchpriority="high"'} decoding="async" draggable="false"></figure>`).join('');
+shBars.innerHTML=HC.map(()=>'<i><b></b></i>').join('');
+shThumbs.innerHTML=HC.map((c,i)=>`<button type="button" aria-label="Show ${esc(c.title)}" aria-pressed="${i===0}"><img src="img/${c.img}-sm.webp" alt="" loading="lazy" decoding="async"><span>${esc(c.t)}</span></button>`).join('');
+const shEls=[...shSlides.children], shBarEls=[...shBars.children], shThumbEls=[...shThumbs.children];
+const SH_DUR=6000; let shI=0, shTimer=null, shPaused=false;
+function shShow(i,user){
+  shI=(i+HC.length)%HC.length; const c=HC[shI];
+  shEls.forEach((el,k)=>{el.classList.toggle('on',k===shI);el.setAttribute('aria-hidden',k!==shI);});
+  shBarEls.forEach((el,k)=>{el.className=k<shI?'done':(k===shI?'on':'');});
+  if(!shPaused&&!reduce){const b=shBarEls[shI];void b.offsetWidth;b.classList.add('run');}
+  shThumbEls.forEach((el,k)=>el.setAttribute('aria-pressed',k===shI));
+  shCap.innerHTML=`<small>${esc(c.t)} · Recent iTOP job</small><b>${esc(c.title)}</b><span>${esc(c.sub)}</span><a class="btn btn-primary" href="#quote" data-q="${esc(c.q)}">Get an estimate like this <svg><use href="#i-arrow"/></svg></a>`;
+  shLive.textContent=`${c.title}, ${shI+1} of ${HC.length}`;
+  if(user)shRestart();
 }
-function hcGo(i,user){hcI=(i+HC.length)%HC.length;hcLayout();if(user)hcRestart();}
-function hcRestart(){clearInterval(hcTimer);if(reduce||hcPaused)return;hcTimer=setInterval(()=>hcGo(hcI+1),HC_DUR);}
-hcStage.style.setProperty('--dur',HC_DUR+'ms');
-hcLayout(); hcRestart();
-$('#hcPrev').addEventListener('click',()=>hcGo(hcI-1,true));
-$('#hcNext').addEventListener('click',()=>hcGo(hcI+1,true));
-hcChips.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const i=HC.findIndex(c=>c.t===b.dataset.t);if(i>=0)hcGo(i,true);});
-hcStage.addEventListener('click',e=>{
-  const go=e.target.closest('.go'); if(go){selectType(go.dataset.q);return;}
-  const c=e.target.closest('.hc-card'); if(!c||hcDragged)return;
-  const i=+c.dataset.i; if(i!==hcI){e.preventDefault();hcGo(i,true);}else{const f=filters.querySelector(`[data-f="${PROJ.find(p=>p.img===HC[i].img)?.t||'All'}"]`);f&&f.click();$('#projects').scrollIntoView({behavior:reduce?'auto':'smooth'});}
-});
-hcStage.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();hcGo(hcI-1,true);hcCards[hcI].querySelector('.go').focus();}else if(e.key==='ArrowRight'){e.preventDefault();hcGo(hcI+1,true);hcCards[hcI].querySelector('.go').focus();}});
-// swipe / drag
-let hcX=null, hcDragged=false;
-hcStage.addEventListener('pointerdown',e=>{hcX=e.clientX;hcDragged=false;});
-hcStage.addEventListener('pointermove',e=>{if(hcX!==null&&Math.abs(e.clientX-hcX)>8)hcDragged=true;});
-hcStage.addEventListener('pointerup',e=>{if(hcX===null)return;const dx=e.clientX-hcX;hcX=null;if(Math.abs(dx)>40)hcGo(hcI+(dx<0?1:-1),true);setTimeout(()=>hcDragged=false,0);});
-hcStage.addEventListener('pointercancel',()=>{hcX=null;});
-// pause on hover/focus; subtle 3D tilt that follows the pointer
-const hc=$('#hc');
-const pause=v=>{hcPaused=v;if(v){clearInterval(hcTimer);hcCards[hcI].querySelector('.hc-prog').classList.remove('run');}else{hcLayout();hcRestart();}};
-hc.addEventListener('mouseenter',()=>pause(true)); hc.addEventListener('mouseleave',()=>{pause(false);hcTilt.style.transform='';});
-hc.addEventListener('focusin',()=>pause(true)); hc.addEventListener('focusout',e=>{if(!hc.contains(e.relatedTarget))pause(false);});
-if(fine.matches&&!reduce)hcStage.addEventListener('pointermove',e=>{const r=hcStage.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hcTilt.style.transform=`rotateY(${(x*8).toFixed(2)}deg) rotateX(${(-y*6).toFixed(2)}deg)`;});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(hcTimer);else hcRestart();});
-addEventListener('resize',()=>hcLayout());
+function shRestart(){clearInterval(shTimer);if(reduce||shPaused)return;shTimer=setInterval(()=>shShow(shI+1),SH_DUR);}
+show.style.setProperty('--dur',SH_DUR+'ms');
+shShow(0); shRestart();
+$('#showPrev').addEventListener('click',()=>shShow(shI-1,true));
+$('#showNext').addEventListener('click',()=>shShow(shI+1,true));
+shThumbs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)shShow(shThumbEls.indexOf(b),true);});
+shCap.addEventListener('click',e=>{const a=e.target.closest('a[data-q]');if(a)selectType(a.dataset.q);});
+show.addEventListener('keydown',e=>{if(e.target.closest('input,textarea'))return;if(e.key==='ArrowLeft'){shShow(shI-1,true);}else if(e.key==='ArrowRight'){shShow(shI+1,true);}});
+// swipe
+let shX=null;
+shStage.addEventListener('pointerdown',e=>{if(e.target.closest('a,button'))return;shX=e.clientX;});
+shStage.addEventListener('pointerup',e=>{if(shX===null)return;const dx=e.clientX-shX;shX=null;if(Math.abs(dx)>40)shShow(shI+(dx<0?1:-1),true);});
+shStage.addEventListener('pointercancel',()=>{shX=null;});
+// pause while the pointer or focus is inside; 3D depth tilt follows the pointer
+const shPause=v=>{shPaused=v;if(v){clearInterval(shTimer);shBarEls[shI].classList.add('hold');}else{shBarEls[shI].classList.remove('hold');shShow(shI);shRestart();}};
+show.addEventListener('mouseenter',()=>shPause(true));
+show.addEventListener('mouseleave',()=>{shPause(false);sh3d.style.setProperty('--rx','0deg');sh3d.style.setProperty('--ry','0deg');});
+show.addEventListener('focusin',()=>shPause(true));
+show.addEventListener('focusout',e=>{if(!show.contains(e.relatedTarget))shPause(false);});
+if(fine.matches&&!reduce)sh3d.addEventListener('pointermove',e=>{const r=sh3d.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;sh3d.style.setProperty('--ry',(x*7).toFixed(2)+'deg');sh3d.style.setProperty('--rx',(-y*6).toFixed(2)+'deg');});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(shTimer);else shRestart();});
 
 /* layers list */
 $('#layers').innerHTML=LAYERS.map((l,i)=>`<li><span class="ln">0${i+1}</span><div><b>${esc(l.name)}</b><small>${esc(l.txt)}</small></div></li>`).join('');
